@@ -27,7 +27,7 @@
 					<div class="content-row-box">
 						<div class="content-item">
 							<h3 class="">新建商品住宅价格同比指数</h3>
-							<div id="index_01" style="height: 200px;width: 400px"></div>
+							<div class="echar-content" id="index_01" style="height: 200px;width: 400px"></div>
 							<a href="javascript:" class="magnifying"></a>
 						</div>
 					</div>
@@ -92,10 +92,12 @@
 				</div>
 				<div class="two-center">
 					<div class="two-center-box">
-						<!--<h3 class="">居住用地显示图</h3>-->
-						<div class="the-map" id="map"></div>
-						<div class="center-row-bottom">
-							
+						<div class="center-content">
+							<!--<h3 class="">居住用地显示图</h3>-->
+							<div class="the-map" id="map"></div>
+							<div class="center-row-bottom">
+
+							</div>
 						</div>
 					</div>
 				</div>
@@ -137,7 +139,10 @@
 				</div>
 			</div>
 		</div>
+		<div class="empty"></div>
 	</div>
+	<div class="bg-pup"></div>
+	<div class="pup-content"></div>
 </body>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
@@ -166,15 +171,35 @@
   //    resize()
   // });
 (function(){
-	window.screen.width && $('body').css('width', window.screen.width);
-    window.screen.height && $('body').css('height', window.screen.height);
+	// window.screen.width && $('body').css('width', window.screen.width);
+ //    window.screen.height && $('body').css('height', window.screen.height);
     $('head').append('<meta name="viewport" content="width='+window.screen.width+'"/>');
-    
-    $(".wrap-content").css('height',$(".container").outerHeight(true) - $(".content-header").outerHeight(true));
+
+    $(".wrap-content").css('height',$(".container").outerHeight(true) - $(".content-header").outerHeight(true) - $(".empty").outerHeight(true));
+    // $(".content-box").css('height',$(".row-one").outerHeight(true) - $(".content-title").outerHeight(true));
     
     $(".row-two").css('height',$(".wrap-content").outerHeight(true) - $(".row-one").outerHeight(true));
     $(".two-content").css('height',$(".two-left").outerHeight(true) - $(".two-title").outerHeight(true));
+    $(".content-box").css('width',$(".row-one").outerWidth(true) - $(".content-title").outerWidth(true));
+    $(".two-left").css('width',$(".content-title").outerWidth(true) + $(".content-box").outerWidth(true)/4);
+    $(".two-center").css('width',$(".row-two").outerWidth(true) - $(".two-left").outerWidth(true)*2)
     console.log($(".wrap-content").height(), 123)
+
+
+
+	$(".magnifying").click(function(){
+	    var thisH = $(this).siblings(".echar-content").outerHeight(true)*2;
+	    var thisR = thisH/$(this).siblings(".echar-content").outerHeight(true);
+	    var thisW = $(this).siblings(".echar-content").outerWidth(true)*thisR;
+        $(".pup-content").append($(this).siblings(".echar-content"))
+		$(".pup-content").css({
+			height: thisH ,
+			width: thisW ,
+			display: 'block',
+			marginTop: -thisH/2 ,
+			marginLeft: -thisW/2
+		})
+	})
  })();
 
 
@@ -188,17 +213,18 @@
         var windowRate = $(window).width()/$(window).height();
 		var screenRate = window.screen.width/window.screen.height;
 
-        //当宽度超出时用宽度自适应
-		if (windowRate > screenRate){
+        //当高度超出时用高度自适应
+		//if (windowRate > screenRate){
 		    resizeCenter();
-		}else {
-            //当高度超出时用高度自适应
+		/*}else {
+            //当宽度超出时用宽度自适应
 		    resizeWidth();
-		}
+		}*/
     }
 
     function resizeWidth() {
-      var ratio = $(window).width()/(window.screen.width||$('body').width());
+      var ratio = $(window).width()/1920;
+        // var ratio = $(window).width()/(window.screen.width||$('body').width());
       $('body').css({
         transform: "scale("+ratio+")",
         transformOrigin: "left top",
@@ -208,7 +234,8 @@
     }
 	function resizeCenter() {
       if(!window.screen.height||!window.screen.width) return resizeCenterBak();
-      var ratio = $(window).height()/window.screen.height;
+      var ratio = $(window).height()/1080;
+        // var ratio = $(window).height()/window.screen.height;
       // console.log(ratio, 'ratio')
       $('body').css({
         transform: "scale("+ratio+")",
