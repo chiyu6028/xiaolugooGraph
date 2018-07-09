@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>指标信息</h5>
+
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" id="tableId">
+                        <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="../js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="../js/content.min.js?v=1.0.0"></script>
+<script src="../js/xiaolugoo.js"></script>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            type: "POST",
+            url: "/indexValue/findIndexValue",
+            data: "",
+            success: function(resp){
+                var data = JSON.parse(resp.replace(/'/g,""));
+
+                if (data.flag == '1'){
+                    //1.渲染表头
+                    drawHead(data);
+                    //2.渲染数据
+                    drawBody(data);
+                }else {
+                    ShowTip("查询失败",'warning');
+                }
+
+                $("#tableId").dataTable({"order": [[0,'desc'],[1,'desc']]});
+            }
+        });
+        
+        function drawHead(resp) {
+            var result = resp.result;
+            var head = $("#tableId").find("thead").find("tr");
+            head.append("<th id=\"indexId\">时间</th>");
+            for (var i = 0; i < result.length; i++) {
+                var th = "<th id='"+ result[i].INDEX_ID +"'>" + result[i].INDEX_NAME + "</th>";
+                head.append(th);
+            }
+        }
+        
+        function drawBody(resp) {
+            var result = resp.result;
+            var timeList = getTimeList(result[0]).reverse();
+            var body = $("#tableId").find("tbody").empty();
+            for (var i = 0; i <timeList.length; i++) {
+                var year = timeList[i].substring(0,4);
+                var month = timeList[i].substring(4,6);
+                var row = "<tr><td>" + year + "." + month + "</td>";
+                for (var j = 0; j < result.length; j++) {
+                    var value = result[j][year][month].toString();
+                    var position = value.toString().indexOf(".");
+                    var len = position > 0 ? position + 2 : value.length;
+                    if (result[j].INDEX_TYPE == '1'){
+                        var col = "<td title='"+ value +"'>" + parseFloat(value.substring(0,len)).toFixed(1) + "</td>";
+                    }else {
+                        var col = "<td title='"+ value + "%" +"'>" + parseFloat(value.substring(0,len)).toFixed(1) + "%" + "</td>";
+                    }
+                    row += col;
+                }
+                row += "</tr>"
+                $(body).append(row);
+            }
+        }
+        
+        function getTimeList(data) {
+            var timeList = [];
+            for (var item in data){
+                if (item.length == 4 ){
+                    for (var time in data[item]){
+                        timeList.push(item + time);
+                    }
+                }
+            }
+            return timeList.sort();
+        }
+    });
+</script>
+
+</body>
+
+</html>

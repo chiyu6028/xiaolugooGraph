@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaolugoo.webapp.mapper.LoginLogMapper">
+  <resultMap id="BaseResultMap" type="com.xiaolugoo.webapp.model.LoginLog">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="login_date" jdbcType="VARCHAR" property="loginDate" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+    <result column="login_status" jdbcType="CHAR" property="loginStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, login_date, login_ip, login_status
+  </sql>
+
+  <select id="selectLoginLog" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select
+    user_id, DATE_FORMAT(login_date,'%Y-%m-%d') login_date, login_ip, login_status
+    from t_user_login_log
+    where 1=1
+    <if test="userId != null and userId != ''">
+      and user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="beginDate != null and beginData != ''">
+      and DATE_FORMAT(login_date,'%Y%m%d')+0 &gt;= #{beginDate,jdbcType=INTEGER}+0
+    </if>
+    <if test="endDate != null and beginData != ''">
+      and DATE_FORMAT(login_date,'%Y%m%d')+0 &lt; #{endDate,jdbcType=INTEGER}+0
+    </if>
+    <if test="loginStatus != null and loginStatus != ''">
+      and login_status = #{loginStatus,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <insert id="insert" parameterType="com.xiaolugoo.webapp.model.LoginLog">
+    insert into t_user_login_log (user_id, login_date, login_ip, login_status)
+    values (#{userId,jdbcType=INTEGER}, sysdate, #{loginIp,jdbcType=VARCHAR},  #{loginStatus,jdbcType=CHAR})
+  </insert>
+</mapper>

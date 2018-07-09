@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaolugoo.webapp.mapper.FileMapper">
+  <resultMap id="BaseResultMap" type="com.xiaolugoo.webapp.model.File">
+    <id column="FILE_ID" jdbcType="INTEGER" property="fileId" />
+    <result column="FILE_KEY" jdbcType="VARCHAR" property="fileKey" />
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName" />
+    <result column="FILE_SIZE" jdbcType="BIGINT" property="fileSize" />
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+    <result column="FILE_DATE" jdbcType="TIMESTAMP" property="fileDate" />
+    <result column="FILE_STATUS" jdbcType="CHAR" property="fileStatus" />
+    <result column="FILE_AUTHOR" jdbcType="INTEGER" property="fileAuthor" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    FILE_ID, FILE_KEY, FILE_NAME, FILE_SIZE, FILE_PATH, FILE_DATE, FILE_STATUS, FILE_AUTHOR
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_FILE
+    where FILE_ID = #{fileId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectLastFile"  resultMap="BaseResultMap">
+    select * from (select rownum as rnum, k.* from (select * from t_file t order by t.file_date desc) k ) a where a.rnum between 0 and 1
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_FILE
+    where FILE_ID = #{fileId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" keyProperty="fileId" parameterType="com.xiaolugoo.webapp.model.File" useGeneratedKeys="true">
+    <selectKey keyProperty="fileId" order="BEFORE" resultType="Integer">
+      select SEQ_FILE.Nextval from dual
+    </selectKey>
+    insert into T_FILE (FILE_ID, FILE_KEY, FILE_NAME, 
+      FILE_SIZE, FILE_PATH, FILE_DATE, 
+      FILE_STATUS, FILE_AUTHOR)
+    values (#{fileId,jdbcType=INTEGER}, #{fileKey,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR},
+      #{fileSize,jdbcType=BIGINT}, #{filePath,jdbcType=VARCHAR}, sysdate,
+      #{fileStatus,jdbcType=CHAR}, #{fileAuthor,jdbcType=INTEGER})
+  </insert>
+
+
+
+
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaolugoo.webapp.mapper.IndexMapper" >
+
+  <resultMap id="BaseResultMap" type="com.xiaolugoo.webapp.model.Index" >
+    <id column="INDEX_ID" property="indexId" jdbcType="DECIMAL" />
+    <result column="INDEX_NAME" property="indexName" jdbcType="VARCHAR" />
+    <result column="INDEX_LINE1" property="indexLine1" jdbcType="DOUBLE" />
+    <result column="INDEX_LINE2" property="indexLine2" jdbcType="DOUBLE" />
+    <result column="INDEX_LINE3" property="indexLine3" jdbcType="DOUBLE" />
+    <result column="INDEX_LINE4" property="indexLine4" jdbcType="DOUBLE" />
+    <result column="INDEX_DATE" property="indexDate" jdbcType="TIMESTAMP" />
+    <result column="INDEX_TYPE" property="indexType" jdbcType="CHAR" />
+    <result column="INDEX_RANGE" property="indexRange" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="findIndex" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select t.index_id, t.index_name, t.index_line1, t.index_line2, t.index_line3, t.index_line4, t.index_date, t.index_type, t.index_range
+    from T_INDEX t
+    where 1=1
+    <if test="indexId != null and  indexId !=''">
+      and t.index_id = #{indexId,jdbcType=INTEGER}
+    </if>
+    <if test="indextype != null and  indextype !=''">
+      and t.index_type = #{indextype,jdbcType=VARCHAR}
+    </if>
+    <if test="indexId != null and  indexId !=''">
+      and t.index_name like '%' || #{indexId,jdbcType=VARCHAR} || '%'
+    </if>
+    order by t.index_id
+  </select>
+
+</mapper>

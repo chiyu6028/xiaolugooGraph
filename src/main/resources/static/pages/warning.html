@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/graph_echarts.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:59 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!--<link href="../css/animate.min.css" rel="stylesheet">-->
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="row  border-bottom white-bg dashboard-header">
+    <div class="row">
+        <div class="col-xs-3">
+            <label class="col-xs-3 control-label text-right" style="margin-top: 7px">选择指标: </label>
+            <select class="form-control m-b" name="account" id="index"></select>
+        </div>
+
+        <div class="col-xs-7">
+            <label class="col-xs-3 control-label text-right" style="margin-top: 7px;">起止时间：</label>
+            <div class="col-sm-4">
+                <input id="begindate" class="laydate-icon form-control layer-date" lay-key="1">
+            </div>
+            <div class="col-sm-4">
+                <input id="enddate" class="laydate-icon form-control layer-date" lay-key="2">
+            </div>
+            <div class="col-xs-3"><button type="button" style="background-color: #39aef5" class="btn btn-success" id="submit">确定</button></div>
+
+        </div>
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins" >
+                <div class="ibox-title">
+                    <h5>可视化图表</h5>
+                </div>
+                <div class="ibox-content" style="height: 600px; padding-top: 15px">
+                    <div class="col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div id="main" style="height: 550px; width: 100%">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/plugins/layer/laydate/laydate.js"></script>
+<script src="../js/echarts.min.js"></script>
+<script src="../js/xiaolugoo.js"></script>
+<script>
+    laydate.render({
+        elem: '#begindate', //指定元素
+        type: 'month',
+        value: '2015-01'
+    });
+    laydate.render({
+        elem: '#enddate', //指定元素
+        type: 'month',
+        value: (new Date).getFullYear() + "-" + ((new Date).getMonth()<10? '0'+(new Date).getMonth():(new Date).getMonth())
+    });
+
+    $(document).ready(function () {
+
+        //下拉框初始化
+        $.ajax({
+            type: "POST",
+            url: "/index/findIndex",
+            data: "",
+            success: function(resp){
+                var data = JSON.parse(resp);
+                if (data.flag == "1"){
+                    var result = data.result;
+                    var select = "";
+                    for (var i = 0; i < result.length; i++) {
+                        select += "<option id='"+ result[i].indexId+"'>" + result[i].indexName + "</option>";
+                    }
+                    $("#index").append(select);
+                    loadData();
+                }else {
+                    toastr.warning("数据加载失败");
+                }
+            }
+        });
+
+        $("#submit").click(function () {
+
+            if ($("#begindate").val().length == 0 || $("#enddate").val().length == 0){
+                toastr.warning("起止日期不能为空");
+                return
+            }
+            loadData();
+        });
+
+        var myChart, timeList, graphValue, result ;
+        function loadData() {
+            var params = getParams();
+            $.ajax({
+                type: "POST",
+                url: "/indexValue/findIndexValue",
+                data: params,
+                success: function(resp){
+                    var data = JSON.parse(resp.replace(/'/g,""));
+                    if (data.flag == "1"){
+                        result = data.result[0];
+                        draw(result);
+                    }else {
+                        toastr.warning("数据加载失败");
+                    }
+                }
+            });
+        }
+
+        function getParams() {
+            var obj = {};
+            obj.indexId = $('#index option:selected').attr("id");
+            var beginDate = $("#begindate").val();
+            var endDate = $("#enddate").val();
+            obj.beginDate = beginDate.substring(0,4) + beginDate.substring(5,7);
+            obj.endDate = endDate.substring(0,4) + endDate.substring(5,7);
+            return obj;
+        }
+
+        function getTimeList(data) {
+            var timeList = [];
+            for (var item in data){
+                if (item.length == 4 ){
+                    for (var time in data[item]){
+                        timeList.push( item.substring(2,4) + "." + time);
+                    }
+                }
+            }
+            return timeList.sort();
+        }
+
+        function getDataList(data, timeList) {
+            var dataList = [];
+            for (var i = 0; i < timeList.length; i++) {
+                for (var item in data){
+                    if (item.length == 4){
+                        for (var ret in data[item]){
+                            var time =  item.substring(2,4) + "." + ret;
+                            if (time == timeList[i]){
+                                dataList.push(data[item][ret]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            return dataList;
+        }
+
+        function draw(result) {
+            timeList = getTimeList(result);
+            myChart = echarts.init(document.getElementById('main'));
+            graphValue = getDataList(result,timeList);
+            var maxValue = Math.max.apply(null,graphValue);
+            var minValue = Math.min.apply(null,graphValue);
+            var maxyValue = result.INDEX_LINE4 > maxValue ? result.INDEX_LINE4  : maxValue;
+            var minyValue = result.INDEX_LINE1 < minValue ? result.INDEX_LINE1  : minValue;
+            var point = getMarkPoin(timeList, graphValue, result.INDEX_LINE3);
+            option = {
+                title: {
+                    text: result.INDEX_NAME,
+                    left: '50%',
+                    textAlign: 'center',
+                    textStyle:{fontSize:'22'},
+                },
+                animationDuration:3000,
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        lineStyle: {
+                            color: '#ddd'
+                        }
+                    },
+                    formatter: result.INDEX_TYPE==1?'{b},{c}':'{b},{c}%',
+                    backgroundColor: 'rgba(57,174,245,0.8)',
+                    padding: [15, 30],
+                    textStyle: {
+                        color: '#ffffff',
+                    },
+                    extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.2)'
+                },
+                grid: [
+                    {x: '7%', y: '7%',top:70, width: '83%'},
+                ],
+                legend: {
+                    right: 20,
+                    orient: 'vertical',
+                    //data:['sss']
+                },
+                visualMap: {
+                    top: 35,
+                    right: 10,
+                    orient:'horizontal',
+                    precision:1,
+                    pieces: [{
+                        //gt: 0,
+                        lte: result.INDEX_LINE1,
+                        color: '#1c84c6'
+                    }, {
+                        gt: result.INDEX_LINE1,
+                        lte: result.INDEX_LINE2,
+                        color: '#23c6c8'
+                    }, {
+                        gt: result.INDEX_LINE2,
+                        lte: result.INDEX_LINE3,
+                        color: '#1ab394'
+                    }, {
+                        gt: result.INDEX_LINE3,
+                        lte: result.INDEX_LINE4,
+                        color: '#f7a54a'
+                    }, {
+                        gt: result.INDEX_LINE4,
+                        //lte: 9999,
+                        color: '#ed5565'
+                    }],
+                    outOfRange: {
+                        color: '#999'
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: timeList,
+                    boundaryGap: false,
+                    scale: true,
+                    splitLine: {
+                        show: true,
+                        interval: '2',
+                        lineStyle: {
+                            color: ['#eeeeee']
+                        }
+                    },
+                    splitArea:{
+                        show:true,
+                        interval:2,
+                        areaStyle:{
+                            color:['rgba(250,250,250,0)','#f6f6f6']
+                        },
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#b3b3b3'
+                        },
+                        onZero:false,
+                    },
+                    axisLabel: {
+                        margin: 10,
+                        color:'#666',
+                        fontSize: 14,
+                        rotate: 45,
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    splitLine: {
+                        show:true,
+                        //interval: 40,
+                        lineStyle: {
+                            color: ['#eeeeee']
+                        }
+                    },
+                    splitArea:{
+                        show:false,
+                        interval:3,
+                    },
+                    max: parseInt(maxyValue > 0 ? maxyValue*1.1 : maxyValue * 0.9),
+                    min: parseInt(minyValue > 0 ? minyValue*0.9 : minyValue * 1.1),
+                    splitNumber: 12,
+                    axisTick: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#b3b3b3'
+                        }
+                    },
+                    axisLabel: {
+                        margin: 10,
+                        formatter: result.INDEX_TYPE == '1'? '{value}':'{value} %',
+                        color:'#666',
+                        fontSize:14,
+                    }
+                },
+                series: [
+                    {
+                        type: 'line',
+                        smooth: true,
+                        symbolSize: 10,
+                        data: graphValue,
+                        markLine: {
+                            symbol: ['none', 'none'],
+                            lineStyle:{
+                                normal:{
+                                    type:' dotted',
+                                    width:2,
+                                }
+                            },
+                            label: {
+                                normal: {
+                                    formatter: result.INDEX_TYPE == '1' ? '{b}:{c}' : '{b}:{c}%',
+                                }
+                            },
+                            data: [
+                                {
+                                    yAxis: result.INDEX_LINE1,
+                                    name: '过冷区上限',
+                                    itemStyle: {
+                                        normal: {
+                                            color: "#666666",
+                                        }
+                                    }
+                                },
+                                {
+                                    yAxis: result.INDEX_LINE2,
+                                    name: '合理区下限',
+                                    itemStyle: {
+                                        normal: {
+                                            color: "#666666",
+                                        }
+                                    }
+                                },
+                                {
+                                    yAxis: result.INDEX_LINE3,
+                                    name: '合理区上限',
+                                    itemStyle: {
+                                        normal: {
+                                            color: "#666666",
+                                        }
+                                    }
+                                },
+                                {
+                                    yAxis: result.INDEX_LINE4,
+                                    name: '过热区下限',
+                                    itemStyle: {
+                                        normal: {
+                                            color: "#666666",
+                                        }
+                                    }
+                                },
+                            ]
+                        },
+                        markPoint: {
+                            symbolSize:[100,50],
+                            animation:3000,
+                            symbolOffset: [0, '-55%'],
+                            symbol:'path://M95.36,32.44H54.61L50,38.684l-4.61-6.244H4.64c-1.909,0-3.457-1.548-3.457-3.457V5.002c0-1.909,1.548-3.457,3.457-3.457h90.72c1.909,0,3.457,1.548,3.457,3.457v23.981C98.817,30.892,97.269,32.44,95.36,32.44z',
+                            itemStyle:{
+                                normal:{
+                                    color:'#2f4050',
+                                    opacity:0.9,
+                                    borderType:"solid",
+                                    borderColor:'#fff',
+                                    borderWidth:'1',
+                                    //shadowColor:'#aaa',
+                                    //ShadowBlur:'1',
+                                    //shadowOffsetX:'2',
+                                    //shadowOffsetY:'1'
+                                }
+                            },
+                            label: {
+                                normal: {
+                                    show: true,
+                                    formatter: result.INDEX_TYPE == '1'? '{c}':'{c}%',
+                                    position: 'inside', //值显示
+                                    padding:[25,20,30,20],
+                                    color:'#fff',
+                                    fontSize:'13'
+                                }
+                            },
+                            data: point.markPoint,
+                        },
+                        lineStyle: {
+                            normal: {
+                                width: 4
+                            }
+                        }
+                    },
+                    {
+                        type: 'effectScatter',
+                        symbolSize: 20,
+                        data: point.effectPoint,
+                        z:999
+                    }
+                ]
+            };
+            myChart.setOption(option);
+        }
+
+        function getMarkPoin(timeList, graphValue ,refer) {
+            var obj = {};
+            var array = [];
+            var effectArray = [];
+            var maxx = 0, maxy = 0;
+            var max = Math.max.apply(null,graphValue);
+            for (var i = 0; i < graphValue.length; i++) {
+                if (max == graphValue[i]){
+                    maxx = timeList[i];
+                    maxy = graphValue[i];
+                }
+            }
+            array.push(
+                {
+                    name: '最大值',
+                    value: maxx+","+parseFloat(maxy).toFixed(2),
+                    xAxis: maxx,
+                    yAxis: maxy
+                }
+            );
+            effectArray.push([maxx,maxy]);
+            array.push(
+                {
+                    name: '最近值',
+                    value: timeList[timeList.length-1]+","+parseFloat(graphValue[graphValue.length-1]).toFixed(2),
+                    xAxis: timeList[timeList.length-1],
+                    yAxis: graphValue[graphValue.length-1]
+                }
+            );
+            effectArray.push([timeList[timeList.length-1],graphValue[graphValue.length-1]]);
+
+            for (var i = 0; i < graphValue.length; i++) {
+                //y1<refer , y2 > refer
+                if (refer > graphValue[i] && refer < graphValue[i+1]){
+                    array.push(
+                        {
+                            name:'上升值',
+                            value: timeList[i+1]+","+parseFloat(graphValue[i+1]).toFixed(2),
+                            xAxis: timeList[i+1],
+                            yAxis: graphValue[i+1]
+                        }
+                    );
+                    effectArray.push([timeList[i+1],graphValue[i+1]]);
+                }
+                if (refer < graphValue[i] && refer > graphValue[i+1]){
+                    array.push(
+                        {
+                            name:'下降值',
+                            value: timeList[i]+","+parseFloat(graphValue[i]).toFixed(2),
+                            xAxis: timeList[i],
+                            yAxis: graphValue[i]
+                        }
+                    );
+                    effectArray.push([timeList[i],graphValue[i]])
+                }
+            }
+            obj.markPoint = array;
+            obj.effectPoint = effectArray;
+            return obj;
+        }
+
+    })
+</script>
+</body>
+</html>
