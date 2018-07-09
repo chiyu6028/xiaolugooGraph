@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>2018预警数据可视化处理系统</title>
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
+	<link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+	<!--<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">-->
+	<!--[if IE]>
+	<script src="js/login/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+		<div class="container demo-1">
+			<div class="content">
+				<div id="large-header" class="large-header">
+					<canvas id="demo-canvas"></canvas>
+					<div class="logo_box">
+						<h3>2018预警数据可视化处理系统</h3>
+						<form action="#" name="f" method="post">
+							<div class="input_outer">
+								<span class="u_user"></span>
+								<input name="logname" id="userAccount" class="text" style="color: #FFFFFF !important" type="text" autocomplete="off" placeholder="请输入账户">
+							</div>
+							<div class="input_outer">
+								<span class="us_uer"></span>
+								<input name="logpass" id="userPassword" class="text" autocomplete="off" style="color: #FFFFFF !important; position:absolute; z-index:100;"value="" type="password" placeholder="请输入密码">
+							</div>
+							<div class="mb2"><a class="act-but submit" id="login" href="javascript:;" style="background-color: #39aef5; color: #FFFFFF">登录</a></div>
+							<div class="checkbox">
+                        		<label>
+                            		<input type="checkbox" checked="checked" id="autoLogin"> 自动登录
+                        		</label>
+                   			</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div><!-- /container -->
+		<script src="js/login/TweenLite.min.js"></script>
+		<script src="js/login/EasePack.min.js"></script>
+		<script src="js/login/rAF.js"></script>
+		<script src="js/login/demo-1.js"></script>
+		<script src="js/jquery.min.js?v=2.1.4"></script>
+		<script src="js/xiaolugoo.js"></script>
+		<!--<script src="js/plugins/toastr/toastr.min.js"></script>-->
+		<script>
+            $(document).ready(function () {
+                if(getCookie('user') && getCookie('pswd')) {
+                    $("#userAccount").val(getCookie('user')) ;
+                    $("#userPassword").val(getCookie('pswd')) ;
+                }
+
+                $("#login").bind("click",function () {
+					var obj = {};
+                    obj.userAccount=$("#userAccount").val();
+                    obj.userPassword=$("#userPassword").val();
+                    if (obj.userAccount == ''){
+                        toastr.warning("用户名不能为空");
+                        return
+					}
+                    if (obj.userPassword == ''){
+                        toastr.warning("密码不能为空");
+                        return
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "/user/login",
+                        data: obj,
+                        success: function(resp){
+                            var data = JSON.parse(resp);
+                            if (data.flag == "1"){
+                                if($("#autoLogin").is(":checked")){
+                                    setCookie('user',$("#userAccount").val(),7); //保存帐号到cookie，有效期7天
+                                    setCookie('pswd',$("#userPassword").val(),7); //保存密码到cookie，有效期7天
+                                }
+                                localStorage.setItem("g_user",JSON.stringify(data.result[0]));
+                                window.location.href='./index.html';
+                            }else {
+                                toastr.error(data.msg)
+                            }
+                        }
+                    });
+
+                })
+
+				$("#autoLogin").change(function () {
+					if (!$("#autoLogin").is(":checked")){
+                        delCookie('user');
+                        delCookie('pswd');
+					}
+                });
+            })
+            if (window != top) {
+                top.location.href = location.href;
+            }
+		</script>
+	</body>
+</html>

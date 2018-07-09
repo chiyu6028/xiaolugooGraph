@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaolugoo.webapp.mapper.IndexValueMapper">
+
+  <delete id="deleteExcel" parameterType="java.util.List">
+    delete from T_INDEX_VALUE
+    where index_id in
+    <foreach collection="list" item="item" open="(" close=")" separator=",">
+      #{item.indexId, jdbcType=INTEGER}
+    </foreach>
+    and index_time in
+    <foreach collection="list" item="item" open="(" close=")" separator=",">
+      #{item.indexTime, jdbcType=VARCHAR}
+    </foreach>
+  </delete>
+
+  <insert id="insertExcel" keyProperty="fileId" parameterType="java.util.List" useGeneratedKeys="false">
+    insert into T_INDEX_VALUE (INDEX_ID,INDEX_TIME,INDEX_VALUE)
+    <foreach collection="list" item="item" separator="union all">
+        select #{item.indexId, jdbcType=INTEGER}, #{item.indexTime, jdbcType=VARCHAR}, #{item.indexValue, jdbcType=DOUBLE} from dual
+    </foreach>
+  </insert>
+
+  <select id="findDate"  resultType="java.lang.String">
+    select t.index_time from t_index_value t
+    <if test="beginDate != null and  beginDate !=''">
+      and substr(t.index_time,0,4)|| substr(index_time,6,7) &gt;= #{beginDate,jdbcType=VARCHAR}
+    </if>
+    <if test="endDate != null and  endDate !=''">
+      and substr(t.index_time,0,4)|| substr(index_time,6,7) &lt; #{endDate,jdbcType=VARCHAR}
+    </if>
+    group by t.index_time order by t.index_time
+  </select>
+
+  <select id="findIndexValue" parameterType="java.util.Map" resultType="java.util.Map">
+
+    select * from (
+      select t.index_id,t.index_name,t.index_line1,t.index_line2,t.index_line3,t.index_line4, a.index_time, t.index_type, a.index_value
+      from T_INDEX t, T_index_value a
+      where t.index_id = a.index_id
+        <if test="indexId != null and  indexId !=''">
+          and a.index_id = #{indexId,jdbcType=INTEGER}
+        </if>
+        <if test="beginDate != null and  beginDate !=''">
+          and substr(a.index_time,0,4)|| substr(a.index_time,6,7) &gt;= #{beginDate,jdbcType=VARCHAR}
+        </if>
+        <if test="endDate != null and  endDate !=''">
+          and substr(a.index_time,0,4)|| substr(a.index_time,6,7) &lt; #{endDate,jdbcType=VARCHAR}
+        </if>
+      )
+      pivot( max(index_value) for index_time in (
+        <foreach collection="dateList" item="item" separator=",">
+          '${item}'
+        </foreach>
+      ) )
+
+  </select>
+
+</mapper>

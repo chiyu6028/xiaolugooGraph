@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:16:41 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>2018预警数据可视化处理系统</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg skin-1" style="overflow:hidden">
+<div id="wrapper">
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i>
+        </div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                               <span class="block m-t-xs"><strong class="font-bold" id="nickName"></strong></span>
+                                <span class="text-muted text-xs block" data-toggle="modal" data-target="#myModal">
+                                    修改密码
+                                </span>
+                                </span>
+                        </a>
+                    </div>
+                    <div class="logo-element">估
+                    </div>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="../pages/main.html" data-index="0"><i class="fa fa fa-line-chart"></i> <span class="nav-label">市场监测</span></a>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="../pages/warning.html" data-index="0"><i class="fa fa fa-line-chart"></i> <span class="nav-label">房地产预警</span></a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-cloud-upload"></i>
+                        <span class="nav-label">数据维护</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <!--<li>
+                            <a class="J_menuItem" href="../pages/main.html" data-index="0">可视化图表</a>
+                        </li>-->
+                        <li>
+                            <a class="J_menuItem" href="../pages/index_value.html">	数据列表</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="../pages/form_webuploader.html">数据上传更新</a>
+                        </li>
+                    </ul>
+
+                </li>
+                <li>
+                    <a class="J_menuItem" href="../pages/index_info.html"><i class="fa fa fa-shield"></i> <span class="nav-label">预警线</span></a>
+                </li>
+                <!--<li>
+                    <a class="J_menuItem" href="../pages/map.html"><i class="fa fa fa-shield"></i> <span class="nav-label">天津地图</span></a>
+                </li>-->
+                <li>
+                    <a class="J_menuItem" href="../pages/szmap.html"><i class="fa fa fa-shield"></i> <span class="nav-label">深圳地图</span></a>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="http://datav.aliyun.com/share/3759d5d19ce55798f9634e86ed1091e8"><i class="fa fa fa-shield"></i> <span class="nav-label">阿里数据</span></a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <!--左侧导航结束-->
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row content-tabs">
+            <button class="roll-nav roll-left J_tabLeft navbar-minimalize"  href="#" style="background-color: #ffffff;color: #39aef5"><i class="fa fa-bars"></i>
+            </button>
+            <nav class="page-tabs J_menuTabs">
+                <div class="page-tabs-content">
+                    <a href="javascript:;" class="active J_menuTab" data-id="../pages/main.html">市场监测</a>
+                </div>
+            </nav>
+            <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+            </button>
+            <div class="btn-group roll-nav roll-right">
+                <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span></button>
+                <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li class="J_tabShowActive"><a>定位当前选项卡</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
+                    </li>
+                    <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
+                    </li>
+                </ul>
+            </div>
+            <a class="roll-nav roll-right J_tabExit" id="logout"><i class="fa fa fa-sign-out"></i> 退出</a>
+
+        </div>
+        <div class="row J_mainContent" id="content-main" style="height: 100%">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="../pages/main.html?v=4.0" frameborder="0" data-id="../pages/main.html" seamless></iframe>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row" style="margin-bottom: 5px">
+                        <div class="col-xs-3" style="margin-top: 8px;">旧密码</div>
+                        <div class="col-xs-7">
+                            <input type="password" class="form-control" id="oldPassword" placeholder="old password">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px">
+                        <div class="col-xs-3" style="margin-top: 8px;">新密码</div>
+                        <div class="col-xs-7">
+                            <input type="password" class="form-control" id="newPassword1" placeholder="new password">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px">
+                        <div class="col-xs-3" style="margin-top: 8px;">新密码</div>
+                        <div class="col-xs-7">
+                            <input type="password" class="form-control" id="newPassword2" placeholder="new password">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="updatePassword" style="background-color: #39aef5">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="js/plugins/layer/layer.min.js"></script>
+<script src="js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="js/contabs.min.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+<script src="js/xiaolugoo.js" ></script>
+<!--<script  data-main="app/index" src="./lib/require.js"></script>-->
+<script>
+    $(document).ready(function () {
+        $("#demo").alert('close')
+        var g_user = JSON.parse( localStorage.getItem("g_user"));
+        //$("#userName").empty().append(g_user.userName);
+        if(g_user.userAccount!=''){
+            $("#nickName").empty().append(g_user.userAccount);
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/data/quarter",
+            data: '',
+            success: function(resp){
+                console.log(resp)
+            }
+        });
+
+        $("#logout").bind("click",function () {
+            $.ajax({
+                type: "POST",
+                url: "/user/logout",
+                data: '',
+                success: function(resp){
+                    var data = JSON.parse(resp);
+                    if (data.flag == "-100"){
+                        window.location.href='./login.html';
+                    }/*else {
+                        ShowTip("数据加载失败",'warning');
+                    }*/
+                }
+            });
+        })
+
+        $("#updatePassword").bind("click",function () {
+            var newPassword1 = $("#newPassword1").val();
+            var newPassword2 = $("#newPassword2").val();
+            var user = {};
+            if (newPassword1 == newPassword2){
+                user.userPassword = newPassword1;
+            }else {
+                //ShowTip("新密码不一致","danger");
+                toastr.warning("新密码不一致")
+                return;
+            }
+
+            user.userId = g_user.userId;
+            user.userAccount = g_user.userAccount;
+            user.oldPassword = $("#oldPassword").val();
+            $.ajax({
+                type: "POST",
+                url: "/user/updatePassword",
+                data: user,
+                success: function(resp){
+                    var data = JSON.parse(resp);
+                    if (data.flag == "1"){
+                        $("#closeModal").click();
+                        toastr.success("密码修改成功")
+                        delCookie('user');
+                        delCookie('pswd');
+                    }else {
+                        ShowTip(data.msg,'warning');
+                    }
+                }
+            });
+        })
+
+    })
+</script>
+</body>
+
+</html>

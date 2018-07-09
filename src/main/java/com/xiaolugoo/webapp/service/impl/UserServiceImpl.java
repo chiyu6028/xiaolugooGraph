@@ -1,8 +1,11 @@
 package com.xiaolugoo.webapp.service.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.xiaolugoo.webapp.mapper.UserMapper;
 import com.xiaolugoo.webapp.model.User;
 import com.xiaolugoo.webapp.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +21,16 @@ import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService {
 
+    Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
     UserMapper userMapper;
 
+
     @Override
     public int insert(User record) {
-        return userMapper.insert(record);
+        int res = userMapper.insert(record);
+        return 0;
     }
 
     @Override
@@ -42,5 +49,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateByPrimaryKeySelective(User record) {
         return userMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public int emailValidate(String code) {
+        return 0;
     }
 }

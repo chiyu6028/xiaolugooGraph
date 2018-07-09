@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <!--<link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/animate.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" type="text/css" href="../css/plugins/webuploader/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="../css/demo/webuploader-demo.min.css">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+    <style>
+        .myUpload{
+            min-height: 80px;
+            padding-top: 20px;
+            text-align: center;
+            color: rgb(204, 204, 204);
+            font-size: 14px;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Excel文档上传</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="page-container">
+                        <!--<p>点击添加附件按钮</p>-->
+                        <p>1.只能上传10M以内的excel文件。2.日期须按“年.月”的格式，月份为单位数时以0补齐，例：“2018.06”<a href="/file/download?fileName=excel.xlsx">下载EXCEL模板<a></p>
+                        <div id="uploader" class="wu-example">
+                            <div class="queueList">
+                                <div id="dndArea" class="myUpload" > <!--class="placeholder"-->
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                            <div id="filePicker" style="margin-left: 30px;"></div>
+                                        </div>
+                                        <div class="col-xs-8" >
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <div style="margin-top: 10px;color: #000000;text-align: left">
+                                                        <div class="row">
+                                                            <div class="col-xs-8"  id="document"></div>
+                                                            <div class="col-xs-3" style="color: #bbbbbb" id="status"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6" style="display: none" id="progress">
+                                                    <div class="progress" style="margin-top: 10px; background-color: #cccccc">
+                                                        <div class="progress-bar"  role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                                             aria-valuemax="100" style="width: 60%; background-color: #39aef5">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2" >
+                                            <button type="button" id="startUploadButton" class="btn btn-default btn-lg"
+                                                    style="font-size:14px; margin-left:20px;display: none; background:none;color:#000;">
+                                                开始上传
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../js/content.min.js?v=1.0.0"></script>
+<script src="../js/plugins/webuploader/webuploader.js"></script>
+<script src="../js/xiaolugoo.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+        var state;
+
+        var uploader = WebUploader.create({
+
+            // swf文件路径
+            swf:  '../js/plugins/webuploader/Uploader.swf',
+
+            // 文件接收服务端。
+            server: '/file/upload',
+
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick:{id:"#filePicker",label:"选择附件"},
+
+            //上传文件数量
+            fileNumLimit:1,
+            fileSizeLimit:10*1024*1024,
+            //accept:{title:"Images",extensions:"gif,jpg,jpeg,bmp,png",mimeTypes:"image/*"},
+            accept: {title: 'excel',extensions: 'xls,xlsx'},
+            // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+            resize: false
+        });
+
+        $('#startUploadButton').bind('click', function () {
+            var obj = new Object();
+            obj.name = "file";
+            obj.id = "001";
+            uploader.options.formData = obj;
+            if (state === 'uploading') {
+                uploader.stop();
+            } else {
+                uploader.upload();
+            }
+            $("#status").empty().append("正在上传");
+            $("#startUploadButton").css({display:"none"});
+        });
+
+        uploader.on( 'fileQueued', function( file ) {
+            $("#document").empty().append(file.name);
+            $("#status").empty().append("等待上传");
+            $("#progress").css({display:"block"});
+            $("#status").css({color:"#bbbbbb"});
+            $("#progress").find(".progress-bar").css({width: 0});
+            $("#progress").find(".progress-bar").empty().append("0%");
+            $("#startUploadButton").css({display:"block"});
+        });
+
+        uploader.on( 'uploadProgress', function( file, percentage ) {
+            $("#progress").find(".progress-bar").css({width: percentage.toFixed(2) * 100 + '%'});
+            $("#progress").find(".progress-bar").empty().append((percentage.toFixed(3) * 100).toString().substring(0,4) + '%');
+        });
+
+        uploader.on( 'uploadSuccess', function( file ,resp) {
+            $("#status").empty().append(resp.msg);
+            $("#progress").css({display:"none"});
+            if (resp.flag == 1){
+                $("#status").css({color:"#00b7ef"});
+            }else if (resp.flag == -1){
+                $("#status").css({color:"#c82a2a"});;
+            }else {
+                $("#status").css({color:"#c82a2a"});
+            }
+
+
+        });
+
+        uploader.on( 'uploadError', function( file ,resp) {
+            $("#progress").css({display:"none"});
+            $("#status").empty().append("上传出错");
+            $("#status").css({color:"#c82a2a"});
+        });
+
+        uploader.on( 'uploadComplete', function( file ) {
+            $( '#'+file.id ).find('.progress').fadeOut();
+            uploader.removeFile( file );
+            $("#uploader").find(".statusBar").css({display: 'none'});
+        });
+
+        uploader.on("error", function (type) {
+            if (type == "Q_TYPE_DENIED") {
+                toastr.warning("请上传.xls、.xlsx格式文件",'warning');
+            } else if (type == "Q_EXCEED_SIZE_LIMIT") {
+                toastr.warning("文件大小不能超过10M",'warning');
+            }else if( type == 'Q_EXCEED_NUM_LIMIT'){
+                toastr.warning("一次只能上传一个文件",'warning');
+            }else {
+                toastr.warning("上传出错！请检查后重新上传！错误代码"+type,'warning');
+            }
+
+        });
+
+    })
+
+</script>
+</body>
+
+</html>

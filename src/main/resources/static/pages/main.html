@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.min862f.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<body>
+	<div class="container">
+		<div class="content-header">
+			<div class="header-title">深圳市房地产市场监测预警系统</div>
+			<div class="header-git">
+				<div class="header-img"></div>
+			</div>
+			<div class="header-line"></div>
+		</div>
+		<div class="wrap-content">
+			<div class="row-one">
+				<div class="content-title">
+					<div>核心指标</div>
+				</div>
+				<div class="content-box">
+					<div class="content-row-box">
+						<div class="content-item">
+							<h3 class="">新建商品住宅价格同比指数</h3>
+							<div id="index_01" style="height: 200px;width: 400px"></div>
+							<a href="javascript:" class="magnifying"></a>
+						</div>
+					</div>
+					<div class="content-row-box">
+						<div class="content-item">
+							<h3 class="">居住用地显示图</h3>
+							<div></div>
+							<a href="javascript:" class="magnifying"></a>
+						</div>
+					</div>
+					<div class="content-row-box">
+						<div class="content-item">
+							<h3 class="">居住用地显示图</h3>
+							<div></div>
+							<a href="javascript:" class="magnifying"></a>
+						</div>
+					</div>
+					<div class="content-row-box">
+						<div class="content-item">
+							<h3 class="">居住用地显示图</h3>
+							<div></div>
+							<a href="javascript:" class="magnifying"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row-two clearfix">
+				<div class="two-left">
+					<div class="two-title">
+						<div>先行指标</div>
+					</div>
+					<div class="two-content clearfix">
+						<div class="two-box-content">
+							<div class="item-content">
+								<h3 class="">居住用地显示图</h3>
+							<div></div>
+							<a href="javascript:" class="magnifying"></a>
+							</div>
+						</div>
+						<div class="two-box-content">
+							<div class="item-content">
+								<h3 class="">居住用地显示图</h3>
+							<div></div>
+							<a href="javascript:" class="magnifying"></a>
+							</div>
+						</div>
+						<div class="two-box-content">
+							<div class="item-content">
+								<h3 class="">居住用地显示图</h3>
+							<div></div>
+							<a href="javascript:" class="magnifying"></a>
+							</div>
+						</div>
+						<div class="two-box-content">
+							<div class="item-content">
+								<h3 class="">居住用地显示图</h3>
+							<div></div>
+							<a href="javascript:" class="magnifying"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="two-center">
+					<div class="two-center-box">
+						<!--<h3 class="">居住用地显示图</h3>-->
+						<div class="the-map" id="map"></div>
+						<div class="center-row-bottom">
+							
+						</div>
+					</div>
+				</div>
+				<div class="two-left">
+					<div class="two-title">
+						<div>先行指标</div>
+					</div>
+					<div class="two-content clearfix">
+						<div class="two-box-content">
+							<div class="item-content">
+								<h3 class="">居住用地显示图</h3>
+								<h3 class="">居住用地显示图</h3>
+							<div></div>
+							<a href="javascript:" class="magnifying"></a>
+							</div>
+						</div>
+						<div class="two-box-content">
+							<div class="item-content">
+								<h3 class="">居住用地显示图</h3>
+							<div></div>
+							<a href="javascript:" class="magnifying"></a>
+							</div>
+						</div>
+						<div class="two-box-content">
+							<div class="item-content">
+								<h3 class="">居住用地显示图</h3>
+							<div></div>
+							<a href="javascript:" class="magnifying"></a>
+							</div>
+						</div>
+						<div class="two-box-content">
+							<div class="item-content">
+								<h3 class="">居住用地显示图</h3>
+							<div></div>
+							<a href="javascript:" class="magnifying"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script src="../js/app/main.js"></script>
+<script src="../js/echarts.min.js"></script>
+<script type="text/javascript">
+	// var boxheight = document.body.clientHeight;
+	// $(".container").height(boxheight);
+	// // window.screen.width && $('body').css('width', window.screen.width);
+	// // window.screen.height && $('body').css('height', window.screen.height);
+	// $('head').append('<meta name="viewport" content="width='+window.screen.width+'"/>');
+	// function setRatio(obj, ratio){
+ //      var that = obj;
+ //      var w = that.outerHeight()*(ratio);
+ //      console.log(w, 'boxheight')
+ //      var borderWid = parseInt(that.css("border-left-width"))+parseInt(that.css("border-right-width")); // 考虑边框的宽度
+ //      that.css("width",w+borderWid);
+ //  }
+
+ //  var obj = $('.container');
+ //  var ratio = 6/7;
+ //  setRatio(obj,ratio);
+
+  // $(window,document).resize(function(){
+  //    // setRatio(obj,ratio);
+  //    resize()
+  // });
+(function(){
+	window.screen.width && $('body').css('width', window.screen.width);
+    window.screen.height && $('body').css('height', window.screen.height);
+    $('head').append('<meta name="viewport" content="width='+window.screen.width+'"/>');
+    
+    $(".wrap-content").css('height',$(".container").outerHeight(true) - $(".content-header").outerHeight(true));
+    
+    $(".row-two").css('height',$(".wrap-content").outerHeight(true) - $(".row-one").outerHeight(true));
+    $(".two-content").css('height',$(".two-left").outerHeight(true) - $(".two-title").outerHeight(true));
+    console.log($(".wrap-content").height(), 123)
+ })();
+
+
+    $(window, document).resize(function(){
+        resize();
+    }).load(function(){
+        resize();
+    });
+
+    function resize() {
+        var windowRate = $(window).width()/$(window).height();
+		var screenRate = window.screen.width/window.screen.height;
+
+        //当宽度超出时用宽度自适应
+		if (windowRate > screenRate){
+		    resizeCenter();
+		}else {
+            //当高度超出时用高度自适应
+		    resizeWidth();
+		}
+    }
+
+    function resizeWidth() {
+      var ratio = $(window).width()/(window.screen.width||$('body').width());
+      $('body').css({
+        transform: "scale("+ratio+")",
+        transformOrigin: "left top",
+        backgroundSize: "100%",
+	    marginLeft: ($(window).width()-$('body').width()*ratio)/2
+      });
+    }
+	function resizeCenter() {
+      if(!window.screen.height||!window.screen.width) return resizeCenterBak();
+      var ratio = $(window).height()/window.screen.height;
+      // console.log(ratio, 'ratio')
+      $('body').css({
+        transform: "scale("+ratio+")",
+        transformOrigin: "left top",
+        backgroundSize: 100*(window.screen.width/$(window).width() * ratio)+"%" + ' 100%',
+        backgroundPosition: ($(window).width()-$('body').width()*ratio)/2+"px top",
+        marginLeft: ($(window).width()-$('body').width()*ratio)/2
+      });
+    }
+
+  	function resizeFull() {
+      if(!window.screen.height||!window.screen.width) return resizeFullBak();
+      var ratioX = $(window).width()/window.screen.width;
+      var ratioY = $(window).height()/window.screen.height;
+      // console.log(ratioX, 'ratio')
+      $('body').css({
+        transform: "scale("+ratioX+", "+ratioY+")",
+        transformOrigin: "left top",
+        backgroundSize: "100% 100%",
+      });
+    }
+
+  	function resizeCenterBak() {
+      var ratioX = $(window).width()/$('body').width();
+      var ratioY = $(window).height()/$('body').height();
+      var ratio = Math.min(ratioX, ratioY);
+      $('body').css({
+        transform: "scale("+ratio+")",
+        transformOrigin: "left top",
+        backgroundSize: (1/ratioX)*100*ratio+"%",
+        backgroundPosition: ($(window).width()-$('body').width()*ratio)/2+"px top",
+        marginLeft: ($(window).width()-$('body').width()*ratio)/2
+      });
+    }
+    function resizeFullBak() {
+      var ratioX = $(window).width()/$('body').width();
+      var ratioY = $(window).height()/$('body').height();
+      $('body').css({
+        transform: "scale("+ratioX+", "+ratioY+")",
+        transformOrigin: "left top",
+        backgroundSize: "100% "+ratioY*100+"%",
+      });
+    }
+</script>
+</html>

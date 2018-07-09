@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="main" style="width: 1000px; height:600px;" ></div>
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/echarts.min.js"></script>
+<script>
+
+    var shenzhen = "../json/shenzhen.json";
+
+    $(function() {
+
+        var myChart = echarts.init(document.getElementById('main'));
+        $.get(shenzhen, function(tjJson) {
+            echarts.registerMap('shenzhen', tjJson);
+            myChart.setOption({
+                series: [{
+                    type: 'map',
+                    map: 'shenzhen'
+                }]
+            });
+
+            option = {
+                //backgroundColor: '#404a59',
+                title: {
+                    text: '深圳地图',
+                    subtext: '深圳市各区房价示意图',
+                    left: 'center',
+                    textStyle: {
+                        color: '#fff'
+                    }
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{b}"
+                },
+                //线颜色及飞行轨道颜色
+                /*visualMap: {
+                    show: false,
+                    min: 0,
+                    max: 100,
+                    color: ['#fff', '#0000ff', '#000000']
+                },*/
+                visualMap: {
+                    min: 0,
+                    max: 2500,
+                    left: 'left',
+                    top: 'bottom',
+                    text: ['高','低'],           // 文本，默认为数值文本
+                    calculable: true,
+                    inRange: {
+                        color: ['#ffffff', '#E0DAFF', '#ADBFFF', '#9CB4FF', '#6A9DFF', '#3889FF']
+                    }
+                },
+                //地图相关设置
+                geo: {
+                    map: 'shenzhen',
+                    //视角缩放比例
+                    zoom: 1,
+                    //显示文本样式
+                    label: {
+                        normal: {
+                            show: true,
+                            textStyle: {
+                                color: '#000000'
+                            }
+                        },
+                        emphasis: {
+                            textStyle: {
+                                color: '#000000'
+                            }
+                        }
+                    },
+                    //鼠标缩放和平移
+                    roam: true,
+                    itemStyle: {
+                        normal: {
+                            //          	color: '#ddd',
+                            borderColor: 'rgba(147, 235, 248, 1)',
+                            borderWidth: 1,
+                            areaColor: {
+                                type: 'radial',
+                                x: 0.5,
+                                y: 0.5,
+                                r: 0.8,
+                                colorStops: [{
+                                    offset: 0,
+                                    color: 'rgba(175,238,238, 0)' // 0% 处的颜色
+                                }, {
+                                    offset: 1,
+                                    color: 'rgba(	47,79,79, .2)' // 100% 处的颜色
+                                }],
+                                globalCoord: false // 缺省为 false
+                            },
+                            shadowColor: 'rgba(128, 217, 248, 1)',
+                            // shadowColor: 'rgba(255, 255, 255, 1)',
+                            shadowOffsetX: -2,
+                            shadowOffsetY: 2,
+                            shadowBlur: 10
+                        },
+                        emphasis: {
+                            areaColor: '#389BB7',
+                            borderWidth: 0
+                        }
+                    }
+                },
+                series: [
+                    {
+                        type: 'effectScatter',
+                        coordinateSystem: 'geo',
+                        zlevel: 2,
+                        //波纹效果
+                        rippleEffect: {
+                            period: 2,
+                            brushType: 'stroke',
+                            scale: 3
+                        },
+                        label: {
+                            normal: {
+                                show: true,
+                                color: '#ffffff',
+                                position: 'right',
+                                formatter: '{b}'
+                            }
+                        },
+                        //终点形象
+                        symbol: 'circle',
+                        //圆点大小
+                        symbolSize: function(val) {
+                            return val[2] / 8;
+                        },
+                        itemStyle: {
+                            normal: {
+                                show: true
+                            }
+                        },
+                        data: [
+
+                        ]
+                    },
+                    {
+                        name: 'iphone3',
+                        type: 'map',
+                        mapType: 'shenzhen',
+                        roam: true,
+                        label: {
+                            normal: {
+                                show: true
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        data:[
+                            {name: '南山区',value: randomData() },
+                            {name: '宝安区',value: randomData() },
+                            {name: '福田区',value: randomData() },
+                            {name: '罗湖区',value: randomData() },
+                            {name: '龙华区',value: randomData() },
+                            {name: '光明区',value: randomData() },
+                            {name: '龙岗区',value: randomData() },
+                            {name: '坪山区',value: randomData() },
+                            {name: '盐田区',value: randomData() },
+                            {name: '大鹏区',value: randomData() },
+                        ]
+                    },
+                ]
+            };
+            myChart.setOption(option);
+        })
+
+
+        function randomData() {
+            return Math.round(Math.random()*1000);
+        }
+    })
+
+</script>
+</body>
+</html>

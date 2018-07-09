@@ -6,6 +6,7 @@ import com.xiaolugoo.webapp.model.LoginLog;
 import com.xiaolugoo.webapp.model.User;
 import com.xiaolugoo.webapp.service.LoginLogService;
 import com.xiaolugoo.webapp.service.UserService;
+import com.xiaolugoo.webapp.util.MD5Util;
 import com.xiaolugoo.webapp.util.ResultData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -57,6 +58,8 @@ public class UserController {
         ResultData result = new ResultData();
         int res = 0;
         try {
+            String password = user.getUserPassword();
+            user.setUserPassword(MD5Util.getinstance().md5Password(password));
             res = userService.insert(user);
             List resList = new ArrayList();
             resList.add(res);
@@ -74,16 +77,68 @@ public class UserController {
         return mapper.writeValueAsString(result);
     }
 
+    @ApiOperation(value="通过邮箱激活用户", notes="根据发送过去的邮箱激活码")
+    @ApiImplicitParam(name = "code", value = "用户ID", required = true, paramType = "path", dataType = "String")
+    @ResponseBody
+    @RequestMapping(value = "/emailValidate/{code}", method = {RequestMethod.GET,RequestMethod.POST})
+    public String emailValidate(@PathVariable("code") String code) throws JsonProcessingException {
+        logger.debug("用户激活邮箱");
+        ResultData result = new ResultData();
+        try {
+            int res = userService.emailValidate(code);
+            List list = new ArrayList();
+            list.add(res);
+            if (res > 0){
+                result.setFlag("1");
+                result.setMsg("激活成功！");
+            }else if (res == -1){
+                result.setFlag("0");
+                result.setMsg("激活过期！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setFlag("0");
+            result.setMsg("激活失败！");
+        }
+        return mapper.writeValueAsString(result);
+    }
+
     @ApiOperation(value = "修改用户",notes = "根据User修改用户")
-    @ApiImplicitParam(name = "user", value = "用户详细实体user", dataType = "User")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",     paramType = "query",    value = "Id",     dataType = "Integer"),
+            @ApiImplicitParam(name = "userName",     paramType = "query",  value = "姓名",   dataType = "String"),
+            @ApiImplicitParam(name = "userEmail",    paramType = "query",  value = "邮箱",   dataType = "String"),
+            @ApiImplicitParam(name = "userNick",     paramType = "query",  value = "昵称",   dataType = "String"),
+            @ApiImplicitParam(name = "userGender",   paramType = "query",  value = "性别",   dataType = "String"),
+            @ApiImplicitParam(name = "userQq",       paramType = "query",  value = "QQ",     dataType = "Integer"),
+            @ApiImplicitParam(name = "userWechar",   paramType = "query",  value = "微信",   dataType = "Strng"),
+    })
     @ResponseBody
     @RequestMapping(value = "/update", method = {RequestMethod.GET,RequestMethod.POST})
-    public String userUpdate(User user,HttpServletRequest request) throws JsonProcessingException {
+    public String userUpdate(
+                                @PathParam("userId")        Integer userId,
+                                @PathParam("userName")      String userName,
+                                @PathParam("userEmail")     String userEmail,
+                                @PathParam("userNick")      String userNick,
+                                @PathParam("userGender")    String userGender,
+                                @PathParam("userQq")        Integer userQq,
+                                @PathParam("userWechar")    String userWechar,
+                                HttpServletRequest request
+                            ) throws JsonProcessingException {
         logger.debug("修改用户");
         ResultData result = new ResultData();
         HttpSession session = request.getSession();
         int res = 0;
+
         try {
+            User user = new User();
+            user.setUserId(userId);
+            user.setUserName(userName);
+            user.setUserEmail(userEmail);
+            user.setUserNick(userNick);
+            user.setUserGender(userGender);
+            user.setUserQq(userQq);
+            user.setUserWechar(userWechar);
             res = userService.updateByPrimaryKeySelective(user);
             List resList = new ArrayList();
             resList.add(res);
@@ -101,6 +156,62 @@ public class UserController {
             e.printStackTrace();
             result.setFlag("0");
             result.setMsg("新增失败！");
+        }
+
+        return mapper.writeValueAsString(result);
+    }
+
+    @ApiOperation(value = "修改用户密码",notes = "根据UserId修改用户密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",     paramType = "query",    value = "Id",     dataType = "Integer"),
+            @ApiImplicitParam(name = "userAccount",  paramType = "query",  value = "账户",   dataType = "String"),
+            @ApiImplicitParam(name = "userPassword", paramType = "query",  value = "密码",   dataType = "String"),
+            @ApiImplicitParam(name = "oldPassword",  paramType = "query",  value = "旧密码", dataType = "String"),
+    })
+    @ResponseBody
+    @RequestMapping(value = "/updatePassword", method = {RequestMethod.GET,RequestMethod.POST})
+    public String userUpdatePassword(
+            @PathParam("userId")        Integer userId,
+            @PathParam("userAccount")   String userAccount,
+            @PathParam("userPassword")  String userPassword,
+            @PathParam("oldPassword")   String oldPassword,
+            HttpServletRequest request
+    ) throws JsonProcessingException {
+        logger.debug("修改用户密码");
+        ResultData result = new ResultData();
+        HttpSession session = request.getSession();
+        int res = 0;
+        //验证旧密码是否正确
+        User queryUser = null;
+        if (oldPassword != null && userPassword != null){
+            queryUser = userService.userLogin(userAccount, MD5Util.getinstance().md5Password(oldPassword));
+        }
+        if (queryUser != null) {
+            try {
+                User user = new User();
+                user.setUserPassword(MD5Util.getinstance().md5Password(userPassword));
+                user.setUserId(userId);
+                res = userService.updateByPrimaryKeySelective(user);
+                List resList = new ArrayList();
+                resList.add(res);
+                if (res > 0){
+                    //修改后，更新session信息
+                    User newUser = userService.selectByPrimaryKey(user.getUserId());
+                    if (newUser != null){
+                        setSessionInfo(session,newUser);
+                    }
+                    result.setFlag("1");
+                    result.setMsg("修改密码成功！");
+                    result.setResult(resList);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                result.setFlag("0");
+                result.setMsg("新增失败！");
+            }
+        }else{
+            result.setFlag("-1");
+            result.setMsg("旧密码不正确");
         }
 
         return mapper.writeValueAsString(result);
@@ -147,14 +258,14 @@ public class UserController {
         HttpSession session = request.getSession();
         ResultData result = null;
 
-        if(validateCodeType.equals("true") && ! validateCode.equals(session.getAttribute("validateCode"))){
+        /*if(validateCodeType.equals("true") && ! validateCode.equals(session.getAttribute("validateCode"))){
             result.setFlag("0");
             result.setMsg("验证码不正确！");
             return mapper.writeValueAsString(result);
-        }
+        }*/
 
         try {
-            User user = userService.userLogin(userAccount, userPassword);
+            User user = userService.userLogin(userAccount, MD5Util.getinstance().md5Password(userPassword));
             LoginLog login = new LoginLog();
             if (user != null ){
 
@@ -275,5 +386,6 @@ public class UserController {
         }
         return ip;
     }
+
 
 }

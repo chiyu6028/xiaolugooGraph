@@ -11,4 +11,6 @@ public interface UserService {
     User userLogin(String userAccount, String userPassword);
 
     int updateByPrimaryKeySelective(User record);
+
+    int emailValidate(String code);
 }

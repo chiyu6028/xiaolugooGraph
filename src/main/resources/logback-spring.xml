@@ -76,8 +76,8 @@
         </encoder>
     </appender>
 
-    <!--项目日志输出为debug-->
-    <logger name="com.xiaolugoo.webapp" level="debug" additivity="false">
+    <!--项目日志输出为debug WARN-->
+    <logger name="com.xiaolugoo.webapp" level="WARN" additivity="false">
         <appender-ref ref="console"/>
         <appender-ref ref="fileInfoLog"/>
         <appender-ref ref="fileErrorLog"/>
