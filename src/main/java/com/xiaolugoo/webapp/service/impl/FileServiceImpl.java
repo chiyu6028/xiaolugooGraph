@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * @Auther: ALEX
@@ -43,8 +46,24 @@ public class FileServiceImpl implements FileService {
         if(fileList.size() == 0){
             return -1;
         }
-        //先删除已存在的
-        int de = indexValueMapper.deleteExcel(fileList);
+
+        int row = (int) Math.ceil((double)fileList.size()/1000);
+
+        for (int i = 0; i < row; i++) {
+            List<IndexValue> batchFileList = new ArrayList<>();
+            for (int j=i*1000; j<fileList.size(); j++){
+                IndexValue indexValue = fileList.get(j);
+                if (indexValue != null){
+                    batchFileList.add(indexValue);
+                }
+                int b = (i+1)*1000 < fileList.size() ? (i+1)*1000-1 : fileList.size()-1;
+                if (j == b){
+                    break;
+                }
+            }
+            //先删除已存在的
+            int de = indexValueMapper.deleteExcel(batchFileList);
+        }
 
         //在插入新增的
         int po = indexValueMapper.insertExcel(fileList);

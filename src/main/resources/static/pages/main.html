@@ -27,28 +27,28 @@
 					<div class="content-row-box">
 						<div class="content-item">
 							<h3 class="">新建商品住宅价格同比指数</h3>
-							<div class="echar-content" id="index_01" style="height: 200px;width: 400px"></div>
+							<div class="echar-content" id="index_01" indexId="01"></div>
 							<a href="javascript:" class="magnifying"></a>
 						</div>
 					</div>
 					<div class="content-row-box">
 						<div class="content-item">
-							<h3 class="">居住用地显示图</h3>
-							<div></div>
+							<h3 class="">二手住宅价格环比指数</h3>
+							<div class="echar-content" id="index_02" indexId="02"></div>
 							<a href="javascript:" class="magnifying"></a>
 						</div>
 					</div>
 					<div class="content-row-box">
 						<div class="content-item">
-							<h3 class="">居住用地显示图</h3>
-							<div></div>
+							<h3 class="">居住用地价格同比指数</h3>
+							<div class="echar-content" id="index_11" indexId="11"></div>
 							<a href="javascript:" class="magnifying"></a>
 						</div>
 					</div>
 					<div class="content-row-box">
 						<div class="content-item">
-							<h3 class="">居住用地显示图</h3>
-							<div></div>
+							<h3 class="">房屋租赁价格同比指数</h3>
+							<div class="echar-content" id="index_12" indexId="12"></div>
 							<a href="javascript:" class="magnifying"></a>
 						</div>
 					</div>
@@ -62,28 +62,32 @@
 					<div class="two-content clearfix">
 						<div class="two-box-content">
 							<div class="item-content">
-								<h3 class="">居住用地显示图</h3>
+								<h3 class="">新增个人住房贷款</h3>
+								<h3 class="">同比增长率</h3>
+							<div class="echar-content" id="index_05" indexId="05"></div>
+							<a href="javascript:" class="magnifying"></a>
+							</div>
+						</div>
+						<div class="two-box-content">
+							<div class="item-content">
+								<h3 class="">新建商品住宅</h3>
+								<h3 class="">新开工面积同比增长率</h3>
+							<div class="echar-content" id="index_07" indexId="07"></div>
+							<a href="javascript:" class="magnifying"></a>
+							</div>
+						</div>
+						<div class="two-box-content">
+							<div class="item-content">
+								<h3 class="">新建商品住宅</h3>
+								<h3 class="">销售面积同比增长率</h3>
 							<div></div>
 							<a href="javascript:" class="magnifying"></a>
 							</div>
 						</div>
 						<div class="two-box-content">
 							<div class="item-content">
-								<h3 class="">居住用地显示图</h3>
-							<div></div>
-							<a href="javascript:" class="magnifying"></a>
-							</div>
-						</div>
-						<div class="two-box-content">
-							<div class="item-content">
-								<h3 class="">居住用地显示图</h3>
-							<div></div>
-							<a href="javascript:" class="magnifying"></a>
-							</div>
-						</div>
-						<div class="two-box-content">
-							<div class="item-content">
-								<h3 class="">居住用地显示图</h3>
+								<h3 class="">二手住宅</h3>
+								<h3 class="">成交面积同比增长率</h3>
 							<div></div>
 							<a href="javascript:" class="magnifying"></a>
 							</div>
@@ -95,42 +99,116 @@
 						<div class="center-content">
 							<!--<h3 class="">居住用地显示图</h3>-->
 							<div class="the-map" id="map"></div>
-							<div class="center-row-bottom">
 
+							<div class="center-row-bottom clearfix">
+								<div class="bottom-left">
+									<div class="new-home ">
+										<div class="new-home-title">新建商品房</div>
+										<ul class="new-home-list clearfix">
+											<li  class="new-home-item">
+												<canvas id="new_year_avg" class="canvasflag" width="100%" ></canvas>
+												<div class="num-box" style="width: 100px;text-align: center;position: absolute;font-size: 25px;z-index: 10;color: rgb(255, 255, 255);left: 0;top: 50%;margin-top: -22px;" id="animationSandbox">
+													15%
+												</div>
+											</li>
+											<li class="new-home-item">
+												<canvas id="new_link_avg" class="canvasflag" ></canvas>
+												<div style="width: 100px; text-align: center;position: absolute; top:85;  font-size: 48px; z-index: 10;color:#ffffff" id="animationSandbox">
+													15%
+												</div>
+											</li>
+											<li class="new-home-item">
+												<canvas id="new_year_num" class="canvasflag"></canvas>
+												<div style="width: 100px; text-align: center;position: absolute; top:85;  font-size: 48px; z-index: 10;color:#ffffff" id="animationSandbox">
+													15%
+												</div>
+											</li>
+											<li class="new-home-item" class="canvasflag">
+												<canvas id="new_link_num" ></canvas>
+												<div style="width: 100px; text-align: center;position: absolute; top:85;  font-size: 48px; z-index: 10;color:#ffffff" id="animationSandbox">
+													15%
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="indexRate">
+										<ul>
+											<li>均价同比增长</li>
+											<li></li>
+											<li></li>
+											<li></li>
+										</ul>
+									</div>
+									<div class="second-home clearfix">
+										<div class="new-home-title">二手住宅</div>
+										<ul class="new-home-list">
+											<li  class="new-home-item">
+												<canvas id="canvas" width="210" height="210" style="background:rgb(0, 0, 0,1);"></canvas>
+												<div style="width: 210px; text-align: center;position: absolute; top:85;  font-size: 48px; z-index: 10;color:#ffffff" id="animationSandbox">
+													15%
+												</div>
+											</li>
+											<li class="new-home-item">
+												<canvas id="canvas" width="210" height="210" style="background:rgb(0, 0, 0,1);"></canvas>
+												<div style="width: 210px; text-align: center;position: absolute; top:85;  font-size: 48px; z-index: 10;color:#ffffff" id="animationSandbox">
+													15%
+												</div>
+											</li>
+											<li class="new-home-item">
+												<canvas id="canvas" width="210" height="210" style="background:rgb(0, 0, 0,1;"></canvas>
+												<div style="width: 210px; text-align: center;position: absolute; top:85;  font-size: 48px; z-index: 10;color:#ffffff" id="animationSandbox">
+													15%
+												</div>
+											</li>
+											<li class="new-home-item">
+												<canvas id="canvas" width="210" height="210" style="background:rgb(0, 0, 0,1);"></canvas>
+												<div style="width: 210px; text-align: center;position: absolute; top:85;  font-size: 48px; z-index: 10;color:#ffffff" id="animationSandbox">
+													15%
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="bottom-right">
+
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="two-left">
 					<div class="two-title">
-						<div>先行指标</div>
+						<div>参考指标</div>
 					</div>
 					<div class="two-content clearfix">
 						<div class="two-box-content">
 							<div class="item-content">
-								<h3 class="">居住用地显示图</h3>
-								<h3 class="">居住用地显示图</h3>
+								<h3 class="">商品住房空置率</h3>
+								<h3 class=""></h3>
 							<div></div>
 							<a href="javascript:" class="magnifying"></a>
 							</div>
 						</div>
 						<div class="two-box-content">
 							<div class="item-content">
-								<h3 class="">居住用地显示图</h3>
+								<h3 class="">房地产贷款余额与人民币</h3>
+								<h3 class="">各项贷款余额的比值</h3>
 							<div></div>
 							<a href="javascript:" class="magnifying"></a>
 							</div>
 						</div>
 						<div class="two-box-content">
 							<div class="item-content">
-								<h3 class="">居住用地显示图</h3>
+								<h3 class="">新增个人住房贷款与</h3>
+								<h3 class="">住房成交金额的比值</h3>
 							<div></div>
 							<a href="javascript:" class="magnifying"></a>
 							</div>
 						</div>
 						<div class="two-box-content">
 							<div class="item-content">
-								<h3 class="">居住用地显示图</h3>
+								<h3 class="">土地出让收入与一般公共</h3>
+								<h3 class="">预算收入的比值</h3>
 							<div></div>
 							<a href="javascript:" class="magnifying"></a>
 							</div>
@@ -149,43 +227,23 @@
 <script src="../js/app/main.js"></script>
 <script src="../js/echarts.min.js"></script>
 <script type="text/javascript">
-	// var boxheight = document.body.clientHeight;
-	// $(".container").height(boxheight);
-	// // window.screen.width && $('body').css('width', window.screen.width);
-	// // window.screen.height && $('body').css('height', window.screen.height);
-	// $('head').append('<meta name="viewport" content="width='+window.screen.width+'"/>');
-	// function setRatio(obj, ratio){
- //      var that = obj;
- //      var w = that.outerHeight()*(ratio);
- //      console.log(w, 'boxheight')
- //      var borderWid = parseInt(that.css("border-left-width"))+parseInt(that.css("border-right-width")); // 考虑边框的宽度
- //      that.css("width",w+borderWid);
- //  }
-
- //  var obj = $('.container');
- //  var ratio = 6/7;
- //  setRatio(obj,ratio);
-
-  // $(window,document).resize(function(){
-  //    // setRatio(obj,ratio);
-  //    resize()
-  // });
 (function(){
 	// window.screen.width && $('body').css('width', window.screen.width);
  //    window.screen.height && $('body').css('height', window.screen.height);
     $('head').append('<meta name="viewport" content="width='+window.screen.width+'"/>');
-
     $(".wrap-content").css('height',$(".container").outerHeight(true) - $(".content-header").outerHeight(true) - $(".empty").outerHeight(true));
-    // $(".content-box").css('height',$(".row-one").outerHeight(true) - $(".content-title").outerHeight(true));
-    
     $(".row-two").css('height',$(".wrap-content").outerHeight(true) - $(".row-one").outerHeight(true));
     $(".two-content").css('height',$(".two-left").outerHeight(true) - $(".two-title").outerHeight(true));
     $(".content-box").css('width',$(".row-one").outerWidth(true) - $(".content-title").outerWidth(true));
-    $(".two-left").css('width',$(".content-title").outerWidth(true) + $(".content-box").outerWidth(true)/4);
+    $(".two-left").css('width',Math.floor($(".content-title").outerWidth(true) + $(".content-box").outerWidth(true)/4));
     $(".two-center").css('width',$(".row-two").outerWidth(true) - $(".two-left").outerWidth(true)*2)
-    console.log($(".wrap-content").height(), 123)
+    $(".content-item>div").css('height',$(".content-item").outerHeight(true) - $(".content-item>h3").outerHeight(true))
+	/*$("#canvas").attr('height',$("#canvas").width());
+    $(".num-box").css('width',$("#canvas").width())*/
 
-
+	var totalHeight = $(".center-row-bottom").height()
+	var newHomeHeight = totalHeight*0.45;
+	$(".canvasflag").attr('height', newHomeHeight);
 
 	$(".magnifying").click(function(){
 	    var thisH = $(this).siblings(".echar-content").outerHeight(true)*2;
@@ -214,12 +272,12 @@
 		var screenRate = window.screen.width/window.screen.height;
 
         //当高度超出时用高度自适应
-		//if (windowRate > screenRate){
+		if (windowRate > screenRate){
 		    resizeCenter();
-		/*}else {
+		}else {
             //当宽度超出时用宽度自适应
 		    resizeWidth();
-		}*/
+		}
     }
 
     function resizeWidth() {

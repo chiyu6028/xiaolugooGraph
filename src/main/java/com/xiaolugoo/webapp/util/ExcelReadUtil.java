@@ -54,9 +54,14 @@ public class ExcelReadUtil {
         //从第二行开始读取数据
         for (int i = 1; i <= rowNum; i++) {
             row = sheet.getRow(i);
-            int colNum = row.getLastCellNum();
+            //int colNum = row.getLastCellNum();
             String time = valueType(row.getCell(0)).toString();
-            for (int j = 1; j < colNum; j++) {
+            //如果日期为空不上传
+            if ("".equals(time) || time == null){
+                continue;
+            }
+            System.out.println(time);
+            for (int j = 1; j < 11; j++) {
                 IndexValue indexValue = new IndexValue();
                 indexValue.setIndexId(j);
                 indexValue.setIndexTime(time);
@@ -71,11 +76,10 @@ public class ExcelReadUtil {
                             value = Double.valueOf(str);
                         }
                         indexValue.setIndexValue(value);
+                        result.add(indexValue);
                     }
-                }else {
-                    indexValue.setIndexValue(0);
                 }
-                result.add(indexValue);
+
             }
         }
 

@@ -50,6 +50,7 @@
             url: "/indexValue/findIndexValue",
             data: "",
             success: function(resp){
+                console.log(resp)
                 var data = JSON.parse(resp.replace(/'/g,""));
 
                 if (data.flag == '1'){
@@ -84,14 +85,23 @@
                 var month = timeList[i].substring(4,6);
                 var row = "<tr><td>" + year + "." + month + "</td>";
                 for (var j = 0; j < result.length; j++) {
-                    var value = result[j][year][month].toString();
-                    var position = value.toString().indexOf(".");
-                    var len = position > 0 ? position + 2 : value.length;
-                    if (result[j].INDEX_TYPE == '1'){
-                        var col = "<td title='"+ value +"'>" + parseFloat(value.substring(0,len)).toFixed(1) + "</td>";
-                    }else {
-                        var col = "<td title='"+ value + "%" +"'>" + parseFloat(value.substring(0,len)).toFixed(1) + "%" + "</td>";
+
+                    var col ;
+                    if (year.length > 0 && month.length > 0 && !$.isEmptyObject(result[j]) ){
+                        console.log(year,month)
+                        console.log(result[j])
+                        var value = result[j][year][month].toString();
+                        var position = value.toString().indexOf(".");
+                        var len = position > 0 ? position + 2 : value.length;
+                        if (result[j].INDEX_TYPE == '1'){
+                            col = "<td title='"+ value +"'>" + parseFloat(value.substring(0,len)).toFixed(1) + "</td>";
+                        }else {
+                            col = "<td title='"+ value + "%" +"'>" + parseFloat(value.substring(0,len)).toFixed(1) + "%" + "</td>";
+                        }
+                    }else{
+                        col = "<td title=''></td>";
                     }
+
                     row += col;
                 }
                 row += "</tr>"

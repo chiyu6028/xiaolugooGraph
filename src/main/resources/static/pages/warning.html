@@ -117,6 +117,7 @@
                     var data = JSON.parse(resp.replace(/'/g,""));
                     if (data.flag == "1"){
                         result = data.result[0];
+                        console.log(result)
                         draw(result);
                     }else {
                         toastr.warning("数据加载失败");
@@ -171,9 +172,11 @@
             graphValue = getDataList(result,timeList);
             var maxValue = Math.max.apply(null,graphValue);
             var minValue = Math.min.apply(null,graphValue);
-            var maxyValue = result.INDEX_LINE4 > maxValue ? result.INDEX_LINE4  : maxValue;
+            var maxyValue = result.INDEX_LINE2 > maxValue ? result.INDEX_LINE2  : maxValue;
             var minyValue = result.INDEX_LINE1 < minValue ? result.INDEX_LINE1  : minValue;
-            var point = getMarkPoin(timeList, graphValue, result.INDEX_LINE3);
+
+            console.log(maxyValue,minyValue)
+            var point = getMarkPoin(timeList, graphValue, result.INDEX_LINE2);
             option = {
                 title: {
                     text: result.INDEX_NAME,
@@ -217,8 +220,8 @@
                     }, {
                         gt: result.INDEX_LINE1,
                         lte: result.INDEX_LINE2,
-                        color: '#23c6c8'
-                    }, {
+                        color: '#f7a54a'
+                    }, /*{
                         gt: result.INDEX_LINE2,
                         lte: result.INDEX_LINE3,
                         color: '#1ab394'
@@ -226,8 +229,8 @@
                         gt: result.INDEX_LINE3,
                         lte: result.INDEX_LINE4,
                         color: '#f7a54a'
-                    }, {
-                        gt: result.INDEX_LINE4,
+                    }, */{
+                        gt: result.INDEX_LINE2,
                         //lte: 9999,
                         color: '#ed5565'
                     }],
@@ -283,8 +286,8 @@
                         show:false,
                         interval:3,
                     },
-                    max: parseInt(maxyValue > 0 ? maxyValue*1.1 : maxyValue * 0.9),
-                    min: parseInt(minyValue > 0 ? minyValue*0.9 : minyValue * 1.1),
+                    max: parseInt(maxyValue > 0 ? maxyValue*1.02 : maxyValue * 0.98),
+                    min: parseInt(minyValue > 0 ? minyValue*0.98 : minyValue * 1.02),
                     splitNumber: 12,
                     axisTick: {
                         show: false
@@ -323,7 +326,7 @@
                             data: [
                                 {
                                     yAxis: result.INDEX_LINE1,
-                                    name: '过冷区上限',
+                                    name: '合理区上限',
                                     itemStyle: {
                                         normal: {
                                             color: "#666666",
@@ -339,7 +342,7 @@
                                         }
                                     }
                                 },
-                                {
+                                /*{
                                     yAxis: result.INDEX_LINE3,
                                     name: '合理区上限',
                                     itemStyle: {
@@ -356,7 +359,7 @@
                                             color: "#666666",
                                         }
                                     }
-                                },
+                                },*/
                             ]
                         },
                         markPoint: {

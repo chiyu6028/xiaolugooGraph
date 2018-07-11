@@ -11,38 +11,236 @@ $(function () {
             }]
         });
 
-        option = {
-            //backgroundColor: '#404a59',
-            title: {
-                text: '深圳地图',
-                subtext: '深圳市各区房价示意图',
-                left: 'center',
-                textStyle: {
-                    color: '#fff'
+        var regionsStyleArray = [
+            {
+                normal: {
+                    borderColor: 'rgba(147, 235, 248, 1)',
+                    borderWidth: 1,
+                    areaColor: 'rgba(3,56,193, .2)',
+                    shadowColor: 'rgba(255, 255, 255, 1)',
+                    shadowOffsetX: -2,
+                    shadowOffsetY: 2,
+                    shadowBlur: 10
+                },
+                emphasis: {
+                    areaColor: '#0338c1',
+                    borderWidth: 0
                 }
+            },
+            {
+                normal: {
+                    borderColor: 'rgba(147, 235, 248, 1)',
+                    borderWidth: 1,
+                    areaColor: 'rgba(70,177,190, .2)',
+                    shadowColor: 'rgba(255, 255, 255, 1)',
+                    shadowOffsetX: -2,
+                    shadowOffsetY: 2,
+                    shadowBlur: 10
+                },
+                emphasis: {
+                    areaColor: '#46b1be',
+                    borderWidth: 0
+                }
+            },
+            {
+                normal: {
+                    borderColor: 'rgba(147, 235, 248, 1)',
+                    borderWidth: 1,
+                    areaColor: 'rgba(39,120,199, .2)',
+                    //shadowColor: 'rgba(128, 217, 248, 1)',
+                    shadowColor: 'rgba(255, 255, 255, 1)',
+                    shadowOffsetX: -2,
+                    shadowOffsetY: 2,
+                    shadowBlur: 10
+                },
+                emphasis: {
+                    areaColor: '#2778c7',
+                    borderWidth: 0
+                }
+            },
+            {
+                normal: {
+                    borderColor: 'rgba(147, 235, 248, 1)',
+                    borderWidth: 1,
+                    areaColor: 'rgba(36,38,76, .2)',
+                    //shadowColor: 'rgba(128, 217, 248, 1)',
+                    shadowColor: 'rgba(255, 255, 255, 1)',
+                    shadowOffsetX: -2,
+                    shadowOffsetY: 2,
+                    shadowBlur: 10
+                },
+                emphasis: {
+                    areaColor: '#24264c',
+                    borderWidth: 0
+                }
+            },
+        ]
+
+        option = {
+            title: {
+                text: '5月份全市成交检测',
+                textStyle: {
+                    color: '#fff',
+                    align:'left'
+                },
+                //subtext: '深圳市各区房价示意图',
             },
             tooltip: {
                 trigger: 'item',
                 formatter: "{b}"
             },
-            //线颜色及飞行轨道颜色
-            /*visualMap: {
-                show: false,
-                min: 0,
-                max: 100,
-                color: ['#fff', '#0000ff', '#000000']
-            },*/
-            /*visualMap: {
-                min: 0,
-                max: 2500,
-                left: 'left',
-                top: 'bottom',
-                text: ['高','低'],           // 文本，默认为数值文本
-                calculable: true,
-                inRange: {
-                    color: ['#ffffff', '#E0DAFF', '#ADBFFF', '#9CB4FF', '#6A9DFF', '#3889FF']
-                }
-            },*/
+            //标签
+            graphic: [
+                //标签
+                {
+                    type: 'group',
+                    ///rotation: Math.PI / 4,
+                    bounding: 'raw',
+                    //right: 110,
+                    //bottom: 110,
+                    top:0,
+                    left:650,
+                    z: 100,
+                    children: [
+                        {
+                            type:'polygon'  ,
+                            left: 20,
+                            shape:{
+                                points:[
+                                    [0,0], [120, 0],[120,30],[52,30],[60,36],[68,30], [0, 30]
+                                ]
+                            },
+                            style:{
+                                fill:'rgba(255,255,255,0.3)',
+                            },
+                        },
+                        {
+                            type: 'text',
+                            left: 30,
+                            top: 8,
+                            z: 100,
+                            style: {
+                                fill: '#ffffff',
+                                text: '全市新建商品房',
+                                font: 'bold 14px Microsoft YaHei'
+                            }
+                        },
+                        {
+                            type: 'text',
+                            left: 5,
+                            top: 40,
+                            z: 100,
+                            style: {
+                                fill: '#ffffff',
+                                text: '65324',
+                                font: 'bold 22px Microsoft YaHei'
+                            }
+                        },
+                        {
+                            type: 'text',
+                            left: 12,
+                            top: 70,
+                            z: 100,
+                            style: {
+                                fill: '#ffffff',
+                                text: '全市均价(元/m2)',
+                                font: 'bold 12px Microsoft YaHei'
+                            }
+                        },
+                        {
+                            type: 'text',
+                            left: 115,
+                            top: 40,
+                            z: 100,
+                            style: {
+                                fill: '#ffffff',
+                                text: '1324',
+                                font: 'bold 22px Microsoft YaHei'
+                            }
+                        },
+                        {
+                            type: 'text',
+                            left: 120,
+                            top: 70,
+                            z: 100,
+                            style: {
+                                fill: '#ffffff',
+                                text: '全市成交套数',
+                                font: 'bold 10px Microsoft YaHei'
+                            }
+                        },
+
+                        {
+                            type:'polygon',
+                            left: 20,
+                            top:100,
+                            shape:{
+                                points:[
+                                    [0,0], [120, 0],[120,30],[52,30],[60,36],[68,30], [0,30]
+                                ]
+                            },
+                            style:{
+                                fill:'rgba(255,255,255,0.3)',
+                            },
+                        },
+                        {
+                            type: 'text',
+                            left: 35,
+                            top: 108,
+                            z: 100,
+                            style: {
+                                fill: '#ffffff',
+                                text: '全市二手房住宅',
+                                font: 'bold 10px Microsoft YaHei'
+                            }
+                        },
+                        {
+                            type: 'text',
+                            left: 5,
+                            top: 140,
+                            z: 100,
+                            style: {
+                                fill: '#ffffff',
+                                text: '65324',
+                                font: 'bold 22px Microsoft YaHei'
+                            }
+                        },
+                        {
+                            type: 'text',
+                            left: 12,
+                            top: 170,
+                            z: 100,
+                            style: {
+                                fill: '#ffffff',
+                                text: '全市均价(元/m2)',
+                                font: 'bold 10px Microsoft YaHei'
+                            }
+                        },
+                        {
+                            type: 'text',
+                            left: 115,
+                            top: 140,
+                            z: 100,
+                            style: {
+                                fill: '#ffffff',
+                                text: '1324',
+                                font: 'bold 22px Microsoft YaHei'
+                            }
+                        },
+                        {
+                            type: 'text',
+                            left: 120,
+                            top: 170,
+                            z: 100,
+                            style: {
+                                fill: '#ffffff',
+                                text: '全市成交套数',
+                                font: 'bold 10px Microsoft YaHei'
+                            }
+                        }
+                    ]
+                },
+            ],
             //地图相关设置
             geo: {
                 map: 'shenzhen',
@@ -63,37 +261,20 @@ $(function () {
                     }
                 },
                 //鼠标缩放和平移
-                roam: true,
-                itemStyle: {
-                    normal: {
-                        //          	color: '#ddd',
-                        borderColor: 'rgba(147, 235, 248, 1)',
-                        borderWidth: 1,
-                        areaColor: {
-                            type: 'radial',
-                            x: 0.5,
-                            y: 0.5,
-                            r: 0.8,
-                            colorStops: [{
-                                offset: 0,
-                                color: 'rgba(175,238,238, 0)' // 0% 处的颜色
-                            }, {
-                                offset: 1,
-                                color: 'rgba(	47,79,79, .2)' // 100% 处的颜色
-                            }],
-                            globalCoord: false // 缺省为 false
-                        },
-                        shadowColor: 'rgba(128, 217, 248, 1)',
-                        // shadowColor: 'rgba(255, 255, 255, 1)',
-                        shadowOffsetX: -2,
-                        shadowOffsetY: 2,
-                        shadowBlur: 10
-                    },
-                    emphasis: {
-                        areaColor: '#389BB7',
-                        borderWidth: 0
-                    }
-                }
+                roam: false,
+                regions: [
+                    {name: '南山区', itemStyle: regionsStyleArray[1]},
+                    {name: '福田区', itemStyle: regionsStyleArray[1]},
+                    {name: '罗湖区', itemStyle: regionsStyleArray[1]},
+                    {name: '宝安区', itemStyle: regionsStyleArray[3]},
+                    {name: '盐田区', itemStyle: regionsStyleArray[3]},
+                    {name: '龙华区', itemStyle: regionsStyleArray[3]},
+                    {name: '龙岗区', itemStyle: regionsStyleArray[2]},
+                    {name: '坪山区', itemStyle: regionsStyleArray[0]},
+                    {name: '光明区', itemStyle: regionsStyleArray[0]},
+                    {name: '大鹏区', itemStyle: regionsStyleArray[0]},
+
+                ]
             },
             series: [
                 {
@@ -129,32 +310,6 @@ $(function () {
 
                     ]
                 },
-                /*{
-                    name: 'iphone3',
-                    type: 'map',
-                    mapType: 'shenzhen',
-                    roam: true,
-                    label: {
-                        normal: {
-                            show: true
-                        },
-                        emphasis: {
-                            show: true
-                        }
-                    },
-                    data:[
-                        {name: '南山区',value: randomData() },
-                        {name: '宝安区',value: randomData() },
-                        {name: '福田区',value: randomData() },
-                        {name: '罗湖区',value: randomData() },
-                        {name: '龙华区',value: randomData() },
-                        {name: '光明区',value: randomData() },
-                        {name: '龙岗区',value: randomData() },
-                        {name: '坪山区',value: randomData() },
-                        {name: '盐田区',value: randomData() },
-                        {name: '大鹏区',value: randomData() },
-                    ]
-                },*/
             ]
         };
         myChart.setOption(option);
@@ -176,7 +331,7 @@ $(function () {
             var data = JSON.parse(resp.replace(/'/g,""));
             if (data.flag == "1"){
                 result = data.result[0];
-                draw(result);
+                coreIndexDraw(result);
             }else {
                 toastr.warning("数据加载失败");
             }
@@ -213,7 +368,7 @@ $(function () {
         return dataList;
     }
 
-    function draw(result) {
+    function coreIndexDraw(result) {
         console.log(result)
         timeList = getTimeList(result);
         myChart = echarts.init(document.getElementById('index_01'));
@@ -224,35 +379,13 @@ $(function () {
         var minyValue = result.INDEX_LINE1 < minValue ? result.INDEX_LINE1  : minValue;
         var point = getMarkPoin(timeList, graphValue, result.INDEX_LINE4);
         option = {
-            /*title: {
-                text: result.INDEX_NAME,
-                left: '50%',
-                textAlign: 'center',
-                textStyle:{fontSize:'22'},
-            },*/
             animationDuration:1000,
-            /*tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    lineStyle: {
-                        color: '#ddd'
-                    }
-                },
-                formatter: result.INDEX_TYPE==1?'{b},{c}':'{b},{c}%',
-                backgroundColor: 'rgba(57,174,245,0.8)',
-                padding: [15, 30],
-                textStyle: {
-                    color: '#ffffff',
-                },
-                extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.2)'
-            },*/
             grid: [
                 {x: '7%', y: '7%',top:30, width: '83%'},
             ],
             legend: {
                 right: 20,
                 orient: 'vertical',
-                //data:['sss']
             },
             visualMap: {
                 top: 5,
@@ -524,7 +657,57 @@ $(function () {
     //-----------------------------------------核心指标-----------------------------------------------end
 
 
+    var canvas = document.getElementById('new_year_avg'),  //获取canvas元素
+        context = canvas.getContext('2d'),  //获取画图环境，指明为2d
+        centerX = canvas.width/2,   //Canvas中心点x轴坐标
+        centerY = canvas.height/2,  //Canvas中心点y轴坐标
+        rad = Math.PI*2/100, //将360度分成100份，那么每一份就是rad度
+        speed = 0.1; //加载的快慢就靠它了
+    //绘制5像素宽的运动外圈
+    function blueCircle(n){
+        context.save();
+        context.strokeStyle = "#fff"; //设置描边样式
+        context.lineWidth = 8; //设置线宽
+        context.beginPath(); //路径开始
+        context.arc(centerX, centerY, 50 , -Math.PI/2, -Math.PI/2 +n*rad, false); //用于绘制圆弧context.arc(x坐标，y坐标，半径，起始角度，终止角度，顺时针/逆时针)
+        context.stroke(); //绘制
+        context.closePath(); //路径结束
+        context.restore();
+    }
+    //绘制白色外圈
+    function whiteCircle(){
+        context.save();
+        context.beginPath();
+        context.lineWidth = 2; //设置线宽
+        context.strokeStyle = "red";
+        context.arc(centerX, centerY, 45, 0, Math.PI*2, false);
+        context.stroke();
+        context.closePath();
+        context.restore();
+    }
+    function drawFrame(size){
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        whiteCircle();
+        blueCircle(25.1);
+    };
+    //}
 
+    function testAnim(x) {
+        $('#animationSandbox').removeClass().addClass(x + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            $(this).removeClass();
+        });
+    };
+    $(document).ready(function(){
+        $('.js--triggerAnimation').click(function(e){
+            e.preventDefault();
+            testAnim("flip");
+        });
+
+        window.setInterval(function(){
+            testAnim("flip");
+            drawFrame(25);
+        },1000)
+    });
 
 
 
