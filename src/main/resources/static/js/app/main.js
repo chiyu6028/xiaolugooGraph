@@ -100,7 +100,7 @@ $(function () {
                     //right: 110,
                     //bottom: 110,
                     top:0,
-                    left:650,
+                    left:630,
                     z: 100,
                     children: [
                         {
@@ -399,18 +399,18 @@ $(function () {
     //-----------------------------------------核心指标-----------------------------------------------start
 
     var coreItemArray = [
-        {params :{indexId:"1", beginDate:"201705", endDate:"201806"}, id:'index_01',type:1},
-        {params :{indexId:"2", beginDate:"201705", endDate:"201806"}, id:'index_02',type:1},
-        {params :{indexId:"3", beginDate:"201705", endDate:"201806"}, id:'index_03',type:1},
-        {params :{indexId:"10", beginDate:"201605", endDate:"201705"}, id:'index_11',type:1},
-        {params :{indexId:"4", beginDate:"201705", endDate:"201806"}, id:'index_04',type:2},
-        {params :{indexId:"5", beginDate:"201705", endDate:"201806"}, id:'index_05',type:2},
-        {params :{indexId:"6", beginDate:"201705", endDate:"201806"}, id:'index_06',type:2},
-        {params :{indexId:"7", beginDate:"201705", endDate:"201806"}, id:'index_07',type:2},
-        {params :{indexId:"8", beginDate:"201705", endDate:"201806"}, id:'index_08',type:2},
-        {params :{indexId:"9", beginDate:"201705", endDate:"201806"}, id:'index_09',type:2},
-        {params :{indexId:"10", beginDate:"201705", endDate:"201806"}, id:'index_10',type:2},
-        {params :{indexId:"2", beginDate:"201605", endDate:"201706"}, id:'index_12',type:2},
+        {params :{indexId:"1", beginDate:"201705", endDate:"201806"}, id:'index_01',type:1,size:1},
+        {params :{indexId:"2", beginDate:"201705", endDate:"201806"}, id:'index_02',type:1,size:1},
+        {params :{indexId:"3", beginDate:"201705", endDate:"201806"}, id:'index_03',type:1,size:1},
+        {params :{indexId:"10", beginDate:"201605", endDate:"201705"}, id:'index_11',type:1,size:1},
+        {params :{indexId:"4", beginDate:"201705", endDate:"201806"}, id:'index_04',type:2,size:1},
+        {params :{indexId:"5", beginDate:"201705", endDate:"201806"}, id:'index_05',type:2,size:1},
+        {params :{indexId:"6", beginDate:"201705", endDate:"201806"}, id:'index_06',type:2,size:1},
+        {params :{indexId:"7", beginDate:"201705", endDate:"201806"}, id:'index_07',type:2,size:1},
+        {params :{indexId:"8", beginDate:"201705", endDate:"201806"}, id:'index_08',type:2,size:1},
+        {params :{indexId:"9", beginDate:"201705", endDate:"201806"}, id:'index_09',type:2,size:1},
+        {params :{indexId:"10", beginDate:"201705", endDate:"201806"}, id:'index_10',type:2,size:1},
+        {params :{indexId:"2", beginDate:"201605", endDate:"201706"}, id:'index_12',type:2,size:1},
         /*{params :{indexId:"1", beginDate:"201705", endDate:"201806"}, id:'index_01'},
         {params :{indexId:"1", beginDate:"201705", endDate:"201806"}, id:'index_01'}*/
     ];
@@ -430,10 +430,10 @@ $(function () {
                 if (data.flag == "1"){
                     result = data.result[0];
                     if(obj.type == 1){
-                        coreIndexDraw(result,obj.id);
+                        coreIndexDraw(result,obj);
                     }
                     if(obj.type == 2){
-                        secondIndexDraw(result,obj.id);
+                        secondIndexDraw(result,obj);
                     }
                 }else {
                     toastr.warning("数据加载失败");
@@ -473,9 +473,9 @@ $(function () {
         return dataList;
     }
 
-    function coreIndexDraw(result, id) {
+    function coreIndexDraw(result, obj) {
         timeList = getTimeList(result);
-        myChart = echarts.init(document.getElementById(id));
+        myChart = echarts.init(document.getElementById(obj.id));
         graphValue = getDataList(result,timeList);
         var maxValue = Math.max.apply(null,graphValue);
         var minValue = Math.min.apply(null,graphValue);
@@ -485,7 +485,7 @@ $(function () {
         option = {
             animationDuration:1000,
             grid: [
-                {x: '7%', y: '7%',top:10, width: '70%'},
+                {x: '7%', y: '7%',top:'5%', tottom:'3%',width: '70%'},
             ],
             legend: {
                 right: 20,
@@ -537,7 +537,7 @@ $(function () {
                 axisLabel: {
                     margin: 10,
                     color:'#29abe2',
-                    fontSize: 10,
+                    fontSize: 10*obj.size,
                     rotate: 45,
                 }
             },
@@ -568,16 +568,16 @@ $(function () {
                     bounding: 'raw',
                     //right: 110,
                     //bottom: 110,
-                    top:0,
-                    left:350,
-                    z: 100,
+                    top:10*obj.size,
+                    left:350*obj.size,
+                    z: 100*obj.size,
                     children: [
                         {
                             type:'polygon'  ,
-                            left: 20,
+                            left: 20*obj.size,
                             shape:{
                                 points:[
-                                    [0,0], [60, 0], [60,138], [0, 138]
+                                    [0,0], [60*obj.size, 0], [60*obj.size,138*obj.size], [0, 138*obj.size]
                                 ]
                             },
                             style:{
@@ -586,11 +586,11 @@ $(function () {
                         },
                         {
                             type:'polygon'  ,
-                            left: 42,
-                            top: 10,
+                            left: 42*obj.size,
+                            top: 10*obj.size,
                             shape:{
                                 points:[
-                                    [0,0], [15, 0], [15,7], [0, 7]
+                                    [0,0], [15*obj.size, 0], [15*obj.size,7*obj.size], [0, 7*obj.size]
                                 ]
                             },
                             z:120,
@@ -600,11 +600,11 @@ $(function () {
                         },
                         {
                             type:'polygon'  ,
-                            left: 42,
-                            top: 49,
+                            left: 42*obj.size,
+                            top: 49*obj.size,
                             shape:{
                                 points:[
-                                    [0,0], [15, 0], [15,7], [0, 7]
+                                    [0,0], [15*obj.size, 0], [15*obj.size,7*obj.size], [0, 7*obj.size]
                                 ]
                             },
                             z:120,
@@ -614,11 +614,11 @@ $(function () {
                         },
                         {
                             type:'polygon'  ,
-                            left: 42,
-                            top: 86,
+                            left: 42*obj.size,
+                            top: 86*obj.size,
                             shape:{
                                 points:[
-                                    [0,0], [15, 0], [15,7], [0, 7]
+                                    [0,0], [15*obj.size, 0], [15*obj.size,7*obj.size], [0, 7*obj.size]
                                 ]
                             },
                             z:120,
@@ -629,35 +629,35 @@ $(function () {
 
                         {
                             type: 'text',
-                            left: 27,
-                            top: 22,
+                            left: 27*obj.size,
+                            top: 22*obj.size,
                             z: 120,
                             style: {
                                 fill: '#29abe2',
                                 text: ['过热区间','  102.3'].join('\n'),
-                                font: 'bold 10px Microsoft YaHei'
+                                font: 'bold '+10*obj.size+'px Microsoft YaHei'
                             }
                         },
                         {
                             type: 'text',
-                            left: 27,
-                            top: 59,
+                            left: 27*obj.size,
+                            top: 59*obj.size,
                             z: 120,
                             style: {
                                 fill: '#29abe2',
                                 text: ['合理区间','   82.3'].join('\n'),
-                                font: 'bold 10px Microsoft YaHei'
+                                font: 'bold '+10*obj.size+'px Microsoft YaHei'
                             }
                         },
                         {
                             type: 'text',
-                            left: 27,
-                            top: 97,
+                            left: 27*obj.size,
+                            top: 97*obj.size,
                             z: 120,
                             style: {
                                 fill: '#29abe2',
                                 text: ['过冷区间','   60.5'].join('\n'),
-                                font: 'bold 10px Microsoft YaHei'
+                                font: 'bold '+10*obj.size+'px Microsoft YaHei'
                             }
                         },
                     ]
@@ -717,9 +717,9 @@ $(function () {
         };
         myChart.setOption(option);
     }
-    function secondIndexDraw(result, id) {
+    function secondIndexDraw(result, obj) {
         timeList = getTimeList(result);
-        myChart = echarts.init(document.getElementById(id));
+        myChart = echarts.init(document.getElementById(obj.id));
         graphValue = getDataList(result,timeList);
         var maxValue = Math.max.apply(null,graphValue);
         var minValue = Math.min.apply(null,graphValue);
@@ -1024,6 +1024,184 @@ $(function () {
 
     //-----------------------------------------核心指标-----------------------------------------------end
 
+    var barChart = echarts.init(document.getElementById('top-rate'));
+
+    baroption = {
+        //backgroundColor: '#00265f',
+        title:{
+            text:'全市各区成交排行',
+            top:0,
+            right:10,
+            textStyle:{
+                color:'#ffffff',
+                fontSize: 14
+            }
+        },
+        grid: {
+            left: '3%',
+            top: 20,
+            right: 0,
+            bottom: 0,
+            containLabel: true
+        },
+        xAxis: [{
+            type: 'category',
+            data: ['南山',
+                '福田',
+                '宝安',
+                '罗湖',
+                '龙华',
+                '龙岗',
+                '光明',
+                '盐田',
+                '坪山',
+                '大鹏 ',
+            ],
+            axisLine: {
+                show: false,
+                lineStyle: {
+                    color: "#063374",
+                    width: 1,
+                    type: "solid"
+                }
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: "#ffffff",
+                }
+            },
+        }],
+        yAxis: [{
+            type: 'value',
+            show: false,
+        }],
+        series: [{
+            type: 'bar',
+            data: [1, 1, 2, 2.5, 3, 4.3, 5, 5.2, 6, 7].reverse(),
+            barWidth: 20, //柱子宽度
+            //barGap: 1, //柱子之间间距
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: '#00fcae'
+                    }, {
+                        offset: 1,
+                        color: '#006388'
+                    }]),
+                    opacity: 1,
+                }
+            }
+        }]
+    };
+
+    barChart.setOption(baroption);
+
+    var childChart = echarts.init(document.getElementById('bottom_rate'));
+
+    childoption = {
+        //backgroundColor: '#00265f',
+        grid: {
+            left: 4,
+            top: 10,
+            right: 0,
+            bottom: '0',
+            containLabel: true
+        },
+        xAxis: [{
+            type: 'category',
+            show: false,
+            data: ['南山',
+                '福田',
+                '宝安',
+                '罗湖',
+                '龙华',
+                '龙岗',
+                '光明',
+                '盐田',
+                '坪山',
+                '大鹏 ',
+            ],
+            axisLine: {
+                show: false,
+                lineStyle: {
+                    color: "#063374",
+                    width: 1,
+                    type: "solid"
+                }
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: "#00c7ff",
+                }
+            },
+        }],
+        yAxis: [{
+            type: 'value',
+            show: false,
+        }],
+        series: [
+            {
+                name: '差值',
+                type: 'bar',
+                stack: '血压',
+                barWidth:20,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'insideTop',    // 底部文字显示设置
+                        color: '#333'
+                    }
+                },
+                data: [1, 1, 2, 2.5, 3, 4.3, 5, 5.2, 6, 7],
+                itemStyle: {
+                    normal: {
+                        color: 'transparent'        // 底部设置为透明，就可以不显示了
+                    }
+                }
+            }, {
+                name: '差值',
+                type: 'bar',
+                stack: '血压',
+                barWidth: 30,
+                label: {
+                    normal: {
+                        show: false,
+                        //position: 'top'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#006388'
+                        }, {
+                            offset: 1,
+                            color: '#1197e6'
+                        }]),
+                        opacity: 1,
+                    }
+                },
+                data: [14, 14, 13, 12.5, 12, 10.7, 10, 9.8, 9, 8]            // 显示的这一部分柱状图，应该为血压最大值-最小值的差值
+            },
+        ]
+    };
+
+    childChart.setOption(childoption);
+
+
+
+
+    //-------------------------------------------------------------------
+
 
     /*var canvas = document.getElementById('new_year_avg'),  //获取canvas元素
         context = canvas.getContext('2d'),  //获取画图环境，指明为2d
@@ -1032,12 +1210,12 @@ $(function () {
         rad = Math.PI*2/100, //将360度分成100份，那么每一份就是rad度
         speed = 0.1; //加载的快慢就靠它了*/
     //绘制5像素宽的运动外圈
-    function blueCircle(context,n,centerX,centerY,rad){
+    function blueCircle(context,obj,centerX,centerY,rad){
         context.save();
-        context.strokeStyle = "#fff"; //设置描边样式
+        context.strokeStyle = obj.color; //设置描边样式
         context.lineWidth = 4; //设置线宽
         context.beginPath(); //路径开始
-        context.arc(centerX, centerY, 31 , -Math.PI/2, -Math.PI/2 +n*rad, false); //用于绘制圆弧context.arc(x坐标，y坐标，半径，起始角度，终止角度，顺时针/逆时针)
+        context.arc(centerX, centerY, 31 , -Math.PI/2, -Math.PI/2 +obj.value*rad, false); //用于绘制圆弧context.arc(x坐标，y坐标，半径，起始角度，终止角度，顺时针/逆时针)
         context.stroke(); //绘制
         context.closePath(); //路径结束
         context.restore();
@@ -1047,7 +1225,7 @@ $(function () {
         context.save();
         context.beginPath();
         context.lineWidth = 2; //设置线宽
-        context.strokeStyle = "red";
+        context.strokeStyle = "#fff";
         context.arc(centerX, centerY, 31, 0, Math.PI*2, false);
         context.stroke();
         context.closePath();
@@ -1059,14 +1237,14 @@ $(function () {
         blueCircle(25.1);
     };*/
     var idArray = [
-        {id:'new_01',value:15},
-        {id:'new_02',value:15},
-        {id:'new_03',value:15},
-        {id:'new_04',value:15},
-        {id:'second_01',value:15},
-        {id:'second_02',value:15},
-        {id:'second_03',value:15},
-        {id:'second_04',value:15},
+        {id:'new_01',value:15,color:'#00fcae'},
+        {id:'new_02',value:25,color:'#00fcae'},
+        {id:'new_03',value:35,color:'#00fcae'},
+        {id:'new_04',value:45,color:'#00fcae'},
+        {id:'second_01',value:15,color:'#1197e6'},
+        {id:'second_02',value:25,color:'#1197e6'},
+        {id:'second_03',value:35,color:'#1197e6'},
+        {id:'second_04',value:85,color:'#1197e6'},
     ];
 
     idArray.map(function (obj) {
@@ -1078,31 +1256,73 @@ $(function () {
             speed = 0.1; //加载的快慢就靠它了
             context.clearRect(0, 0, canvas.width, canvas.height);
             whiteCircle(context,centerX,centerY);
-            blueCircle(context,obj.value,centerX,centerY,rad);
+            blueCircle(context,obj,centerX,centerY,rad);
     })
     //}
 
     function testAnim(x) {
-        console.log("sdsafdsf")
         $('.animationSandbox').map(function(){
             $(this).removeClass().addClass(x + ' animated num-box animationSandbox').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-
                 $(this).removeClass(x +   ' animated');
             });
         })
     };
-    $(document).ready(function(){
-        /*$('.js--triggerAnimation').click(function(e){
-            e.preventDefault();
-            testAnim("flip");
-        });*/
 
-        window.setInterval(function(){
-            testAnim("flip");
-        },1000)
-    });
+    window.setInterval(function(){
+        testAnim("flip");
+    },2000)
 
 
+    //-------------------放大镜---------------
+    $(".magnifying").click(function(){
+        $(".bg-pup").show();
+        /*var thisH = $(this).siblings(".echar-content").outerHeight(true)*2;
+        var thisR = thisH/$(this).siblings(".echar-content").outerHeight(true);
+        var thisW = $(this).siblings(".echar-content").outerWidth(true)*thisR;
+        console.log(thisH,thisW);*/
+        //var cloneDIV = $(this).siblings(".echar-content").clone().prependTo($(".pup-content"))
+        // $(".pup-content").append()
+        $(".pup-content").css({
+            height: 336 ,
+            width: 890 ,
+            display: 'block',
+            marginTop: -168 ,
+            marginLeft: -445
+        })
 
+        var indexId = $(this).siblings(".echar-content").attr("indexId");
+        var indexInfo = {params :{indexId:indexId, beginDate:"201705", endDate:"201806"}, id:'magnifyEcharts',type:1,size:2};
+        coreRequest(indexInfo)
+    })
+
+
+    //--------------------大屏看板------------------------
+
+    $("#bigScreen").click(function () {
+        requestFullScreen();
+    })
+
+    //进入全屏
+    function requestFullScreen(element) {
+        var de = document.querySelector(element) || document.documentElement;
+        if (de.requestFullscreen) {
+            de.requestFullscreen();
+        } else if (de.mozRequestFullScreen) {
+            de.mozRequestFullScreen();
+        } else if (de.webkitRequestFullScreen) {
+            de.webkitRequestFullScreen();
+        }
+    }
+    //退出全屏
+    function exitFullscreen(element) {
+        var de = document.querySelector(element) || document.documentElement;
+        if (de.exitFullscreen) {
+            de.exitFullscreen();
+        } else if (de.mozCancelFullScreen) {
+            de.mozCancelFullScreen();
+        } else if (de.webkitCancelFullScreen) {
+            de.webkitCancelFullScreen();
+        }
+    }
 
 })

@@ -391,9 +391,9 @@ body{
 }
 .close-btn{
 	position: absolute;
-	top: 30px;
-	right: 30px;
-	background: url(../img/enlarge.png) no-repeat;
+	top: 20px;
+	right: 20px;
+	background: url(../img/close.png) no-repeat;
     height: 22px;
     width: 22px;
     background-size: 100%;

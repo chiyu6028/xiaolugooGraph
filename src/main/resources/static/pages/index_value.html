@@ -90,14 +90,19 @@
                     if (year.length > 0 && month.length > 0 && !$.isEmptyObject(result[j]) ){
                         console.log(year,month)
                         console.log(result[j])
-                        var value = result[j][year][month].toString();
-                        var position = value.toString().indexOf(".");
-                        var len = position > 0 ? position + 2 : value.length;
-                        if (result[j].INDEX_TYPE == '1'){
-                            col = "<td title='"+ value +"'>" + parseFloat(value.substring(0,len)).toFixed(1) + "</td>";
+                        if (result[j] != undefined && result[j][year] != undefined && result[j][year][month] != undefined){
+                            var value = result[j][year][month].toString();
+                            var position = value.toString().indexOf(".");
+                            var len = position > 0 ? position + 2 : value.length;
+                            if (result[j].INDEX_TYPE == '1'){
+                                col = "<td title='"+ value +"'>" + parseFloat(value.substring(0,len)).toFixed(1) + "</td>";
+                            }else {
+                                col = "<td title='"+ value + "%" +"'>" + parseFloat(value.substring(0,len)).toFixed(1) + "%" + "</td>";
+                            }
                         }else {
-                            col = "<td title='"+ value + "%" +"'>" + parseFloat(value.substring(0,len)).toFixed(1) + "%" + "</td>";
+                            col = "<td>" + "" + "</td>";
                         }
+
                     }else{
                         col = "<td title=''></td>";
                     }
