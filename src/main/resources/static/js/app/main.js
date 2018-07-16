@@ -4,74 +4,78 @@ $(function () {
     var myChart = echarts.init(document.getElementById('map'));
     $.get(shenzhen, function(tjJson) {
         echarts.registerMap('shenzhen', tjJson);
-        myChart.setOption({
+        /*myChart.setOption({
             series: [{
                 type: 'map',
                 map: 'shenzhen'
             }]
-        });
+        });*/
 
         var regionsStyleArray = [
+            //亮蓝
             {
                 normal: {
-                    borderColor: 'rgba(147, 235, 248, 1)',
+                    borderColor: 'rgba(255, 255, 255, 1)',
                     borderWidth: 1,
-                    areaColor: 'rgba(3,56,193, .5)',
-                    shadowColor: 'rgba(255, 255, 255, 1)',
+                    areaColor: 'rgba(2,72,255, .8)',
+                    //shadowColor: 'rgba(255, 255, 255, 1)',
                     shadowOffsetX: -2,
                     shadowOffsetY: 2,
                     shadowBlur: 10
                 },
                 emphasis: {
-                    areaColor: '#0338c1',
-                    borderWidth: 0
+                    areaColor: 'rgba(254,230,24)',
+                    //borderWidth: 0
                 }
             },
+            //天蓝
             {
                 normal: {
-                    borderColor: 'rgba(147, 235, 248, 1)',
+                    borderColor: 'rgba(255, 255, 255, 1)',
                     borderWidth: 1,
-                    areaColor: 'rgba(70,177,190, .5)',
-                    shadowColor: 'rgba(255, 255, 255, 1)',
-                    shadowOffsetX: -2,
+                    areaColor: 'rgba(77,210,249, .8)',
+                    //shadowColor: 'rgba(255, 255, 255, 1)',
+                    /*shadowOffsetX: -2,
                     shadowOffsetY: 2,
-                    shadowBlur: 10
+                    shadowBlur: 10*/
                 },
                 emphasis: {
-                    areaColor: '#46b1be',
-                    borderWidth: 0
+                    areaColor: 'rgba(254,230,24)',
+                    //borderWidth: 0
                 }
             },
+            //浅蓝
             {
                 normal: {
-                    borderColor: 'rgba(147, 235, 248, 1)',
+                    borderColor: 'rgba(255, 255, 255, 1)',
                     borderWidth: 1,
-                    areaColor: 'rgba(39,120,199, .5)',
+                    areaColor: 'rgba(94,239,247, .8)',
                     //shadowColor: 'rgba(128, 217, 248, 1)',
-                    shadowColor: 'rgba(255, 255, 255, 1)',
-                    shadowOffsetX: -2,
+                    //shadowColor: 'rgba(255, 255, 255, 1)',
+                    /*shadowOffsetX: -2,
                     shadowOffsetY: 2,
-                    shadowBlur: 10
+                    shadowBlur: 10*/
                 },
                 emphasis: {
-                    areaColor: '#2778c7',
-                    borderWidth: 0
+                    areaColor: 'rgba(254,230,24)',
+                    //borderWidth: 0
                 }
             },
+            //深蓝
             {
                 normal: {
-                    borderColor: 'rgba(147, 235, 248, 1)',
+                    borderColor: 'rgba(255, 255, 255, 1)',
                     borderWidth: 1,
-                    areaColor: 'rgba(36,38,76, .5)',
+                    areaColor: 'rgba(46,47,88, .8)',
                     //shadowColor: 'rgba(128, 217, 248, 1)',
-                    shadowColor: 'rgba(255, 255, 255, 1)',
-                    shadowOffsetX: -2,
-                    shadowOffsetY: 2,
-                    shadowBlur: 10
+                    //shadowColor: 'rgba(255, 255, 255, 1)',
+                    //shadowOffsetX: -2,
+                    //shadowOffsetY: 2,
+                    //shadowBlur: 10
                 },
                 emphasis: {
-                    areaColor: '#24264c',
-                    borderWidth: 0
+                    areaColor: 'rgba(254,230,24)',
+                    //borderWidth: 0
                 }
             },
         ]
@@ -91,7 +95,7 @@ $(function () {
                 formatter: "{b}"
             },
             //标签
-            graphic: [
+            /*graphic: [
                 //标签
                 {
                     type: 'group',
@@ -133,7 +137,7 @@ $(function () {
                             z: 100,
                             style: {
                                 fill: '#23a7f1',
-                                text: '65324',
+                                text: '54111',
                                 font: 'bold 28px Microsoft YaHei'
                             }
                         },
@@ -155,7 +159,7 @@ $(function () {
                             z: 100,
                             style: {
                                 fill: '#23a7f1',
-                                text: '1324',
+                                text: '2564',
                                 font: 'bold 28px Microsoft YaHei'
                             }
                         },
@@ -202,7 +206,7 @@ $(function () {
                             z: 100,
                             style: {
                                 fill: '#23a7f1',
-                                text: '65324',
+                                text: '38941',
                                 font: 'bold 28px Microsoft YaHei'
                             }
                         },
@@ -224,7 +228,7 @@ $(function () {
                             z: 100,
                             style: {
                                 fill: '#23a7f1',
-                                text: '1324',
+                                text: '7225',
                                 font: 'bold 28px Microsoft YaHei'
                             }
                         },
@@ -241,12 +245,13 @@ $(function () {
                         }
                     ]
                 },
-            ],
+            ],*/
             //地图相关设置
             geo: {
                 map: 'shenzhen',
                 //视角缩放比例
                 zoom: 1.1,
+                top: 70,
                 //显示文本样式
                 label: {
                     normal: {
@@ -264,13 +269,13 @@ $(function () {
                 //鼠标缩放和平移
                 roam: false,
                 regions: [
-                    {name: '南山区', itemStyle: regionsStyleArray[1]},
-                    {name: '福田区', itemStyle: regionsStyleArray[1]},
-                    {name: '罗湖区', itemStyle: regionsStyleArray[1]},
+                    {name: '南山区', itemStyle: regionsStyleArray[2]},
+                    {name: '福田区', itemStyle: regionsStyleArray[2]},
+                    {name: '罗湖区', itemStyle: regionsStyleArray[2]},
                     {name: '宝安区', itemStyle: regionsStyleArray[3]},
                     {name: '盐田区', itemStyle: regionsStyleArray[3]},
                     {name: '龙华区', itemStyle: regionsStyleArray[3]},
-                    {name: '龙岗区', itemStyle: regionsStyleArray[2]},
+                    {name: '龙岗区', itemStyle: regionsStyleArray[1]},
                     {name: '坪山区', itemStyle: regionsStyleArray[0]},
                     {name: '光明区', itemStyle: regionsStyleArray[0]},
                     {name: '大鹏区', itemStyle: regionsStyleArray[0]},
@@ -285,27 +290,53 @@ $(function () {
                     coordinateSystem: 'geo',
                     data: [
                         {
-                            name:'新房:54111(75套)',
+                            //宝安
+                            name:'新房:53693(246套)',
                             value:[113.917345, 22.693843]
                         },
                         {
-                            name:'新房:54111(75套)',
+                            //光明
+                            name:'新房:41851(24套)',
                             value:[113.997345, 22.793843]
                         },
                         {
-                            name:'新房:54111(75套)',
+                            //龙华
+                            name:'新房:52963(414套)',
+                            value:[114.087345, 22.723843]
+                        },
+                        {
+                            //南山
+                            name:'新房:125798(84套)',
+                            value:[114.047345, 22.613843]
+                        },
+                        {
+                            //福田
+                            name:'新房:94680(60套)',
+                            value:[114.127345, 22.553843]
+                        },
+                        /*{
+                            //盐田
+                            name:'新房:41851(24套)',
+                            value:[114.377345, 22.623843]
+                        },*/
+                        {
+                            //罗湖区
+                            name:'新房:75200(75套)',
                             value:[114.217345, 22.603843]
                         },
                         {
-                            name:'新房:54111(75套)',
+                            //龙岗
+                            name:'新房:45307(1136套)',
                             value:[114.327345, 22.749843]
                         },
                         {
-                            name:'新房:54111(75套)',
+                            //坪山
+                            name:'新房:31993(405套)',
                             value:[114.437345, 22.702843]
                         },
                         {
-                            name:'新房:54111(75套)',
+                            //大鹏
+                            name:'新房:36836(8套)',
                             value:[114.567345, 22.648843]
                         }
                     ],
@@ -338,27 +369,48 @@ $(function () {
                     coordinateSystem: 'geo',
                     data: [
                         {
-                            name:'二手房:54111(75套)',
+                            name:'二手房:36605(1327套)',
                             value:[113.917345, 22.693843]
                         },
                         {
-                            name:'二手房:54111(75套)',
+                            name:'二手房:26380(18套)',
                             value:[113.997345, 22.793843]
                         },
                         {
-                            name:'二手房:54111(75套)',
+                            //龙华
+                            name:'二手房:44598(74套)',
+                            value:[114.087345, 22.723843]
+                        },
+                        {
+                            //南山
+                            name:'二手房:58196(1159套)',
+                            value:[114.047345, 22.613843]
+                        },
+                        {
+                            //福田
+                            name:'二手房:49091(1339套)',
+                            value:[114.127345, 22.553843]
+                        },
+                        {
+                            //盐田
+                            name:'二手房:33168(117套)',
+                            value:[114.377345, 22.623843]
+                        },
+                        {
+                            //
+                            name:'二手房:34384(1156套)',
                             value:[114.217345, 22.603843]
                         },
                         {
-                            name:'二手房:54111(75套)',
+                            name:'二手房:27472(1636套)',
                             value:[114.327345, 22.749843]
                         },
                         {
-                            name:'二手房:54111(75套)',
+                            name:'二手房:22469(24套)',
                             value:[114.437345, 22.702843]
                         },
                         {
-                            name:'二手房:54111(75套)',
+                            name:'二手房:23612(12套)',
                             value:[114.567345, 22.648843]
                         }
                     ],
@@ -388,6 +440,31 @@ $(function () {
             ]
         };
         myChart.setOption(option);
+
+        /*function setSelect(){
+            myChart.setOption({
+                geo:{
+                    regions: [
+                        {name: '南山区', itemStyle: regionsStyleArray[2],selected: true},
+                        {name: '福田区', itemStyle: regionsStyleArray[2]},
+                        {name: '罗湖区', itemStyle: regionsStyleArray[2]},
+                        {name: '宝安区', itemStyle: regionsStyleArray[3]},
+                        {name: '盐田区', itemStyle: regionsStyleArray[3]},
+                        {name: '龙华区', itemStyle: regionsStyleArray[3]},
+                        {name: '龙岗区', itemStyle: regionsStyleArray[1]},
+                        {name: '坪山区', itemStyle: regionsStyleArray[0]},
+                        {name: '光明区', itemStyle: regionsStyleArray[0]},
+                        {name: '大鹏区', itemStyle: regionsStyleArray[0]},
+
+                    ]
+                }
+            });
+        }
+
+        window.setInterval(function(){
+            setSelect()
+        }, 2000);*/
+
     })
 
 
@@ -402,44 +479,51 @@ $(function () {
         {params :{indexId:"1", beginDate:"201705", endDate:"201806"}, id:'index_01',type:1,size:1},
         {params :{indexId:"2", beginDate:"201705", endDate:"201806"}, id:'index_02',type:1,size:1},
         {params :{indexId:"3", beginDate:"201705", endDate:"201806"}, id:'index_03',type:1,size:1},
-        {params :{indexId:"10", beginDate:"201605", endDate:"201705"}, id:'index_11',type:1,size:1},
-        {params :{indexId:"4", beginDate:"201705", endDate:"201806"}, id:'index_04',type:2,size:1},
-        {params :{indexId:"5", beginDate:"201705", endDate:"201806"}, id:'index_05',type:2,size:1},
-        {params :{indexId:"6", beginDate:"201705", endDate:"201806"}, id:'index_06',type:2,size:1},
-        {params :{indexId:"7", beginDate:"201705", endDate:"201806"}, id:'index_07',type:2,size:1},
-        {params :{indexId:"8", beginDate:"201705", endDate:"201806"}, id:'index_08',type:2,size:1},
-        {params :{indexId:"9", beginDate:"201705", endDate:"201806"}, id:'index_09',type:2,size:1},
-        {params :{indexId:"10", beginDate:"201705", endDate:"201806"}, id:'index_10',type:2,size:1},
-        {params :{indexId:"2", beginDate:"201605", endDate:"201706"}, id:'index_12',type:2,size:1},
-        /*{params :{indexId:"1", beginDate:"201705", endDate:"201806"}, id:'index_01'},
-        {params :{indexId:"1", beginDate:"201705", endDate:"201806"}, id:'index_01'}*/
+        //{params :{indexId:"11", beginDate:"201605", endDate:"201705"}, id:'index_11',type:1,size:1},
+        {params :{indexId:"4", beginDate:"201712", endDate:"201806"}, id:'index_04',type:2,size:1},
+        {params :{indexId:"5", beginDate:"201712", endDate:"201806"}, id:'index_05',type:2,size:1},
+        {params :{indexId:"6", beginDate:"201712", endDate:"201806"}, id:'index_06',type:2,size:1},
+        {params :{indexId:"7", beginDate:"201712", endDate:"201806"}, id:'index_07',type:2,size:1},
+        {params :{indexId:"8", beginDate:"201712", endDate:"201806"}, id:'index_08',type:2,size:1},
+        {params :{indexId:"9", beginDate:"201712", endDate:"201806"}, id:'index_09',type:2,size:1},
+        {params :{indexId:"10", beginDate:"201801", endDate:"201806"}, id:'index_10',type:2,size:1},
     ];
-
+    var timeList, graphValue, result ;
 
     coreItemArray.map(function (obj) {
         coreRequest(obj)
     })
 
     function coreRequest(obj) {
-        $.ajax({
-            type: "POST",
-            url: "/indexValue/findIndexValue",
-            data: obj.params,
-            success: function(resp){
-                var data = JSON.parse(resp.replace(/'/g,""));
-                if (data.flag == "1"){
-                    result = data.result[0];
-                    if(obj.type == 1){
-                        coreIndexDraw(result,obj);
+
+        if (obj.params.indexId == "11"){
+            coreIndexDraw({INDEX_ID:11,INDEX_LINE1:85,INDEX_LINE2:115},{id:'magnifyEcharts',size:2});
+
+        } else if (obj.params.indexId == "12"){
+            secondIndexDraw({INDEX_ID:12,INDEX_LINE1:0.15,INDEX_LINE2:0.35},{id:'magnifyEcharts',size:2});
+        }else{
+            $.ajax({
+                type: "POST",
+                url: "/indexValue/findIndexValue",
+                data: obj.params,
+                success: function(resp){
+                    var data = JSON.parse(resp.replace(/'/g,""));
+                    if (data.flag == "1"){
+                        result = data.result[0];
+                        if(obj.type == 1){
+                            coreIndexDraw(result,obj);
+                        }
+                        if(obj.type == 2){
+                            secondIndexDraw(result,obj);
+                        }
+                    }else {
+                        toastr.warning("数据加载失败");
                     }
-                    if(obj.type == 2){
-                        secondIndexDraw(result,obj);
-                    }
-                }else {
-                    toastr.warning("数据加载失败");
                 }
-            }
-        });
+            });
+        }
+
+
     }
 
 
@@ -448,7 +532,7 @@ $(function () {
         for (var item in data){
             if (item.length == 4 ){
                 for (var time in data[item]){
-                    timeList.push( item.substring(2,4) + "." + time);
+                    timeList.push( /*item.substring(2,4) */item + "." + time);
                 }
             }
         }
@@ -461,9 +545,9 @@ $(function () {
             for (var item in data){
                 if (item.length == 4){
                     for (var ret in data[item]){
-                        var time =  item.substring(2,4) + "." + ret;
+                        var time =  /*item.substring(2,4)*/item + "." + ret;
                         if (time == timeList[i]){
-                            dataList.push(data[item][ret]);
+                            dataList.push(parseFloat(data[item][ret]).toFixed(1));
                             break;
                         }
                     }
@@ -473,32 +557,149 @@ $(function () {
         return dataList;
     }
 
+    function getTitle(result) {
+        return {
+            text: result.INDEX_NAME,
+            left: 920,
+            top:10,
+            textAlign: 'center',
+            textStyle:{
+                color: '#fff',
+                fontSize:'32'
+            }
+        }
+    }
+
+    function getMarkPoin(timeList, graphValue ,refer) {
+        var obj = {};
+        var array = [];
+        var effectArray = [];
+        var maxx = 0, maxy = 0;
+        var max = Math.max.apply(null,graphValue);
+        for (var i = 0; i < graphValue.length; i++) {
+            if (max == graphValue[i]){
+                maxx = timeList[i];
+                maxy = graphValue[i];
+            }
+        }
+        array.push(
+            {
+                name: '最大值',
+                value: /*maxx+","+*/parseFloat(maxy).toFixed(1),
+                xAxis: maxx,
+                yAxis: maxy
+            }
+        );
+        effectArray.push([maxx,maxy]);
+        array.push(
+            {
+                name: '最近值',
+                value: /*timeList[timeList.length-1]+","+*/parseFloat(graphValue[graphValue.length-1]).toFixed(1),
+                xAxis: timeList[timeList.length-1],
+                yAxis: graphValue[graphValue.length-1]
+            }
+        );
+        effectArray.push([timeList[timeList.length-1],graphValue[graphValue.length-1]]);
+
+        for (var i = 0; i < graphValue.length; i++) {
+            //y1<refer , y2 > refer
+            if (refer > graphValue[i] && refer < graphValue[i+1]){
+                array.push(
+                    {
+                        name:'上升值',
+                        value: /*timeList[i+1]+","+*/parseFloat(graphValue[i+1]).toFixed(1),
+                        xAxis: timeList[i+1],
+                        yAxis: graphValue[i+1]
+                    }
+                );
+                effectArray.push([timeList[i+1],graphValue[i+1]]);
+            }
+            if (refer < graphValue[i] && refer > graphValue[i+1]){
+                array.push(
+                    {
+                        name:'下降值',
+                        value: /*timeList[i]+","+*/parseFloat(graphValue[i]).toFixed(1),
+                        xAxis: timeList[i],
+                        yAxis: graphValue[i]
+                    }
+                );
+                effectArray.push([timeList[i],graphValue[i]])
+            }
+        }
+        obj.markPoint = array;
+        obj.effectPoint = effectArray;
+        return obj;
+    }
+
+    coreIndexDraw({INDEX_ID:11,INDEX_LINE1:85,INDEX_LINE2:115},{id:'index_11',size:1});
+    secondIndexDraw({INDEX_ID:12,INDEX_LINE1:0.15,INDEX_LINE2:0.35},{id:'index_12',size:1});
+
     function coreIndexDraw(result, obj) {
-        timeList = getTimeList(result);
-        myChart = echarts.init(document.getElementById(obj.id));
-        graphValue = getDataList(result,timeList);
+        coreChart = echarts.init(document.getElementById(obj.id));
+        if (result.INDEX_ID == 11){
+            timeList = [
+                "2014-Q1", "2014-Q2", "2014-Q3", "2014-Q4", "2015-Q1", "2015-Q2", "2015-Q3", "2015-Q4",
+                "2016-Q1", "2016-Q2", "2016-Q3", "2016-Q4", "2017-Q1", "2017-Q2", "2017-Q3", "2017-Q4", "2018-Q1"
+            ];
+            graphValue = [
+                "106.6", "108.4", "109.5", "110.9", "104.0", "110.7", "113.3", "117.5",
+                "122.3", "117.0", "115.5", "109.8", "108.7", "106.8", "107.0", "108.6", "106.3"
+            ]
+        }else if (result.INDEX_ID == 12){
+            timeList = ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"];
+            graphValue = ["0.12", "0.12", "0.12", "0.12", "0.06", "0.21", "0.20", "0.12", "0.25", "0.18"]
+        } else{
+            timeList = getTimeList(result);
+            graphValue = getDataList(result,timeList);
+        }
+
         var maxValue = Math.max.apply(null,graphValue);
         var minValue = Math.min.apply(null,graphValue);
         var maxyValue = result.INDEX_LINE2 > maxValue ? result.INDEX_LINE2  : maxValue;
         var minyValue = result.INDEX_LINE1 < minValue ? result.INDEX_LINE1  : minValue;
         var point = getMarkPoin(timeList, graphValue, result.INDEX_LINE2);
+        var visualMapFont = obj.size == 1 ? 'bold 10px "Microsoft YaHei"' : 'bold 16px "Microsoft YaHei"';
+
+        if (result.INDEX_ID == 12){
+            timeList = [] ;
+            graphValue = [];
+        }
         option = {
-            animationDuration:1000,
+            animationDuration:3000,
+            title: obj.size > 1 ? getTitle(result): {},
             grid: [
-                {x: '7%', y: '7%',top:'5%', tottom:'3%',width: '70%'},
+                {x: obj.size == 1 ? '7%' : '4%', y: '7%',top:8*obj.size*1.5+'%', tottom:'4%',width: obj.size == 1 ? '70%' : '82%'},
             ],
             legend: {
                 right: 20,
                 orient: 'vertical',
             },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    lineStyle: {
+                        color: '#ddd'
+                    }
+                },
+                formatter: result.INDEX_TYPE==1?'{c}':'{c}%',
+                backgroundColor: '#000',
+                padding: [0,0],//[2*obj.size, 2*obj.size],
+                textStyle: {
+                    color: '#ffffff',
+                    fontSize:9*obj.size
+                },
+                extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.2)'
+            },
             visualMap: {
-                top:15,
-                right: 10,
+                top: obj.size == 1 ? 17 : 440,
+                right: obj.size == 1 ? 30 : 95,
                 //orient:'vertical',
                 precision:1,
-                show:false,
-                // itemHeight:10,
-                // itemWidth:40,
+                show:true,
+                z:130,
+                itemHeight:obj.size == 1 ? 9: 10,
+                itemWidth: obj.size == 1 ?20 :28,
+                itemGap: obj.size == 1 ?28 : 80,
                 // textStyle:{
                 //     color:"#ffffff",
                 // },
@@ -537,7 +738,7 @@ $(function () {
                 axisLabel: {
                     margin: 10,
                     color:'#29abe2',
-                    fontSize: 10*obj.size,
+                    fontSize: obj.size ==1 ?  10 : 16,
                     rotate: 45,
                 }
             },
@@ -547,7 +748,7 @@ $(function () {
                     show:false,
                 },
                 max: maxyValue+0.5,//parseInt(maxyValue > 0 ? maxyValue*1.02 : maxyValue * 0.98),
-                min: minyValue-0.5,//parseInt(minyValue > 0 ? minyValue*0.98 : minyValue * 1.02),
+                min: minyValue-1.5,//parseInt(minyValue > 0 ? minyValue*0.98 : minyValue * 1.02),
                 axisTick: {
                     show: false
                 },
@@ -568,16 +769,16 @@ $(function () {
                     bounding: 'raw',
                     //right: 110,
                     //bottom: 110,
-                    top:10*obj.size,
-                    left:350*obj.size,
+                    top: obj.size == 1 ? 10: 410,
+                    left:obj.size == 1 ? 340: 1600,
                     z: 100*obj.size,
                     children: [
                         {
                             type:'polygon'  ,
-                            left: 20*obj.size,
+                            left: obj.size == 1 ? 20 : 45,
                             shape:{
                                 points:[
-                                    [0,0], [60*obj.size, 0], [60*obj.size,138*obj.size], [0, 138*obj.size]
+                                    [0,0], [obj.size == 1 ?60:120, 0], [obj.size == 1 ? 60 : 120, obj.size == 1 ? 138 : 300], [0, obj.size == 1 ? 138 : 300]
                                 ]
                             },
                             style:{
@@ -585,79 +786,36 @@ $(function () {
                             },
                         },
                         {
-                            type:'polygon'  ,
-                            left: 42*obj.size,
-                            top: 10*obj.size,
-                            shape:{
-                                points:[
-                                    [0,0], [15*obj.size, 0], [15*obj.size,7*obj.size], [0, 7*obj.size]
-                                ]
-                            },
-                            z:120,
-                            style:{
-                                fill:'#e1491d',
-                            },
-                        },
-                        {
-                            type:'polygon'  ,
-                            left: 42*obj.size,
-                            top: 49*obj.size,
-                            shape:{
-                                points:[
-                                    [0,0], [15*obj.size, 0], [15*obj.size,7*obj.size], [0, 7*obj.size]
-                                ]
-                            },
-                            z:120,
-                            style:{
-                                fill:'#1bc172',
-                            },
-                        },
-                        {
-                            type:'polygon'  ,
-                            left: 42*obj.size,
-                            top: 86*obj.size,
-                            shape:{
-                                points:[
-                                    [0,0], [15*obj.size, 0], [15*obj.size,7*obj.size], [0, 7*obj.size]
-                                ]
-                            },
-                            z:120,
-                            style:{
-                                fill:'#29abe2',
-                            },
-                        },
-
-                        {
                             type: 'text',
-                            left: 27*obj.size,
-                            top: 22*obj.size,
+                            left: obj.size == 1 ? 27 : 70,
+                            top: obj.size == 1 ? 22 : 58,
                             z: 120,
                             style: {
                                 fill: '#29abe2',
-                                text: ['过热区间','  102.3'].join('\n'),
-                                font: 'bold '+10*obj.size+'px Microsoft YaHei'
+                                text: ['过热区间',' >'+result.INDEX_LINE2].join('\n'),
+                                font: visualMapFont
                             }
                         },
                         {
                             type: 'text',
-                            left: 27*obj.size,
-                            top: 59*obj.size,
+                            left: obj.size == 1 ? 27 : 70,
+                            top: obj.size == 1 ? 59 : 156,
                             z: 120,
                             style: {
                                 fill: '#29abe2',
-                                text: ['合理区间','   82.3'].join('\n'),
-                                font: 'bold '+10*obj.size+'px Microsoft YaHei'
+                                text: ['合理区间',result.INDEX_LINE1+'-'+result.INDEX_LINE2].join('\n'),
+                                font: visualMapFont
                             }
                         },
                         {
                             type: 'text',
-                            left: 27*obj.size,
-                            top: 97*obj.size,
+                            left: obj.size == 1 ? 27 : 70,
+                            top: obj.size == 1 ? 97 : 234,
                             z: 120,
                             style: {
                                 fill: '#29abe2',
-                                text: ['过冷区间','   60.5'].join('\n'),
-                                font: 'bold '+10*obj.size+'px Microsoft YaHei'
+                                text: ['过冷区间','   <'+result.INDEX_LINE1].join('\n'),
+                                font: visualMapFont
                             }
                         },
                     ]
@@ -667,7 +825,8 @@ $(function () {
                 {
                     type: 'line',
                     smooth: true,
-                    symbolSize: 10,
+                    symbol: 'circle',
+                    symbolSize: 7,
                     data: graphValue,
                     markLine: {
                         symbol: ['none', 'none'],
@@ -701,48 +860,116 @@ $(function () {
                             },
                         ]
                     },
+                    markPoint: {
+                        symbolSize:[32*obj.size,16*obj.size],
+                        animation:3000,
+                        symbolOffset: [0, '-85%'],
+                        symbol:'path://M95.36,32.44H54.61L50,38.684l-4.61-6.244H4.64c-1.909,0-3.457-1.548-3.457-3.457V5.002c0-1.909,1.548-3.457,3.457-3.457h90.72c1.909,0,3.457,1.548,3.457,3.457v23.981C98.817,30.892,97.269,32.44,95.36,32.44z',
+                        itemStyle:{
+                            normal:{
+                                color:'#000',
+                                /*opacity:0.9,
+                                borderType:"solid",
+                                borderColor:'#fff',
+                                borderWidth:'1',*/
+                            }
+                        },
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: result.INDEX_TYPE == '1'? '{c}':'{c}%',
+                                position: 'inside', //值显示
+                                padding:[25,20,30,20],
+                                color:'#fff',
+                                fontSize:9*obj.size
+                            }
+                        },
+                        data: point.markPoint,
+                    },
                     lineStyle: {
                         normal: {
-                            width: 4
+                            width: 2
                         }
-                    }
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(41, 117, 226, .7)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(41, 117, 226, 0)'
+                            }]),
+                            origin:'start'
+                        },
+                        origin:'start'
+                    },
                 },
                 {
                     type: 'effectScatter',
-                    symbolSize: 15,
+                    symbolSize: obj.size == 1 ? 7 : 20,
                     data: point.effectPoint,
-                    z:999
+                    z:999,
+                    rippleEffect:{
+                        period: 4, //动画时间，值越小速度越快
+                        brushType: 'stroke', //波纹绘制方式 stroke, fill
+                        scale: 4 //波纹圆环最大限制，值越大波纹越大
+                    }
                 }
             ]
         };
-        myChart.setOption(option);
+        coreChart.setOption(option);
     }
+
     function secondIndexDraw(result, obj) {
-        timeList = getTimeList(result);
-        myChart = echarts.init(document.getElementById(obj.id));
-        graphValue = getDataList(result,timeList);
+        secondChart = echarts.init(document.getElementById(obj.id));
+        if (result.INDEX_ID == 12){
+            timeList = ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"];
+            graphValue = ["0.12", "0.12", "0.12", "0.12", "0.06", "0.21", "0.20", "0.12", "0.25", "0.18"]
+        } else {
+            timeList = getTimeList(result);
+            graphValue = getDataList(result, timeList);
+        }
         var maxValue = Math.max.apply(null,graphValue);
         var minValue = Math.min.apply(null,graphValue);
         var maxyValue = result.INDEX_LINE2 > maxValue ? result.INDEX_LINE2  : maxValue;
         var minyValue = result.INDEX_LINE1 < minValue ? result.INDEX_LINE1  : minValue;
         var point = getMarkPoin(timeList, graphValue, result.INDEX_LINE2);
         option = {
-            animationDuration:1000,
+            animationDuration:3000,
             grid: [
-                {x: '10%', y: '10%',top:15,bottom:100, width: '80%'},
+                {x: '10%', y: '10%',top:40,bottom:90, width: '80%'},
             ],
             legend: {
                 right: 20,
                 orient: 'vertical',
             },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    lineStyle: {
+                        color: '#ddd'
+                    }
+                },
+                formatter: result.INDEX_TYPE==1?'{c}':'{c}%',
+                backgroundColor: '#000',
+                padding: [0,0],//[2*obj.size, 2*obj.size],
+                textStyle: {
+                    color: '#ffffff',
+                    fontSize:9
+                },
+                extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.2)'
+            },
             visualMap: {
-                top:15,
-                right: 10,
+                bottom:30,
+                right: 50,
                 orient:'horizontal',
                 precision:1,
-                show: false,
-                // itemHeight:10,
-                // itemWidth:40,
+                inverse:true,
+                show:true,
+                itemHeight:9,
+                itemWidth:20,
+                itemGap:47,
                 // textStyle:{
                 //     color:"#ffffff",
                 // },
@@ -790,8 +1017,8 @@ $(function () {
                 splitLine: {
                     show:false,
                 },
-                max: maxyValue+0.5,//parseInt(maxyValue > 0 ? maxyValue*1.02 : maxyValue * 0.98),
-                min: minyValue-0.5,//parseInt(minyValue > 0 ? minyValue*0.98 : minyValue * 1.02),
+                max: parseInt(maxyValue > 0 ? maxyValue*1.2 : maxyValue * 0.8),
+                min: parseInt(minyValue > 0 ? minyValue*0.8 : minyValue * 1.2),
                 axisTick: {
                     show: false
                 },
@@ -828,57 +1055,14 @@ $(function () {
                             },
                         },
                         {
-                            type:'polygon'  ,
-                            left: 7,
-                            top: 8,
-                            shape:{
-                                points:[
-                                    [0,0], [15, 0], [15,7], [0, 7]
-                                ]
-                            },
-                            z:120,
-                            style:{
-                                fill:'#e1491d',
-                            },
-                        },
-                        {
-                            type:'polygon'  ,
-                            left: 75,
-                            top: 8,
-                            shape:{
-                                points:[
-                                    [0,0], [15, 0], [15,7], [0, 7]
-                                ]
-                            },
-                            z:120,
-                            style:{
-                                fill:'#1bc172',
-                            },
-                        },
-                        {
-                            type:'polygon'  ,
-                            left: 143,
-                            top: 8,
-                            shape:{
-                                points:[
-                                    [0,0], [15, 0], [15,7], [0, 7]
-                                ]
-                            },
-                            z:120,
-                            style:{
-                                fill:'#29abe2',
-                            },
-                        },
-
-                        {
                             type: 'text',
                             left: 27,
                             top: 5,
                             z: 120,
                             style: {
                                 fill: '#29abe2',
-                                text: ['过热区间','  102.3'].join('\n'),
-                                font: 'bold 10px Microsoft YaHei'
+                                text: ['过热区间','  >'+result.INDEX_LINE2].join('\n'),
+                                font: 'bold 10px "Microsoft YaHei"'
                             }
                         },
                         {
@@ -888,8 +1072,8 @@ $(function () {
                             z: 120,
                             style: {
                                 fill: '#29abe2',
-                                text: ['合理区间','   82.3'].join('\n'),
-                                font: 'bold 10px Microsoft YaHei'
+                                text: ['合理区间',result.INDEX_LINE1+'-'+result.INDEX_LINE2].join('\n'),
+                                font: 'bold 10px "Microsoft YaHei"'
                             }
                         },
                         {
@@ -899,8 +1083,8 @@ $(function () {
                             z: 120,
                             style: {
                                 fill: '#29abe2',
-                                text: ['过冷区间','   60.5'].join('\n'),
-                                font: 'bold 10px Microsoft YaHei'
+                                text: ['过冷区间','  <'+result.INDEX_LINE1].join('\n'),
+                                font: 'bold 10px "Microsoft YaHei"'
                             }
                         },
                     ]
@@ -910,7 +1094,8 @@ $(function () {
                 {
                     type: 'line',
                     smooth: true,
-                    symbolSize: 10,
+                    symbol: 'circle',
+                    symbolSize: 7,
                     data: graphValue,
                     markLine: {
                         symbol: ['none', 'none'],
@@ -944,119 +1129,139 @@ $(function () {
                             },
                         ]
                     },
+                    markPoint: {
+                        symbolSize:[32,16],
+                        animation:3000,
+                        symbolOffset: [0, '-75%'],
+                        symbol:'path://M95.36,32.44H54.61L50,38.684l-4.61-6.244H4.64c-1.909,0-3.457-1.548-3.457-3.457V5.002c0-1.909,1.548-3.457,3.457-3.457h90.72c1.909,0,3.457,1.548,3.457,3.457v23.981C98.817,30.892,97.269,32.44,95.36,32.44z',
+                        itemStyle:{
+                            normal:{
+                                color:'#000',
+                                /*opacity:0.9,
+                                borderType:"solid",
+                                borderColor:'#fff',
+                                borderWidth:'1',*/
+                            }
+                        },
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: result.INDEX_TYPE == '1'? '{c}':'{c}%',
+                                position: 'inside', //值显示
+                                padding:[25,20,30,20],
+                                color:'#fff',
+                                fontSize:'9'
+                            }
+                        },
+                        data: point.markPoint,
+                    },
                     lineStyle: {
                         normal: {
-                            width: 4
+                            width: 2
                         }
-                    }
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(41, 117, 226, .7)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(41, 117, 226, 0)'
+                            }]),
+                            origin:'start'
+                        },
+
+                    },
                 },
                 {
                     type: 'effectScatter',
-                    symbolSize: 15,
+                    symbolSize: 7,
                     data: point.effectPoint,
-                    z:999
+                    z:999,
+                    rippleEffect:{
+                        period: 4, //动画时间，值越小速度越快
+                        brushType: 'stroke', //波纹绘制方式 stroke, fill
+                        scale: 4 //波纹圆环最大限制，值越大波纹越大
+                    }
                 }
             ]
         };
-        myChart.setOption(option);
-    }
-
-    function getMarkPoin(timeList, graphValue ,refer) {
-        var obj = {};
-        var array = [];
-        var effectArray = [];
-        var maxx = 0, maxy = 0;
-        var max = Math.max.apply(null,graphValue);
-        for (var i = 0; i < graphValue.length; i++) {
-            if (max == graphValue[i]){
-                maxx = timeList[i];
-                maxy = graphValue[i];
-            }
-        }
-        array.push(
-            {
-                name: '最大值',
-                value: maxx+","+parseFloat(maxy).toFixed(2),
-                xAxis: maxx,
-                yAxis: maxy
-            }
-        );
-        effectArray.push([maxx,maxy]);
-        array.push(
-            {
-                name: '最近值',
-                value: timeList[timeList.length-1]+","+parseFloat(graphValue[graphValue.length-1]).toFixed(2),
-                xAxis: timeList[timeList.length-1],
-                yAxis: graphValue[graphValue.length-1]
-            }
-        );
-        effectArray.push([timeList[timeList.length-1],graphValue[graphValue.length-1]]);
-
-        for (var i = 0; i < graphValue.length; i++) {
-            //y1<refer , y2 > refer
-            if (refer > graphValue[i] && refer < graphValue[i+1]){
-                array.push(
-                    {
-                        name:'上升值',
-                        value: timeList[i+1]+","+parseFloat(graphValue[i+1]).toFixed(2),
-                        xAxis: timeList[i+1],
-                        yAxis: graphValue[i+1]
-                    }
-                );
-                effectArray.push([timeList[i+1],graphValue[i+1]]);
-            }
-            if (refer < graphValue[i] && refer > graphValue[i+1]){
-                array.push(
-                    {
-                        name:'下降值',
-                        value: timeList[i]+","+parseFloat(graphValue[i]).toFixed(2),
-                        xAxis: timeList[i],
-                        yAxis: graphValue[i]
-                    }
-                );
-                effectArray.push([timeList[i],graphValue[i]])
-            }
-        }
-        obj.markPoint = array;
-        obj.effectPoint = effectArray;
-        return obj;
+        secondChart.setOption(option);
     }
 
     //-----------------------------------------核心指标-----------------------------------------------end
 
     var barChart = echarts.init(document.getElementById('top-rate'));
+    var barData = [
+        {name:'南山',value:3.11},{name:'福田',value:2.22},{name:'宝安',value:20.75},
+        {name:'罗湖',value:2.44},{name:'龙华',value:15.31},{name:'龙岗',value:31.95},
+        {name:'光明',value:1.41},{name:'盐田',value:0.00},{name:'坪山',value:21.82},
+        {name:'大鹏',value:1.00}]
+    //var childData = [17.38,18.80,18.37,16.00, 4.24, 22.64,0.25,1.83,0.33,0.17];
+    var childData = [
+        {name:'南山',value:18.48},{name:'福田',value:21.35},{name:'宝安',value:20.28},
+        {name:'罗湖',value:21.35},{name:'龙华',value:1.18},{name:'龙岗',value:20.99},
+        {name:'光明',value:0.16},{name:'盐田',value:1.87},{name:'坪山',value:0.24},
+        {name:'大鹏',value:0.26}]
+
+    function getSortData(data){
+        var temp = [];
+        data.map(function(obj){
+            temp.push(obj.value);
+        })
+        temp.sort(function (a,b) {
+            return b-a;
+        })
+
+        var objArray = [];
+        var dataArray = [];
+        temp.map(function (value) {
+            data.map(function (obj) {
+                if (obj.value == value ) {
+                    var flag = true;
+                    objArray.map(function (arr) {
+                        if (arr == obj.name){
+                            flag = false;
+                        }
+                    })
+                    if (flag){
+                        objArray.push(obj.name);
+                        dataArray.push(obj.value);
+                    }
+                }
+            })
+        })
+
+        return {name:objArray,data:dataArray};
+    }
+
+    var barSort = getSortData(barData);
+
+    var chaildSort = getSortData(childData);
 
     baroption = {
         //backgroundColor: '#00265f',
         title:{
-            text:'全市各区成交排行',
+            text:'新建商品住宅成交占比排行',
             top:0,
             right:10,
+            left:0,
             textStyle:{
                 color:'#ffffff',
                 fontSize: 14
             }
         },
         grid: {
-            left: '3%',
-            top: 20,
+            left: -3,
+            top: 30,
             right: 0,
             bottom: 0,
             containLabel: true
         },
         xAxis: [{
             type: 'category',
-            data: ['南山',
-                '福田',
-                '宝安',
-                '罗湖',
-                '龙华',
-                '龙岗',
-                '光明',
-                '盐田',
-                '坪山',
-                '大鹏 ',
-            ],
+            data: barSort.name,
             axisLine: {
                 show: false,
                 lineStyle: {
@@ -1072,26 +1277,40 @@ $(function () {
                 show: true,
                 textStyle: {
                     color: "#ffffff",
+                    fontSize:12,
                 }
             },
         }],
         yAxis: [{
             type: 'value',
             show: false,
+            position:'right',
         }],
         series: [{
             type: 'bar',
-            data: [1, 1, 2, 2.5, 3, 4.3, 5, 5.2, 6, 7].reverse(),
-            barWidth: 20, //柱子宽度
+            data: barSort.data,
+            barWidth: 15, //柱子宽度
             //barGap: 1, //柱子之间间距
+            animationEasing: name,
+            animationDuration: 3000,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    color:'#fff',
+                    formatter:'{c}%',
+                    fontSize:9,
+                    width:30
+                }
+            },
             itemStyle: {
                 normal: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#00fcae'
-                    }, {
                         offset: 1,
-                        color: '#006388'
+                        color: '#1d1975'
+                    }, {
+                        offset: 0,
+                        color: '#1197e6'
                     }]),
                     opacity: 1,
                 }
@@ -1105,27 +1324,26 @@ $(function () {
 
     childoption = {
         //backgroundColor: '#00265f',
+        title:{
+            text:'二手住宅成交占比排行',
+            top:0,
+            right:10,
+            left:0,
+            textStyle:{
+                color:'#ffffff',
+                fontSize: 14
+            }
+        },
         grid: {
-            left: 4,
-            top: 10,
+            left: -25,
+            top: 30,
             right: 0,
             bottom: '0',
             containLabel: true
         },
         xAxis: [{
             type: 'category',
-            show: false,
-            data: ['南山',
-                '福田',
-                '宝安',
-                '罗湖',
-                '龙华',
-                '龙岗',
-                '光明',
-                '盐田',
-                '坪山',
-                '大鹏 ',
-            ],
+            data: chaildSort.name,
             axisLine: {
                 show: false,
                 lineStyle: {
@@ -1140,7 +1358,8 @@ $(function () {
             axisLabel: {
                 show: true,
                 textStyle: {
-                    color: "#00c7ff",
+                    color: "#ffffff",
+                    fontSize:12,
                 }
             },
         }],
@@ -1148,51 +1367,37 @@ $(function () {
             type: 'value',
             show: false,
         }],
-        series: [
-            {
-                name: '差值',
-                type: 'bar',
-                stack: '血压',
-                barWidth:20,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'insideTop',    // 底部文字显示设置
-                        color: '#333'
-                    }
-                },
-                data: [1, 1, 2, 2.5, 3, 4.3, 5, 5.2, 6, 7],
-                itemStyle: {
-                    normal: {
-                        color: 'transparent'        // 底部设置为透明，就可以不显示了
-                    }
+        series: [{
+            name: '差值',
+            type: 'bar',
+            stack: '血压',
+            barWidth: 15,
+            animationEasing: name,
+            animationDuration: 3000,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    color:'#fff',
+                    formatter:'{c}%',
+                    fontSize:9,
+                    width:30
                 }
-            }, {
-                name: '差值',
-                type: 'bar',
-                stack: '血压',
-                barWidth: 30,
-                label: {
-                    normal: {
-                        show: false,
-                        //position: 'top'
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: '#006388'
-                        }, {
-                            offset: 1,
-                            color: '#1197e6'
-                        }]),
-                        opacity: 1,
-                    }
-                },
-                data: [14, 14, 13, 12.5, 12, 10.7, 10, 9.8, 9, 8]            // 显示的这一部分柱状图，应该为血压最大值-最小值的差值
             },
-        ]
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: '#00fcae'
+                    }, {
+                        offset: 1,
+                        color: '#006388'
+                    }]),
+                    opacity: 1,
+                }
+            },
+            data: chaildSort.data           // 显示的这一部分柱状图，应该为血压最大值-最小值的差值
+        },]
     };
 
     childChart.setOption(childoption);
@@ -1215,7 +1420,7 @@ $(function () {
         context.strokeStyle = obj.color; //设置描边样式
         context.lineWidth = 4; //设置线宽
         context.beginPath(); //路径开始
-        context.arc(centerX, centerY, 31 , -Math.PI/2, -Math.PI/2 +obj.value*rad, false); //用于绘制圆弧context.arc(x坐标，y坐标，半径，起始角度，终止角度，顺时针/逆时针)
+        context.arc(centerX, centerY, 31 , -Math.PI/2, -Math.PI/2 +Math.abs( obj.value)*rad, false); //用于绘制圆弧context.arc(x坐标，y坐标，半径，起始角度，终止角度，顺时针/逆时针)
         context.stroke(); //绘制
         context.closePath(); //路径结束
         context.restore();
@@ -1231,23 +1436,19 @@ $(function () {
         context.closePath();
         context.restore();
     }
-    /*function drawFrame(size){
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        whiteCircle();
-        blueCircle(25.1);
-    };*/
+
     var idArray = [
-        {id:'new_01',value:15,color:'#00fcae'},
-        {id:'new_02',value:25,color:'#00fcae'},
-        {id:'new_03',value:35,color:'#00fcae'},
-        {id:'new_04',value:45,color:'#00fcae'},
-        {id:'second_01',value:15,color:'#1197e6'},
-        {id:'second_02',value:25,color:'#1197e6'},
-        {id:'second_03',value:35,color:'#1197e6'},
-        {id:'second_04',value:85,color:'#1197e6'},
+        {id:'new_01',value:'-0.74',color:'#00fcae'},
+        {id:'new_02',value:'-0.11',color:'#00fcae'},
+        {id:'new_03',value:'32.57',color:'#00fcae'},
+        {id:'new_04',value:'10.90',color:'#00fcae'},
+        {id:'second_01',value:'6.54',color:'#1197e6'},
+        {id:'second_02',value:'9.96',color:'#1197e6'},
+        {id:'second_03',value:'12.38',color:'#1197e6'},
+        {id:'second_04',value:'18.87',color:'#1197e6'},
     ];
 
-    idArray.map(function (obj) {
+    /*idArray.map(function (obj) {
         var canvas = document.getElementById(obj.id),  //获取canvas元素
             context = canvas.getContext('2d'),  //获取画图环境，指明为2d
             centerX = canvas.width/2,   //Canvas中心点x轴坐标
@@ -1257,7 +1458,15 @@ $(function () {
             context.clearRect(0, 0, canvas.width, canvas.height);
             whiteCircle(context,centerX,centerY);
             blueCircle(context,obj,centerX,centerY,rad);
-    })
+
+        $(".animationSandbox").map(function (e) {
+            var id = $(this).closest('.new-home-item').find("canvas").attr("id");
+            if (id == obj.id){
+                $(this).empty().append(obj.value+"%")
+            }
+        })
+
+    })*/
     //}
 
     function testAnim(x) {
@@ -1268,9 +1477,9 @@ $(function () {
         })
     };
 
-    window.setInterval(function(){
+    /*window.setInterval(function(){
         testAnim("flip");
-    },2000)
+    },3000)*/
 
 
     //-------------------放大镜---------------
@@ -1283,24 +1492,45 @@ $(function () {
         //var cloneDIV = $(this).siblings(".echar-content").clone().prependTo($(".pup-content"))
         // $(".pup-content").append()
         $(".pup-content").css({
-            height: 336 ,
-            width: 890 ,
+            height: 1080 ,
+            width: 1920 ,
             display: 'block',
-            marginTop: -168 ,
-            marginLeft: -445
+            marginTop: -540 ,
+            marginLeft: -960
         })
 
         var indexId = $(this).siblings(".echar-content").attr("indexId");
-        var indexInfo = {params :{indexId:indexId, beginDate:"201705", endDate:"201806"}, id:'magnifyEcharts',type:1,size:2};
+        var indexInfo = {params :{indexId:indexId/*, beginDate:"201705", endDate:"201806"*/}, id:'magnifyEcharts',type:1,size:2};
         coreRequest(indexInfo)
     })
 
+    $(".close-btn").click(function(event) {
+        $(".bg-pup").hide();
+        $(this).siblings(".echar-content").remove();
+        $(this).closest(".pup-content").hide()
+        $(this).closest("div").find("div").removeAttr("_echarts_instance_");
+    });
 
     //--------------------大屏看板------------------------
 
     $("#bigScreen").click(function () {
         requestFullScreen();
+        $(this).hide();
+        resizeCenter(-5);
     })
+
+    window.onresize = function(){
+        if(!checkFull()){
+            exitFullscreen();
+            $("#bigScreen").show();
+        }
+    }
+
+    function checkFull(){
+        var isFull =  document.fullscreenEnabled || window.fullScreen || document.webkitIsFullScreen || document.msFullscreenEnabled;
+        if(isFull === undefined) isFull = false;
+        return isFull;
+    }
 
     //进入全屏
     function requestFullScreen(element) {
@@ -1324,5 +1554,127 @@ $(function () {
             de.webkitCancelFullScreen();
         }
     }
+
+    //-----------------------打印报告-------------------------------------
+
+    $("#warningBtn").click(function () {
+        $(".pup-index").show();
+        $(".bg-pup").show();
+        $(".month-report-content").hide();
+    })
+
+    $("#warningClose").click(function () {
+        $(".pup-index").hide();
+        $(".bg-pup").hide()
+    })
+
+    $("#indexPrint").click(function () {
+        bdhtml=window.document.body.innerHTML;
+        sprnstr="<!--startprint-->";
+        eprnstr="<!--endprint-->";
+        prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17);
+        prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));
+        window.document.body.innerHTML=prnhtml;
+        window.print();
+        window.location.reload();
+        $(".pup-index").css({display:'block'});
+    })
+
+    $("#monthBtn").click(function () {
+        $("#reportOptionsId").val("0")
+        //另外框隐藏
+        $(".pup-index").hide();
+        $(".bg-pup").show();
+        //第二个框显示
+        $(".month-report-content").show();
+        $(".report-ct").show();
+    })
+
+    $("#proReportId").click(function () {
+        var selectValue = $("#reportOptionsId").val();
+        if (selectValue == 0){
+            return;
+        }
+
+        $(".report-ct").hide();
+        $(".report-two-left").show();
+        $(".report-two").show();
+        $(".report-two-txt").show();
+
+        var titel = selectValue.substring(0,8);
+        $(".report-two-left-title").empty().append(titel);
+        $("#monthDownId").attr("val",selectValue);
+    })
+
+    $(".month-report-content .close-btn").click(function () {
+        $(".month-report-content").hide();
+        $(".report-two-left").hide();
+        $(".report-two").hide();
+        $(".report-two-txt").hide();
+    })
+
+    $("#monthDownId").click(function () {
+        var title = $(this).attr("val");
+        $(this).find("a").attr("href","/file/download?fileName="+ title +".docx");
+        document.getElementById("monthDownEvent").click()
+    })
+
+    //文字翻滚
+    $("#newHomeId").click(function () {
+        console.log("s")
+        /*var scrollHeight = $(".map-num").height();
+        $(".map-num").animate({/!*height: 'toggle', *!/opacity: '.9'},200)*/
+        $(".map-num-scroll").animate({
+            marginTop: '-50px',
+            opacity: '0'
+        }, 2000, function () {
+            $(this).css({marginTop:"0",opacity: '1'}).find(":first").appendTo(this);
+            var value = $(this).html();
+            var newValue;
+            var flag = Math.random() > 0.5 ? true: false;
+            if (flag){
+                newValue = parseInt(value) + parseInt(Math.random()*10);
+            }else{
+                newValue = parseInt(value) - parseInt(Math.random()*10);
+            }
+
+            $(this).html(newValue);
+
+        });
+    })
+
+    scrollText = function(index){
+        $(".map-num-scroll").eq(index).animate({
+            marginTop: '-50px',
+            opacity: '0'
+        }, 2000, function () {
+            $(this).css({marginTop:"0",opacity: '1'}).find(":first").appendTo(this);
+            var value = $(this).html();
+            var newValue;
+            var flag = Math.random() > 0.5 ? true: false;
+            if (index%2 == 0){
+                if (flag){
+                    newValue = parseInt(value) + parseInt(Math.random()*10);
+                }else{
+                    newValue = parseInt(value) - parseInt(Math.random()*10);
+                }
+            }else{
+                newValue = parseInt(value) + parseInt(Math.random()*10);
+            }
+
+
+            $(this).html(newValue);
+
+        });
+    }
+
+    /*setInterval("scrollText(0)", parseInt(Math.random()*10)*1000);
+    setInterval("scrollText(1)", parseInt(Math.random()*10)*1000);
+    setInterval("scrollText(2)", parseInt(Math.random()*10)*1000);
+    setInterval("scrollText(3)", parseInt(Math.random()*10)*1000);*/
+
+    /*$(".map-num").map(function () {
+        $(this).animate({top:-scrollHeight},200)
+    })*/
 
 })

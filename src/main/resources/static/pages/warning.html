@@ -117,7 +117,6 @@
                     var data = JSON.parse(resp.replace(/'/g,""));
                     if (data.flag == "1"){
                         result = data.result[0];
-                        console.log(result)
                         draw(result);
                     }else {
                         toastr.warning("数据加载失败");
@@ -156,7 +155,7 @@
                         for (var ret in data[item]){
                             var time =  item.substring(2,4) + "." + ret;
                             if (time == timeList[i]){
-                                dataList.push(data[item][ret]);
+                                dataList.push(parseFloat(data[item][ret]).toFixed(2));
                                 break;
                             }
                         }
@@ -175,7 +174,6 @@
             var maxyValue = result.INDEX_LINE2 > maxValue ? result.INDEX_LINE2  : maxValue;
             var minyValue = result.INDEX_LINE1 < minValue ? result.INDEX_LINE1  : minValue;
 
-            console.log(maxyValue,minyValue)
             var point = getMarkPoin(timeList, graphValue, result.INDEX_LINE2);
             option = {
                 title: {
@@ -216,11 +214,11 @@
                     pieces: [{
                         //gt: 0,
                         lte: result.INDEX_LINE1,
-                        color: '#1c84c6'
+                        color: '#29abe2'
                     }, {
                         gt: result.INDEX_LINE1,
                         lte: result.INDEX_LINE2,
-                        color: '#f7a54a'
+                        color: '#1ab394'
                     }, /*{
                         gt: result.INDEX_LINE2,
                         lte: result.INDEX_LINE3,
@@ -363,9 +361,9 @@
                             ]
                         },
                         markPoint: {
-                            symbolSize:[100,50],
+                            symbolSize:[50,30],
                             animation:3000,
-                            symbolOffset: [0, '-55%'],
+                            symbolOffset: [0, '-75%'],
                             symbol:'path://M95.36,32.44H54.61L50,38.684l-4.61-6.244H4.64c-1.909,0-3.457-1.548-3.457-3.457V5.002c0-1.909,1.548-3.457,3.457-3.457h90.72c1.909,0,3.457,1.548,3.457,3.457v23.981C98.817,30.892,97.269,32.44,95.36,32.44z',
                             itemStyle:{
                                 normal:{
@@ -424,7 +422,7 @@
             array.push(
                 {
                     name: '最大值',
-                    value: maxx+","+parseFloat(maxy).toFixed(2),
+                    value: /*maxx+","+*/parseFloat(maxy).toFixed(1),
                     xAxis: maxx,
                     yAxis: maxy
                 }
@@ -433,7 +431,7 @@
             array.push(
                 {
                     name: '最近值',
-                    value: timeList[timeList.length-1]+","+parseFloat(graphValue[graphValue.length-1]).toFixed(2),
+                    value: /*timeList[timeList.length-1]+","+*/parseFloat(graphValue[graphValue.length-1]).toFixed(1),
                     xAxis: timeList[timeList.length-1],
                     yAxis: graphValue[graphValue.length-1]
                 }
@@ -446,7 +444,7 @@
                     array.push(
                         {
                             name:'上升值',
-                            value: timeList[i+1]+","+parseFloat(graphValue[i+1]).toFixed(2),
+                            value: /*timeList[i+1]+","+*/parseFloat(graphValue[i+1]).toFixed(1),
                             xAxis: timeList[i+1],
                             yAxis: graphValue[i+1]
                         }
@@ -457,7 +455,7 @@
                     array.push(
                         {
                             name:'下降值',
-                            value: timeList[i]+","+parseFloat(graphValue[i]).toFixed(2),
+                            value: /*timeList[i]+","+*/parseFloat(graphValue[i]).toFixed(1),
                             xAxis: timeList[i],
                             yAxis: graphValue[i]
                         }

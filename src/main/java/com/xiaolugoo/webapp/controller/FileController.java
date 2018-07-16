@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,13 +45,24 @@ public class FileController {
     ObjectMapper mapper;
 
     @RequestMapping(path = "/download", method = {RequestMethod.GET,RequestMethod.POST})
-    public void downloadFile(@RequestParam("fileName") String fileName, HttpServletResponse response, HttpServletRequest request) {
+    public void downloadFile(@RequestParam("fileName") String fileName, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
 
         File file = new File(download_path, fileName);
 
+        //设置下载乱码问题
+        String userAgent = request.getHeader("user-agent").toLowerCase();
+        String fullFileName = "";
+        if (userAgent.contains("msie") || userAgent.contains("like gecko") ) {
+            // win10 ie edge 浏览器 和其他系统的ie
+            fullFileName = URLEncoder.encode(fileName, "UTF-8");
+        } else {
+            // fe
+            fullFileName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
+        }
+
         if (file.exists()) {
             response.setContentType("application/force-download");// 设置强制下载不打开
-            response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);// 设置文件名
+            response.addHeader("Content-Disposition", "attachment;fileName=" + fullFileName);// 设置文件名
             byte[] buffer = new byte[2048];
 
             FileInputStream fileInputStream = null;

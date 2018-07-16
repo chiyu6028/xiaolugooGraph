@@ -16,17 +16,36 @@
 			<div class="header-git">
 				<div class="header-img"></div>
 			</div>
-			<div class="header-line"></div>
+			<div class="header-line">
+			</div>
+			<div class="header-data">
+				<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" style="vertical-align: middle;width: 18px; height: 18px; margin-right: 5px;">
+					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+						<g transform="translate(-920.000000, -643.000000)" fill="#5DF5F4" class="icon-path" style="fill: rgb(46, 147, 255);">
+							<path d="M929,661 C924.028906,661 920,656.971094 920,652 C920,647.028906 924.028906,643 929,643 C933.971094,643 938,647.028906 938,652 C938,656.971094 933.971094,661 929,661 L929,661 Z M934.468555,646.531445 C933.758398,645.821289 932.930469,645.262305 932.009375,644.873828 C931.056641,644.469531 930.044141,644.265625 929,644.265625 C927.955859,644.265625 926.943359,644.469531 925.990625,644.87207 C925.069531,645.262305 924.243359,645.819531 923.531445,646.529688 C922.821289,647.239844 922.262305,648.067773 921.873828,648.988867 C921.469531,649.943359 921.265625,650.955859 921.265625,652 C921.265625,653.044141 921.469531,654.056641 921.87207,655.009375 C922.262305,655.930469 922.819531,656.756641 923.529688,657.468555 C924.239844,658.178711 925.067773,658.737695 925.988867,659.126172 C926.943359,659.530469 927.955859,659.734375 929,659.734375 C930.044141,659.734375 931.056641,659.530469 932.009375,659.12793 C932.930469,658.737695 933.756641,658.180469 934.468555,657.470312 C935.178711,656.760156 935.737695,655.932227 936.126172,655.011133 C936.530469,654.056641 936.734375,653.044141 936.734375,652 C936.734375,650.955859 936.530469,649.943359 936.12793,648.990625 C935.737695,648.069531 935.180469,647.241602 934.468555,646.531445 L934.468555,646.531445 Z M932.884766,652.140625 L929.632812,652.140625 L929.632812,656.359375 C929.632812,656.70918 929.349805,656.992188 929,656.992188 L929,656.992188 C928.650195,656.992188 928.367188,656.70918 928.367188,656.359375 L928.367188,652.140625 L928.367188,652.140625 C928.367188,651.441016 928.933203,650.875 929.632812,650.875 L929.632812,650.875 L932.884766,650.875 C933.23457,650.875 933.517578,651.158008 933.517578,651.507812 L933.517578,651.507812 C933.517578,651.857617 933.23457,652.140625 932.884766,652.140625 L932.884766,652.140625 Z" transform="translate(929.000000, 652.000000) scale(1, -1) translate(-929.000000, -652.000000)"></path>
+						</g>
+					</g>
+				</svg>
+				<span class="data-txt"></span>
+			</div>
+			<div class="hearder-btn clearfix">
+				<div id="warningBtn">
+					预警指标
+				</div>
+				<div id="monthBtn">
+					月度报告
+				</div>
+			</div>
 		</div>
 		<div class="wrap-content">
-			<div class="row-one">
+			<div class="row-one clearfix">
 				<div class="content-title">
 					<div>核心指标</div>
 				</div>
 				<div class="content-box">
 					<div class="content-row-box">
 						<div class="content-item">
-							<h3 class="">新建商品住宅价格同比指数</h3>
+							<h3 class="">新建商品住宅价格环比指数</h3>
 							<div class="echar-content" id="index_01" indexId="1"></div>
 							<a href="javascript:" class="magnifying"></a>
 						</div>
@@ -47,7 +66,7 @@
 					</div>
 					<div class="content-row-box">
 						<div class="content-item">
-							<h3 class="">房屋租赁价格同比指数</h3>
+							<h3 class="">住房租赁价格同比指数</h3>
 							<div class="echar-content" id="index_03" indexId="3"></div>
 							<a href="javascript:" class="magnifying"></a>
 						</div>
@@ -70,7 +89,7 @@
 						</div>
 						<div class="two-box-content">
 							<div class="item-content">
-								<h3 class="">新建商品住宅</h3>
+								<h3 class="">商品住宅</h3>
 								<h3 class="">新开工面积同比增长率</h3>
 							<div class="echar-content" id="index_05" indexId="5"></div>
 							<a href="javascript:" class="magnifying"></a>
@@ -99,97 +118,135 @@
 						<div class="center-content">
 							<!--<h3 class="">居住用地显示图</h3>-->
 							<div class="the-map" id="map"></div>
+							<div class="the-map-content clearfix">
+								<div class="map-btn" id="newHomeId" style="position: absolute;right: 32px;">
+									新建商品住宅
+									<div class="btn-bottom"></div>
+								</div>
+								<div class="map-text clearfix">
+									<div class="map-left">
+										<div class="map-num" style="position: absolute;right: 101px;top: 30px;"><div class="map-num-scroll">54099</div></div>
+										<div class="map-txt" style="position: absolute;right: 78px;top: 60px;width: 100px;" >全市均价(元/m<sup>2</sup>)</div>
+									</div>
+									<div  class="map-right">
+										<div class="map-num" style="position: absolute;right: 20px;top: 30px;"><div class="map-num-scroll">2704</div></div>
+										<div class="map-txt" style="position: absolute;right: -4px;top: 60px;width: 100px;">全市成交套数</div>
+									</div>
+									<div></div>
+								</div>
+								<div class="map-btn" style="position: absolute;right: 32px;top: 90px;">
+									二手住宅
+									<div class="btn-bottom"></div>
+								</div>
+								<div class="map-text clearfix">
+									<div class="map-left">
+										<div class="map-num" style="position: absolute;right: 101px;top: 120px;"><div class="map-num-scroll">43317</div></div>
+										<div class="map-txt" style="position: absolute;right: 78px;top: 145px;width: 100px;">全市均价(元/m<sup>2</sup>)</div>
+									</div>
+									<div  class="map-right">
+										<div class="map-num" style="position: absolute;right: 20px;top: 120px;"><div class="map-num-scroll">6271</div></div>
+										<div class="map-txt" style="position: absolute;right: -4px;top: 145px;width: 100px;">全市成交套数</div>
+									</div>
+									<div></div>
+								</div>
+							</div>
 
 							<div class="center-row-bottom clearfix">
 								<div class="bottom-left">
-									<div class="new-home clearfix">
-										<div class="new-home-title">
-											<div>新建商品房</div>
-										</div>
-										<ul class="new-home-list clearfix">
-											<li  class="new-home-item">
-												<canvas id="new_01" class="canvasflag" width="100%" ></canvas>
-												<div class="num-box animationSandbox"  >
-													15%
-												</div>
-											</li>
-											<li  class="new-home-item">
-												<canvas id="new_02" class="canvasflag" width="100%" ></canvas>
-												<div class="num-box animationSandbox" >
-													25%
-												</div>
-											</li>
-											<li  class="new-home-item">
-												<canvas id="new_03" class="canvasflag" width="100%" ></canvas>
-												<div class="num-box animationSandbox" >
-													35%
-												</div>
-											</li>
-											<li  class="new-home-item">
-												<canvas id="new_04" class="canvasflag" width="100%" ></canvas>
-												<div class="num-box animationSandbox" >
-													45%
-												</div>
-											</li>
-										</ul>
+									<div class="new-home-content" id="top-rate">
+
 									</div>
-									<div class="indexRate clearfix">
-										<div class="new-home-title">
-										</div>
-										<ul class="new-home-list clearfix">
-											<li  class="new-home-item">
-												均价同比增加
-											</li>
-											<li  class="new-home-item">
-												均价环比增加
-											</li>
-											<li  class="new-home-item">
-												成数同比增加
-											</li>
-											<li  class="new-home-item">
-												成数环比增加
-											</li>
-										</ul>
-									</div>
-									<div class="second-home clearfix">
-										<div class="new-home-title">
-											<div>二手住宅</div>
-										</div>
-										<ul class="new-home-list clearfix">
-											<li  class="new-home-item">
-												<canvas id="second_01" class="canvasflag" width="100%" ></canvas>
-												<div class="num-box animationSandbox"  >
-													15%
-												</div>
-											</li>
-											<li  class="new-home-item">
-												<canvas id="second_02" class="canvasflag" width="100%" ></canvas>
-												<div class="num-box animationSandbox" >
-													25%
-												</div>
-											</li>
-											<li  class="new-home-item">
-												<canvas id="second_03" class="canvasflag" width="100%" ></canvas>
-												<div class="num-box animationSandbox" >
-													35%
-												</div>
-											</li>
-											<li  class="new-home-item">
-												<canvas id="second_04" class="canvasflag" width="100%" ></canvas>
-												<div class="num-box animationSandbox" >
-													85%
-												</div>
-											</li>
-										</ul>
-									</div>
+									<!--<div class="new-home clearfix">-->
+										<!--<div class="new-home-title">-->
+											<!--<div class="new-home-title-d">新建商品房</div>-->
+										<!--</div>-->
+										<!--<ul class="new-home-list clearfix">-->
+											<!--<li  class="new-home-item">-->
+												<!--<canvas id="new_01" class="canvasflag" width="100%" ></canvas>-->
+												<!--<div class="num-box animationSandbox"  >-->
+													<!--15%-->
+												<!--</div>-->
+											<!--</li>-->
+											<!--<li  class="new-home-item">-->
+												<!--<canvas id="new_02" class="canvasflag" width="100%" ></canvas>-->
+												<!--<div class="num-box animationSandbox" >-->
+													<!--25%-->
+												<!--</div>-->
+											<!--</li>-->
+											<!--<li  class="new-home-item">-->
+												<!--<canvas id="new_03" class="canvasflag" width="100%" ></canvas>-->
+												<!--<div class="num-box animationSandbox" >-->
+													<!--35%-->
+												<!--</div>-->
+											<!--</li>-->
+											<!--<li  class="new-home-item">-->
+												<!--<canvas id="new_04" class="canvasflag" width="100%" ></canvas>-->
+												<!--<div class="num-box animationSandbox" >-->
+													<!--45%-->
+												<!--</div>-->
+											<!--</li>-->
+										<!--</ul>-->
+									<!--</div>-->
+									<!--<div class="indexRate clearfix">-->
+										<!--<div class="new-home-title">-->
+										<!--</div>-->
+										<!--<ul class="new-home-list clearfix">-->
+											<!--<li  class="new-home-item">-->
+												<!--均价同比增加-->
+											<!--</li>-->
+											<!--<li  class="new-home-item">-->
+												<!--均价环比增加-->
+											<!--</li>-->
+											<!--<li  class="new-home-item">-->
+												<!--成交数同比增加-->
+											<!--</li>-->
+											<!--<li  class="new-home-item">-->
+												<!--成交数环比增加-->
+											<!--</li>-->
+										<!--</ul>-->
+									<!--</div>-->
+									<!--<div class="second-home clearfix">-->
+										<!--<div class="new-home-title">-->
+											<!--<div class="new-home-title-d">二手住宅</div>-->
+										<!--</div>-->
+										<!--<ul class="new-home-list clearfix">-->
+											<!--<li  class="new-home-item">-->
+												<!--<canvas id="second_01" class="canvasflag" width="100%" ></canvas>-->
+												<!--<div class="num-box animationSandbox"  >-->
+													<!--15%-->
+												<!--</div>-->
+											<!--</li>-->
+											<!--<li  class="new-home-item">-->
+												<!--<canvas id="second_02" class="canvasflag" width="100%" ></canvas>-->
+												<!--<div class="num-box animationSandbox" >-->
+													<!--25%-->
+												<!--</div>-->
+											<!--</li>-->
+											<!--<li  class="new-home-item">-->
+												<!--<canvas id="second_03" class="canvasflag" width="100%" ></canvas>-->
+												<!--<div class="num-box animationSandbox" >-->
+													<!--35%-->
+												<!--</div>-->
+											<!--</li>-->
+											<!--<li  class="new-home-item">-->
+												<!--<canvas id="second_04" class="canvasflag" width="100%" ></canvas>-->
+												<!--<div class="num-box animationSandbox" >-->
+													<!--85%-->
+												<!--</div>-->
+											<!--</li>-->
+										<!--</ul>-->
+									<!--</div>-->
 								</div>
 								<div class="bottom-right">
-									<div class="top-deal" >
-										<div id="top-rate" style="width: 390px ;height:105px"></div>
+									<div class="new-home-content" id="bottom_rate">
+
 									</div>
-									<div class="bottom-deal">
-										<div id="bottom_rate" style=" width: 390px; height:85px"></div>
-									</div>
+									<!--<div class="top-deal" >-->
+										<!--<div id="top-rate" style="width: 390px ;height:92px"></div>-->
+									<!--</div>-->
+									<!--<div class="bottom-deal">-->
+										<!--<div id="bottom_rate" style=" width: 390px; height:85px"></div>-->
+									<!--</div>-->
 								</div>
 							</div>
 						</div>
@@ -202,7 +259,7 @@
 					<div class="two-content clearfix">
 						<div class="two-box-content">
 							<div class="item-content">
-								<h3 class="">商品住房空置率</h3>
+								<h3 class="">住房空置率</h3>
 								<h3 class="">&nbsp;</h3>
 							<div class="echar-content" id="index_08" indexId="8"></div>
 							<a href="javascript:" class="magnifying"></a>
@@ -226,8 +283,8 @@
 						</div>
 						<div class="two-box-content">
 							<div class="item-content">
-								<h3 class="">土地出让收入与一般公共</h3>
-								<h3 class="">预算收入的比值</h3>
+								<h3 class="">土地出让收入与地方</h3>
+								<h3 class="">财政收入的比值</h3>
 							<div class="echar-content" id="index_12" indexId="12"></div>
 							<a href="javascript:" class="magnifying"></a>
 							</div>
@@ -237,15 +294,237 @@
 			</div>
 		</div>
 		<div class="bag-content" id="bigScreen">
-			<span href="javascript:void(0)" >大屏模板</span>
+			<span href="javascript:void(0)" >大屏看板</span>
 		<div class="left-icom"></div>
 		<div class="right-icom"></div>
 	</div>
 	</div>
+	<!--弹窗-->
 	<div class="bg-pup"></div>
 	<div class="pup-content">
 		<div style="height: 100%; width: 100%" id="magnifyEcharts"></div>
 		<a href="javascript:" class="close-btn"></a>
+	</div>
+	<div class="month-report-content">
+		<div class="month-report">
+			<div class="index-title">月度报告生成下载</div>
+			<div class="month-report-box ">
+				<!--第一步-->
+				<div class="report-ct clearfix">
+					<div class="report-select">
+						<select id="reportOptionsId">
+							<option value="0" style="font-size: 16px">请选择要生成的月份报告</option>
+							<option value="2018年1月份深圳市房地产市场运行情况-月中版" style="font-size: 16px">2018年1月份深圳市房地产市场运行情况-月中版</option>
+							<option value="2018年2月份深圳市房地产市场运行情况-月中版" style="font-size: 16px">2018年2月份深圳市房地产市场运行情况-月中版</option>
+							<option value="2018年3月份深圳市房地产市场运行情况-月中版" style="font-size: 16px">2018年3月份深圳市房地产市场运行情况-月中版</option>
+							<option value="2018年4月份深圳市房地产市场运行情况-月中版" style="font-size: 16px">2018年4月份深圳市房地产市场运行情况-月中版</option>
+							<option value="2018年5月份深圳市房地产市场运行情况-月初版" style="font-size: 16px">2018年5月份深圳市房地产市场运行情况-月初版</option>
+							<option value="2018年6月份深圳市房地产市场运行情况-月初版" style="font-size: 16px">2018年6月份深圳市房地产市场运行情况-月初版</option>
+						</select>
+					</div>
+					<div class="pro-report" id="proReportId">
+						生成报告
+					</div>
+				</div>
+				<!--第二步-->
+				<div class="report-two clearfix">
+					<div class="report-two-left">
+						<div class="report-two-left-title">
+							2018年1月
+						</div>
+						<div class="report-two-left-content">
+							深圳市房地产市场运行情况
+						</div>
+						<div class="report-two-left-txt">
+							房产评估中心
+						</div>
+					</div>
+					<div class="pro-report report-two-txt" id="monthDownId">
+						<span>下载</span>
+						<a href="" id="monthDownEvent" style="text-decoration: none;color: #fff; display: none"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a href="javascript:" class="close-btn"></a>
+	</div>
+	<div class="pup-index">
+		<div style="height: 100%; width: 100%">
+			<!--startprint-->
+			<div class="index-title">五月份预警指标明细表</div>
+			<div class="index-content">
+				<table>
+					<thead>
+						<tr class="header-itable">
+							<th colspan="4">开发供应</th>
+							<th colspan="4">市场需求</th>
+							<th colspan="4">市场价格</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="body-header">
+							<td>指标</td>
+							<td>数值</td>
+							<td>环比</td>
+							<td>同比</td>
+							<td>指标</td>
+							<td>数值</td>
+							<td>环比</td>
+							<td>同比</td>
+							<td>指标</td>
+							<td>数值</td>
+							<td>环比</td>
+							<td>同比</td>
+						</tr>
+						<tr class="body-tcontent">
+							<td>商品住宅累计开发投资完成额</td>
+							<td>411.5亿元</td>
+							<td>-</td>
+							<td>30.5%</td>
+							<td>新建商品住宅成交面积</td>
+							<td>25.93万平方米</td>
+							<td>38.6%</td>
+							<td>10.7%</td>
+							<td>新建商品住宅简单均价</td>
+							<td>54111元/平方米</td>
+							<td>-0.11%</td>
+							<td>-2.7%</td>
+						</tr>
+						<tr class="body-tcontent">
+							<td>商品住宅累计新开工面积</td>
+							<td>256.71平方米</td>
+							<td>-</td>
+							<td>42.1%</td>
+							<td>新建商品住宅成交套数</td>
+							<td>2564套</td>
+							<td>32.6%</td>
+							<td>10.9%</td>
+							<td>全样本二手住宅均价</td>
+							<td>62877元/平方米</td>
+							<td>2.6%</td>
+							<td>12%</td>
+						</tr>
+						<tr class="body-tcontent">
+							<td>商品住宅批准预售面积</td>
+							<td>48.15平方米万</td>
+							<td>125.2%</td>
+							<td>229.5%</td>
+							<td>二手住宅成交面积</td>
+							<td>53.04万平方米</td>
+							<td>12.3%</td>
+							<td>-8.5%</td>
+							<td>商品住房开发贷款余额</td>
+							<td>2181亿元</td>
+							<td>4.9%</td>
+							<td>24%</td>
+						</tr>
+						<tr class="body-tcontent">
+							<td>商品住宅库存消化周期</td>
+							<td>10.8月</td>
+							<td>-</td>
+							<td>-</td>
+							<td>二手住宅成交套数</td>
+							<td>6580套</td>
+							<td>13.2%</td>
+							<td>0.3%</td>
+							<td>个人住房购房贷款余额</td>
+							<td>11181亿元</td>
+							<td>1%</td>
+							<td>11.7%</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="index-content">
+				<table>
+					<thead>
+					<tr class="header-itable">
+						<th colspan="4">开发供应</th>
+						<th colspan="4">市场需求</th>
+						<th colspan="4">市场价格</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr class="body-header">
+						<td>指标</td>
+						<td>数值</td>
+						<td>合理区间</td>
+						<td>提示</td>
+						<td>指标</td>
+						<td>数值</td>
+						<td>合理区间</td>
+						<td>提示</td>
+						<td>指标</td>
+						<td>数值</td>
+						<td>合理区间</td>
+						<td>提示</td>
+					</tr>
+					<tr class="body-tcontent">
+						<td>新建商品住宅价格环比指数</td>
+						<td>99.3</td>
+						<td>[99.4，100.6]</td>
+						<td>-</td>
+						<td>新增个人住房贷款同比增长率</td>
+						<td>59.8</td>
+						<td>[-30%，30%]</td>
+						<td>过热</td>
+						<td>住房空置率</td>
+						<td>3333平方米</td>
+						<td>36</td>
+						<td>36%</td>
+					</tr>
+					<tr class="body-tcontent">
+						<td>二手住宅价格环比指数</td>
+						<td>101.5</td>
+						<td>[99.4，100.6]</td>
+						<td>过热</td>
+						<td>商品住宅新开工面积同比增长率</td>
+						<td>42.0</td>
+						<td>[-30%，30%]</td>
+						<td>过热</td>
+						<td>房地产贷款余额与人民币各项贷款余额的比值</td>
+						<td>0.37</td>
+						<td>[0.20-0.35]</td>
+						<td>过热</td>
+					</tr>
+					<tr class="body-tcontent">
+						<td>居住用地价格同比指数</td>
+						<td>106.3</td>
+						<td>[85，115]</td>
+						<td>-</td>
+						<td>新建商品住宅销售面积同比增长率</td>
+						<td>54.4</td>
+						<td>[-30%，30%]</td>
+						<td>过热</td>
+						<td>新增个人住房贷款与住房成交金额的比值</td>
+						<td>-</td>
+						<td>[0.40, 0.60]</td>
+						<td>-</td>
+					</tr>
+					<tr class="body-tcontent">
+						<td>住房租赁价格同比指数</td>
+						<td>104.0</td>
+						<td>[95,  105]</td>
+						<td>-</td>
+						<td>二手住宅成交面积同比增长率</td>
+						<td>-0.8</td>
+						<td>[-30%，30%]</td>
+						<td>-</td>
+						<td>土地出让收入与地方财政收入的比值</td>
+						<td>-</td>
+						<td>[0.15-0.35]</td>
+						<td>-</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<!--endprint-->
+			<div class="index-btn clearfix">
+				<div class="index-download"><a href="/file/download?fileName=5月预警指标.docx" style="text-decoration: none;color: #fff;">下载</a></div>
+				<div class="index-print" id="indexPrint">打印</div>
+			</div>
+		</div>
+		<a href="javascript:" class="close-btn" id="warningClose"></a>
 	</div>
 </body>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -254,33 +533,20 @@
 <script src="../js/echarts.min.js"></script>
 <script type="text/javascript">
 (function(){
-	// window.screen.width && $('body').css('width', window.screen.width);
- //    window.screen.height && $('body').css('height', window.screen.height);
- //    $('head').append('<meta name="viewport" content="width='+window.screen.width+'"/>');
- //    $(".wrap-content").css('height',$(".container").outerHeight(true) - $(".content-header").outerHeight(true) - $(".empty").outerHeight(true));
- //    $(".row-two").css('height',$(".wrap-content").outerHeight(true) - $(".row-one").outerHeight(true));
- //    $(".two-content").css('height',$(".two-left").outerHeight(true) - $(".two-title").outerHeight(true));
- //    $(".content-box").css('width',$(".row-one").outerWidth(true)-1 - $(".content-title").outerWidth(true));
- //    $(".two-left").css('width',Math.floor($(".content-title").outerWidth(true) + $(".content-box").outerWidth(true)/4));
- //    $(".two-center").css('width',$(".row-two").outerWidth(true) - $(".two-left").outerWidth(true)*2)
+
     $(".content-item>div").css('height',$(".content-item").outerHeight(true) - $(".content-item>h3").outerHeight(true))
     $(".two-box-content").find(".item-content>div").css('height',$(".two-box-content").find(".item-content").outerHeight(true) - $(".two-box-content").find(".item-content>h3").outerHeight(true)*2)
-	// $(".new-home-list").css('width',$(".new-home").outerWidth(true) - $(".new-home-title").outerWidth(true))
-	// $(".top-deal").height($(".new-home").outerHeight())
-	// $(".bottom-deal").height($(".bottom-right").outerHeight() -$(".top-deal").outerHeight())
-	// var totalHeight = $(".center-row-bottom").height()
-	// var newHomeHeight = totalHeight*0.45;
-	// $(".canvasflag").attr('height', newHomeHeight);
 
-
- })();
-
- $(".close-btn").click(function(event) {
- 	$(".bg-pup").hide();
- 	$(this).siblings(".echar-content").remove();
- 	$(this).closest(".pup-content").hide()
- });
-
+    window.setInterval(function () {
+        var myDate = new Date;
+        var year = myDate.getFullYear();
+        var yue = myDate.getMonth();
+        var day = myDate.getDate();
+        var hour = myDate.getHours();
+        var minutes = myDate.getMinutes() < 10 ? '0'+myDate.getMinutes():myDate.getMinutes();
+        var secondes = myDate.getSeconds() <10 ? '0'+myDate.getSeconds():myDate.getSeconds();
+        $(".header-data .data-txt").empty().html(year+'-'+yue+'-'+day+"  "+hour+":"+minutes+":"+secondes);
+    },1000);
 
     $(window, document).resize(function(){
         resize();
@@ -290,73 +556,79 @@
 
     function resize() {
         var windowRate = $(window).width()/$(window).height();
-		var screenRate = window.screen.width/window.screen.height;
+        var screenRate = window.screen.width/window.screen.height;
 
         //当高度超出时用高度自适应
-		if (windowRate > screenRate){
-		    resizeCenter();
-		}else {
+        if (windowRate > screenRate){
+            resizeCenter(40);
+        }else {
             //当宽度超出时用宽度自适应
-		    resizeWidth();
-		}
+            resizeWidth();
+        }
     }
 
     function resizeWidth() {
-      var ratio = $(window).width()/1920;
+        var ratio = $(window).width()/1920;
         // var ratio = $(window).width()/(window.screen.width||$('body').width());
-      $('body').css({
-        transform: "scale("+ratio+")",
-        transformOrigin: "left top",
-        backgroundSize: "100%",
-	    marginLeft: ($(window).width()-$('body').width()*ratio)/2
-      });
+        $('body').css({
+            transform: "scale("+ratio+")",
+            transformOrigin: "left top",
+            backgroundSize: "100%",
+            marginLeft: ($(window).width()-$('body').width()*ratio)/2
+        });
     }
-	function resizeCenter() {
-      if(!window.screen.height||!window.screen.width) return resizeCenterBak();
-      var ratio = ($(window).height()-40)/1080;
+    function resizeCenter(size) {
+        if(!window.screen.height||!window.screen.width) return resizeCenterBak();
+        var ratio = ($(window).height()-size)/1080;
         // var ratio = $(window).height()/window.screen.height;
-      // console.log(ratio, 'ratio')
-      $('body').css({
-        transform: "scale("+ratio+")",
-        transformOrigin: "left top",
-        backgroundSize: 100*(window.screen.width/$(window).width() * ratio)+"%" + ' 100%',
-        backgroundPosition: ($(window).width()-$('body').width()*ratio)/2+"px top",
-        marginLeft: ($(window).width()-$('body').width()*ratio)/2
-      });
+        // console.log(ratio, 'ratio')
+        $('body').css({
+            transform: "scale("+ratio+")",
+            transformOrigin: "left top",
+            backgroundSize: 100*(window.screen.width/$(window).width() * ratio)+"% " + 100*(window.screen.height-40/$(window).height() * ratio)+"%",
+            backgroundPosition: ($(window).width()-$('body').width()*ratio)/2+"px top",
+            marginLeft: ($(window).width()-$('body').width()*ratio)/2
+        });
     }
 
-  	function resizeFull() {
-      if(!window.screen.height||!window.screen.width) return resizeFullBak();
-      var ratioX = $(window).width()/window.screen.width;
-      var ratioY = $(window).height()/window.screen.height;
-      // console.log(ratioX, 'ratio')
-      $('body').css({
-        transform: "scale("+ratioX+", "+ratioY+")",
-        transformOrigin: "left top",
-        backgroundSize: "100% 100%",
-      });
+    function resizeFull() {
+        if(!window.screen.height||!window.screen.width) return resizeFullBak();
+        var ratioX = $(window).width()/window.screen.width;
+        var ratioY = $(window).height()/window.screen.height;
+        // console.log(ratioX, 'ratio')
+        $('body').css({
+            transform: "scale("+ratioX+", "+ratioY+")",
+            transformOrigin: "left top",
+            backgroundSize: "100% 100%",
+        });
     }
 
-  	function resizeCenterBak() {
-      var ratioX = $(window).width()/$('body').width();
-      var ratioY = $(window).height()/$('body').height();
-      var ratio = Math.min(ratioX, ratioY);
-      $('body').css({
-        transform: "scale("+ratio+")",
-        transformOrigin: "left top",
-        backgroundSize: (1/ratioX)*100*ratio+"%",
-        backgroundPosition: ($(window).width()-$('body').width()*ratio)/2+"px top",
-        marginLeft: ($(window).width()-$('body').width()*ratio)/2
-      });
+    function resizeCenterBak() {
+        var ratioX = $(window).width()/$('body').width();
+        var ratioY = $(window).height()/$('body').height();
+        var ratio = Math.min(ratioX, ratioY);
+        $('body').css({
+            transform: "scale("+ratio+")",
+            transformOrigin: "left top",
+            backgroundSize: (1/ratioX)*100*ratio+"%",
+            backgroundPosition: ($(window).width()-$('body').width()*ratio)/2+"px top",
+            marginLeft: ($(window).width()-$('body').width()*ratio)/2
+        });
     }
     function resizeFullBak() {
-      var ratioX = $(window).width()/$('body').width();
-      var ratioY = $(window).height()/$('body').height();
-      $('body').css({
-        transform: "scale("+ratioX+", "+ratioY+")",
-        transformOrigin: "left top",
-        backgroundSize: "100% "+ratioY*100+"%",
-      });
+        var ratioX = $(window).width()/$('body').width();
+        var ratioY = $(window).height()/$('body').height();
+        $('body').css({
+            transform: "scale("+ratioX+", "+ratioY+")",
+            transformOrigin: "left top",
+            backgroundSize: "100% "+ratioY*100+"%",
+        });
     }
+ })();
+
+
+
+
+
 </script>
 </html>
