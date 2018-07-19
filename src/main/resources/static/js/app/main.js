@@ -1797,16 +1797,23 @@ $(function () {
 
     //--------------------大屏看板------------------------
 
+    var flagScreen = window.location.search.length == 0? "big" : "small";
     $("#bigScreen").click(function () {
-        requestFullScreen();
-        $(this).hide();
+        if (flagScreen == "small"){
+            flagScreen = "big";
+            requestFullScreen();
+        }else {
+            flagScreen = "small";
+            exitFull();
+        }
         resizeCenter(0);
     })
 
     window.onresize = function(){
         if(!checkFull()){
-            exitFullscreen();
-            $("#bigScreen").show();
+            //exitFullscreen();
+            exitFull();
+            //$("#bigScreen").show();
         }
     }
 
@@ -1826,6 +1833,7 @@ $(function () {
         } else if (de.webkitRequestFullScreen) {
             de.webkitRequestFullScreen();
         }
+        document.documentElement.webkitRequestFullScreen();
     }
     //退出全屏
     function exitFullscreen(element) {
@@ -1837,6 +1845,25 @@ $(function () {
         } else if (de.webkitCancelFullScreen) {
             de.webkitCancelFullScreen();
         }
+        document.webkitCancelFullScreen();
+    }
+
+    function exitFull() {
+        // 判断各种浏览器，找到正确的方法
+        var exitMethod = document.exitFullscreen || //W3C
+            document.mozCancelFullScreen || //Chrome等
+            document.webkitExitFullscreen || //FireFox
+            document.webkitExitFullscreen; //IE11
+        if (exitMethod) {
+            exitMethod.call(document);
+        }
+        else if (typeof window.ActiveXObject !== "undefined") {//for Internet Explorer
+            var wscript = new ActiveXObject("WScript.Shell");
+            if (wscript !== null) {
+                wscript.SendKeys("{F11}");
+            }
+        }
+        document.webkitCancelFullScreen();
     }
 
     //-------------------------------自适应----------------------------------------------------
@@ -1865,7 +1892,6 @@ $(function () {
     }
 
     function resizeWidth() {
-        console.log("width")
         var ratio = $(window).width()/1920;
         // var ratio = $(window).width()/(window.screen.width||$('body').width());
         $('.container').css({

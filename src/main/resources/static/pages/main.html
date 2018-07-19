@@ -5,6 +5,8 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="favicon.ico">
+	<link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.min862f.css">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
@@ -28,6 +30,9 @@
 				</div>
 				<div id="monthBtn">
 					月度报告
+				</div>
+				<div id="bigScreen">
+					<i class="fa fa-arrows-alt"></i>
 				</div>
 			</div>
 			<div class="header-data">
@@ -301,89 +306,88 @@
 				</div>
 			</div>
 		</div>
-		<div class="bag-content" id="bigScreen">
+		<!--<div class="bag-content" id="bigScreen">
 			<span href="javascript:void(0)" >大屏看板</span>
-		<div class="left-icom"></div>
-		<div class="right-icom"></div>
-	</div>
-	</div>
-	<!--弹窗-->
-	<div class="bg-pup"></div>
-	<div class="pup-content">
-		<div style="height: 100%; width: 100%" id="magnifyEcharts"></div>
-		<a href="javascript:" class="close-btn"></a>
-	</div>
-	<div class="month-report-content-first" id="monthReportClassId">
-		<div class="month-report">
-			<div class="index-title">月度报告生成下载</div>
-			<div class="month-report-box-first " id="monthReportBoxId">
-				<!--第一步-->
-				<div class="report-first clearfix">
-					<div class="report-first-img">
-						<!--<div>--><img src="../img/download_a.jpg" style="width: 420px;height: 580px; " alt=""><!--</div>-->
-						<!--<div>--><img src="../img/download_b.jpg" style="width: 420px;height: 580px; margin-left: 40px" alt=""><!--</div>-->
-					</div>
-					<div class="pro-first-report" id="proCurrentReportId">
-						<span>下载</span>
-						<a href="/file/download?fileName=2018年6月份深圳市房地产市场运行情况-月初版.docx&fileId=999996" id="currentReport_download" style="display: none" ></a>
-					</div>
-					<div class="pro-first-report-other" id="otherMonthId">
-						<a href="javascript:void(0)" id="otherMonthReport" >其他月份下载</a>
-					</div>
-				</div>
-				<!--第一步-->
-				<div class="report-ct clearfix">
-					<div class="report-select">
-						<select id="reportOptionsId">
-							<option value="0" style="font-size: 16px">请选择要生成的月份报告</option>
-							<option value="2018年1月份深圳市房地产市场运行情况-月中版" fileId="999991" style="font-size: 16px">2018年1月份深圳市房地产市场运行情况-月中版</option>
-							<option value="2018年2月份深圳市房地产市场运行情况-月中版" fileId="999992" style="font-size: 16px">2018年2月份深圳市房地产市场运行情况-月中版</option>
-							<option value="2018年3月份深圳市房地产市场运行情况-月中版" fileId="999993" style="font-size: 16px">2018年3月份深圳市房地产市场运行情况-月中版</option>
-							<option value="2018年4月份深圳市房地产市场运行情况-月中版" fileId="999994" style="font-size: 16px">2018年4月份深圳市房地产市场运行情况-月中版</option>
-							<option value="2018年5月份深圳市房地产市场运行情况-月初版" fileId="999995" style="font-size: 16px">2018年5月份深圳市房地产市场运行情况-月初版</option>
-							<!--<option value="2018年6月份深圳市房地产市场运行情况-月初版" fileId="999996" style="font-size: 16px">2018年6月份深圳市房地产市场运行情况-月初版</option>-->
-						</select>
-					</div>
-					<div class="pro-report" id="proReportId">
-						生成报告
-					</div>
-				</div>
-				<!--第二步-->
-				<div class="report-two clearfix">
-					<div class="report-two-left">
-						<div class="report-two-left-title">
-							2018年1月
+			<div class="left-icom"></div>
+			<div class="right-icom"></div>
+		</div>-->
+		<!--弹窗-->
+		<div class="bg-pup"></div>
+		<div class="pup-content">
+			<div style="height: 100%; width: 100%" id="magnifyEcharts"></div>
+			<a href="javascript:" class="close-btn"></a>
+		</div>
+		<div class="month-report-content-first" id="monthReportClassId">
+			<div class="month-report">
+				<div class="index-title">月度报告生成下载</div>
+				<div class="month-report-box-first " id="monthReportBoxId">
+					<!--第一步-->
+					<div class="report-first clearfix">
+						<div class="report-first-img">
+							<!--<div>--><img src="../img/download_a.jpg" style="width: 420px;height: 580px; " alt=""><!--</div>-->
+							<!--<div>--><img src="../img/download_b.jpg" style="width: 420px;height: 580px; margin-left: 40px" alt=""><!--</div>-->
 						</div>
-						<div class="report-two-left-content">
-							深圳市房地产市场运行情况
+						<div class="pro-first-report" id="proCurrentReportId">
+							<span>下载</span>
+							<a href="/file/download?fileName=2018年5月份深圳市房地产市场运行情况-月初版.docx&fileId=999995" id="currentReport_download" style="display: none" ></a>
 						</div>
-						<div class="report-two-left-txt">
-							房产评估中心
+						<div class="pro-first-report-other" id="otherMonthId">
+							<a href="javascript:void(0)" id="otherMonthReport" >其他月份下载</a>
 						</div>
 					</div>
-					<div class="pro-report report-two-txt" id="monthDownId">
-						<span>下载</span>
-						<a href="" id="monthDownEvent" style="text-decoration: none;color: #fff; display: none"></a>
+					<!--第一步-->
+					<div class="report-ct clearfix">
+						<div class="report-select">
+							<select id="reportOptionsId">
+								<option value="0" style="font-size: 16px">请选择要生成的月份报告</option>
+								<option value="2018年1月份深圳市房地产市场运行情况-月中版" fileId="999991" style="font-size: 16px">2018年1月份深圳市房地产市场运行情况-月中版</option>
+								<option value="2018年2月份深圳市房地产市场运行情况-月中版" fileId="999992" style="font-size: 16px">2018年2月份深圳市房地产市场运行情况-月中版</option>
+								<option value="2018年3月份深圳市房地产市场运行情况-月中版" fileId="999993" style="font-size: 16px">2018年3月份深圳市房地产市场运行情况-月中版</option>
+								<option value="2018年4月份深圳市房地产市场运行情况-月中版" fileId="999994" style="font-size: 16px">2018年4月份深圳市房地产市场运行情况-月中版</option>
+								<option value="2018年5月份深圳市房地产市场运行情况-月初版" fileId="999995" style="font-size: 16px">2018年5月份深圳市房地产市场运行情况-月初版</option>
+								<!--<option value="2018年6月份深圳市房地产市场运行情况-月初版" fileId="999996" style="font-size: 16px">2018年6月份深圳市房地产市场运行情况-月初版</option>-->
+							</select>
+						</div>
+						<div class="pro-report" id="proReportId">
+							生成报告
+						</div>
+					</div>
+					<!--第二步-->
+					<div class="report-two clearfix">
+						<div class="report-two-left">
+							<div class="report-two-left-title">
+								2018年1月
+							</div>
+							<div class="report-two-left-content">
+								深圳市房地产市场运行情况
+							</div>
+							<div class="report-two-left-txt">
+								房产评估中心
+							</div>
+						</div>
+						<div class="pro-report report-two-txt" id="monthDownId">
+							<span>下载</span>
+							<a href="" id="monthDownEvent" style="text-decoration: none;color: #fff; display: none"></a>
+						</div>
 					</div>
 				</div>
 			</div>
+			<a href="javascript:" class="close-btn"></a>
 		</div>
-		<a href="javascript:" class="close-btn"></a>
-	</div>
-	<div class="pup-index">
-		<div style="height: 100%; width: 100%">
-			<!--startprint-->
-			<div class="index-title">五月份预警指标明细表</div>
-			<div class="index-content">
-				<table>
-					<thead>
+		<div class="pup-index">
+			<div style="height: 100%; width: 100%">
+				<!--startprint-->
+				<div class="index-title">五月份预警指标明细表</div>
+				<div class="index-content">
+					<table>
+						<thead>
 						<tr class="header-itable">
 							<th colspan="4">开发供应</th>
 							<th colspan="4">市场需求</th>
 							<th colspan="4">市场价格</th>
 						</tr>
-					</thead>
-					<tbody>
+						</thead>
+						<tbody>
 						<tr class="body-header">
 							<td>指标</td>
 							<td>数值</td>
@@ -454,100 +458,102 @@
 							<td>1%</td>
 							<td>11.7%</td>
 						</tr>
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</div>
+				<div class="index-content">
+					<table>
+						<thead>
+						<tr class="header-itable">
+							<th colspan="4">开发供应</th>
+							<th colspan="4">市场需求</th>
+							<th colspan="4">市场价格</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr class="body-header">
+							<td>指标</td>
+							<td>数值</td>
+							<td>合理区间</td>
+							<td>提示</td>
+							<td>指标</td>
+							<td>数值</td>
+							<td>合理区间</td>
+							<td>提示</td>
+							<td>指标</td>
+							<td>数值</td>
+							<td>合理区间</td>
+							<td>提示</td>
+						</tr>
+						<tr class="body-tcontent">
+							<td>新建商品住宅价格环比指数</td>
+							<td>99.3</td>
+							<td>[99.4，100.6]</td>
+							<td>-</td>
+							<td>新增个人住房贷款同比增长率</td>
+							<td>59.8</td>
+							<td>[-30%，30%]</td>
+							<td>过热</td>
+							<td>住房空置率</td>
+							<td>3333平方米</td>
+							<td>36</td>
+							<td>36%</td>
+						</tr>
+						<tr class="body-tcontent">
+							<td>二手住宅价格环比指数</td>
+							<td>101.5</td>
+							<td>[99.4，100.6]</td>
+							<td>过热</td>
+							<td>商品住宅新开工面积同比增长率</td>
+							<td>42.0</td>
+							<td>[-30%，30%]</td>
+							<td>过热</td>
+							<td>房地产贷款余额与人民币各项贷款余额的比值</td>
+							<td>0.37</td>
+							<td>[0.20-0.35]</td>
+							<td>过热</td>
+						</tr>
+						<tr class="body-tcontent">
+							<td>居住用地价格同比指数</td>
+							<td>106.3</td>
+							<td>[85，115]</td>
+							<td>-</td>
+							<td>新建商品住宅销售面积同比增长率</td>
+							<td>54.4</td>
+							<td>[-30%，30%]</td>
+							<td>过热</td>
+							<td>新增个人住房贷款与住房成交金额的比值</td>
+							<td>-</td>
+							<td>[0.40, 0.60]</td>
+							<td>-</td>
+						</tr>
+						<tr class="body-tcontent">
+							<td>住房租赁价格同比指数</td>
+							<td>104.0</td>
+							<td>[95,  105]</td>
+							<td>-</td>
+							<td>二手住宅成交面积同比增长率</td>
+							<td>-0.8</td>
+							<td>[-30%，30%]</td>
+							<td>-</td>
+							<td>土地出让收入与地方财政收入的比值</td>
+							<td>-</td>
+							<td>[0.15-0.35]</td>
+							<td>-</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<!--endprint-->
+				<div class="index-btn clearfix">
+					<div class="index-download"><a href="/file/download?fileName=5月预警指标.docx&fileId=999997" style="text-decoration: none;color: #fff;">下载</a></div>
+					<div class="index-print" id="indexPrint">打印</div>
+				</div>
 			</div>
-			<div class="index-content">
-				<table>
-					<thead>
-					<tr class="header-itable">
-						<th colspan="4">开发供应</th>
-						<th colspan="4">市场需求</th>
-						<th colspan="4">市场价格</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr class="body-header">
-						<td>指标</td>
-						<td>数值</td>
-						<td>合理区间</td>
-						<td>提示</td>
-						<td>指标</td>
-						<td>数值</td>
-						<td>合理区间</td>
-						<td>提示</td>
-						<td>指标</td>
-						<td>数值</td>
-						<td>合理区间</td>
-						<td>提示</td>
-					</tr>
-					<tr class="body-tcontent">
-						<td>新建商品住宅价格环比指数</td>
-						<td>99.3</td>
-						<td>[99.4，100.6]</td>
-						<td>-</td>
-						<td>新增个人住房贷款同比增长率</td>
-						<td>59.8</td>
-						<td>[-30%，30%]</td>
-						<td>过热</td>
-						<td>住房空置率</td>
-						<td>3333平方米</td>
-						<td>36</td>
-						<td>36%</td>
-					</tr>
-					<tr class="body-tcontent">
-						<td>二手住宅价格环比指数</td>
-						<td>101.5</td>
-						<td>[99.4，100.6]</td>
-						<td>过热</td>
-						<td>商品住宅新开工面积同比增长率</td>
-						<td>42.0</td>
-						<td>[-30%，30%]</td>
-						<td>过热</td>
-						<td>房地产贷款余额与人民币各项贷款余额的比值</td>
-						<td>0.37</td>
-						<td>[0.20-0.35]</td>
-						<td>过热</td>
-					</tr>
-					<tr class="body-tcontent">
-						<td>居住用地价格同比指数</td>
-						<td>106.3</td>
-						<td>[85，115]</td>
-						<td>-</td>
-						<td>新建商品住宅销售面积同比增长率</td>
-						<td>54.4</td>
-						<td>[-30%，30%]</td>
-						<td>过热</td>
-						<td>新增个人住房贷款与住房成交金额的比值</td>
-						<td>-</td>
-						<td>[0.40, 0.60]</td>
-						<td>-</td>
-					</tr>
-					<tr class="body-tcontent">
-						<td>住房租赁价格同比指数</td>
-						<td>104.0</td>
-						<td>[95,  105]</td>
-						<td>-</td>
-						<td>二手住宅成交面积同比增长率</td>
-						<td>-0.8</td>
-						<td>[-30%，30%]</td>
-						<td>-</td>
-						<td>土地出让收入与地方财政收入的比值</td>
-						<td>-</td>
-						<td>[0.15-0.35]</td>
-						<td>-</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-			<!--endprint-->
-			<div class="index-btn clearfix">
-				<div class="index-download"><a href="/file/download?fileName=5月预警指标.docx&fileId=999997" style="text-decoration: none;color: #fff;">下载</a></div>
-				<div class="index-print" id="indexPrint">打印</div>
-			</div>
+			<a href="javascript:" class="close-btn" id="warningClose"></a>
 		</div>
-		<a href="javascript:" class="close-btn" id="warningClose"></a>
 	</div>
+
 </body>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>

@@ -11,7 +11,7 @@ html{
 body{
 	background: url('../img/bg-img.png') ;
 	color: #fff;
-
+    overflow: hidden
 }
 .container{
 	position: relative;
@@ -530,9 +530,18 @@ body{
 .hearder-btn>div:first-child{
 	margin-right: 25px;
 }
+.hearder-btn>div:last-child{
+    border: 0px;
+    width: 80px;
+    font-size: 30px;
+}
 .hearder-btn>div:hover{
 	border: 1px solid #fff;
 	color:#fff
+}
+.hearder-btn>div:hover:last-child{
+    border: 0;
+    color:#fff
 }
 .pup-index{
 	position: fixed;
