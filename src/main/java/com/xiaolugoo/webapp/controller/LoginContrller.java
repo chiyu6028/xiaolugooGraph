@@ -13,7 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginContrller {
 
     @RequestMapping("/")
-    public String index() {
+    public String login() {
         return "forward:/login.html";
+    }
+
+    @RequestMapping("/pages/main")
+    public String pagesMain() {
+        return "forward:/pages/main.html";
     }
 }

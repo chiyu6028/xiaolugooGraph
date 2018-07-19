@@ -45,9 +45,21 @@ public class FileController {
     ObjectMapper mapper;
 
     @RequestMapping(path = "/download", method = {RequestMethod.GET,RequestMethod.POST})
-    public void downloadFile(@RequestParam("fileName") String fileName, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
+    public void downloadFile(@RequestParam("fileName") String fileName,
+                             @RequestParam("fileId") Integer fileId,
+                             HttpServletResponse response,
+                             HttpServletRequest request) throws UnsupportedEncodingException {
 
-        File file = new File(download_path, fileName);
+        String tempFileName ;
+        //如果存在id 按照id查询名称下载，  否自按照fileName下载
+        if (!"".equals(fileId)){
+            com.xiaolugoo.webapp.model.File tempFile = fileService.selectByPrimaryKey(fileId);
+            tempFileName = tempFile.getFileKey();
+        }else {
+            tempFileName = fileName;
+        }
+
+        File file = new File(download_path, tempFileName);
 
         //设置下载乱码问题
         String userAgent = request.getHeader("user-agent").toLowerCase();

@@ -1,5 +1,5 @@
 $(function () {
-    var shenzhen = "../json/shenzhen.json";
+    //var shenzhen = "../json/shenzhen.json";
 
     var myChart = echarts.init(document.getElementById('map'));
     $.get(shenzhen, function(tjJson) {
@@ -19,9 +19,9 @@ $(function () {
                     borderWidth: 1,
                     areaColor: 'rgba(2,72,255, .8)',
                     //shadowColor: 'rgba(255, 255, 255, 1)',
-                    shadowOffsetX: -2,
-                    shadowOffsetY: 2,
-                    shadowBlur: 10
+                    //shadowOffsetX: -2,
+                    //shadowOffsetY: 2,
+                    //shadowBlur: 10
                 },
                 emphasis: {
                     areaColor: 'rgba(254,230,24)',
@@ -251,7 +251,7 @@ $(function () {
                 map: 'shenzhen',
                 //视角缩放比例
                 zoom: 1.1,
-                top: 70,
+                top: 60,
                 //显示文本样式
                 label: {
                     normal: {
@@ -291,12 +291,12 @@ $(function () {
                     data: [
                         {
                             //宝安
-                            name:'新房:53693(246套)',
+                            name:'新房:55404(561)',
                             value:[113.917345, 22.693843]
                         },
                         {
                             //光明
-                            name:'新房:41851(24套)',
+                            name:'新房:43007(38套)',
                             value:[113.997345, 22.793843]
                         },
                         {
@@ -314,29 +314,29 @@ $(function () {
                             name:'新房:94680(60套)',
                             value:[114.127345, 22.553843]
                         },
-                        /*{
+                        {
                             //盐田
-                            name:'新房:41851(24套)',
+                            name:'新房:0(0套)',
                             value:[114.377345, 22.623843]
-                        },*/
+                        },
                         {
                             //罗湖区
-                            name:'新房:75200(75套)',
+                            name:'新房:74491(66套)',
                             value:[114.217345, 22.603843]
                         },
                         {
                             //龙岗
-                            name:'新房:45307(1136套)',
+                            name:'新房:44361(864套)',
                             value:[114.327345, 22.749843]
                         },
                         {
                             //坪山
-                            name:'新房:31993(405套)',
+                            name:'新房:28068(590套)',
                             value:[114.437345, 22.702843]
                         },
                         {
                             //大鹏
-                            name:'新房:36836(8套)',
+                            name:'新房:37088(27套)',
                             value:[114.567345, 22.648843]
                         }
                     ],
@@ -369,11 +369,13 @@ $(function () {
                     coordinateSystem: 'geo',
                     data: [
                         {
-                            name:'二手房:36605(1327套)',
+                            //宝安
+                            name:'二手房:40719(1272套)',
                             value:[113.917345, 22.693843]
                         },
                         {
-                            name:'二手房:26380(18套)',
+                            //光明
+                            name:'二手房:29584(10套)',
                             value:[113.997345, 22.793843]
                         },
                         {
@@ -397,20 +399,23 @@ $(function () {
                             value:[114.377345, 22.623843]
                         },
                         {
-                            //
-                            name:'二手房:34384(1156套)',
+                            //罗湖
+                            name:'二手房:36895(953套)',
                             value:[114.217345, 22.603843]
                         },
                         {
-                            name:'二手房:27472(1636套)',
+                            //龙岗
+                            name:'二手房:30111(1316套)',
                             value:[114.327345, 22.749843]
                         },
                         {
-                            name:'二手房:22469(24套)',
+                            //坪山
+                            name:'二手房:24708(15套)',
                             value:[114.437345, 22.702843]
                         },
                         {
-                            name:'二手房:23612(12套)',
+                            //大鹏
+                            name:'二手房:26091(16套)',
                             value:[114.567345, 22.648843]
                         }
                     ],
@@ -497,10 +502,10 @@ $(function () {
     function coreRequest(obj) {
 
         if (obj.params.indexId == "11"){
-            coreIndexDraw({INDEX_ID:11,INDEX_LINE1:85,INDEX_LINE2:115},{id:'magnifyEcharts',size:2});
+            coreIndexDraw({INDEX_ID:11,INDEX_LINE1:85,INDEX_LINE2:115,INDEX_TYPE:1,INDEX_NAME:'居住用地价格同比指数'},{id:'magnifyEcharts',size:2});
 
         } else if (obj.params.indexId == "12"){
-            secondIndexDraw({INDEX_ID:12,INDEX_LINE1:0.15,INDEX_LINE2:0.35},{id:'magnifyEcharts',size:2});
+            coreIndexDraw({INDEX_ID:12,INDEX_LINE1:0.15,INDEX_LINE2:0.35,INDEX_TYPE:1,INDEX_NAME:'土地出让收入与地方财政收入的比值'},{id:'magnifyEcharts',size:2});
         }else{
             $.ajax({
                 type: "POST",
@@ -547,7 +552,12 @@ $(function () {
                     for (var ret in data[item]){
                         var time =  /*item.substring(2,4)*/item + "." + ret;
                         if (time == timeList[i]){
-                            dataList.push(parseFloat(data[item][ret]).toFixed(1));
+                            if (data.INDEX_TYPE == 1 && parseFloat(data[item][ret]) < 1){
+                                dataList.push(parseFloat(data[item][ret]).toFixed(2));
+                            } else {
+                                dataList.push(parseFloat(data[item][ret]).toFixed(1));
+                            }
+
                             break;
                         }
                     }
@@ -570,10 +580,12 @@ $(function () {
         }
     }
 
-    function getMarkPoin(timeList, graphValue ,refer) {
+    function getMarkPoin(timeList, graphValue ,refer, precision) {
         var obj = {};
         var array = [];
         var effectArray = [];
+        var lastPointArray = [];
+        var lastEffectArray = [];
         var maxx = 0, maxy = 0;
         var max = Math.max.apply(null,graphValue);
         for (var i = 0; i < graphValue.length; i++) {
@@ -582,43 +594,49 @@ $(function () {
                 maxy = graphValue[i];
             }
         }
-        array.push(
-            {
-                name: '最大值',
-                value: /*maxx+","+*/parseFloat(maxy).toFixed(1),
-                xAxis: maxx,
-                yAxis: maxy
-            }
-        );
-        effectArray.push([maxx,maxy]);
-        array.push(
+
+        lastPointArray.push(
             {
                 name: '最近值',
-                value: /*timeList[timeList.length-1]+","+*/parseFloat(graphValue[graphValue.length-1]).toFixed(1),
+                value: /*timeList[timeList.length-1]+","+*/parseFloat(graphValue[graphValue.length-1]).toFixed(precision),
                 xAxis: timeList[timeList.length-1],
                 yAxis: graphValue[graphValue.length-1]
             }
         );
-        effectArray.push([timeList[timeList.length-1],graphValue[graphValue.length-1]]);
+        lastEffectArray.push([timeList[timeList.length-1],graphValue[graphValue.length-1]]);
+
+        if (lastPointArray[0].yAxis != maxy) {
+            array.push(
+                {
+                    name: '最大值',
+                    value: /*maxx+","+*/parseFloat(maxy).toFixed(precision),
+                    xAxis: maxx,
+                    yAxis: maxy
+                }
+            );
+            effectArray.push([maxx,maxy]);
+        }
+
+
 
         for (var i = 0; i < graphValue.length; i++) {
             //y1<refer , y2 > refer
-            if (refer > graphValue[i] && refer < graphValue[i+1]){
+            if (refer > graphValue[i] && refer < graphValue[i+1] && lastPointArray[0].yAxis != graphValue[i+1]){
                 array.push(
                     {
                         name:'上升值',
-                        value: /*timeList[i+1]+","+*/parseFloat(graphValue[i+1]).toFixed(1),
+                        value: /*timeList[i+1]+","+*/parseFloat(graphValue[i+1]).toFixed(precision),
                         xAxis: timeList[i+1],
                         yAxis: graphValue[i+1]
                     }
                 );
                 effectArray.push([timeList[i+1],graphValue[i+1]]);
             }
-            if (refer < graphValue[i] && refer > graphValue[i+1]){
+            if (refer < graphValue[i] && refer > graphValue[i+1] && lastPointArray[0].yAxis != graphValue[i+1]){
                 array.push(
                     {
                         name:'下降值',
-                        value: /*timeList[i]+","+*/parseFloat(graphValue[i]).toFixed(1),
+                        value: /*timeList[i]+","+*/parseFloat(graphValue[i]).toFixed(precision),
                         xAxis: timeList[i],
                         yAxis: graphValue[i]
                     }
@@ -627,15 +645,16 @@ $(function () {
             }
         }
         obj.markPoint = array;
+        obj.lastPoint = lastPointArray;
         obj.effectPoint = effectArray;
+        obj.lastEffectPoint = lastEffectArray;
         return obj;
     }
-
-    coreIndexDraw({INDEX_ID:11,INDEX_LINE1:85,INDEX_LINE2:115},{id:'index_11',size:1});
-    secondIndexDraw({INDEX_ID:12,INDEX_LINE1:0.15,INDEX_LINE2:0.35},{id:'index_12',size:1});
+    coreIndexDraw({INDEX_ID:11,INDEX_LINE1:85,INDEX_LINE2:115,INDEX_TYPE:1,INDEX_NAME:'居住用地价格同比指数'},{id:'index_11',size:1});
+    secondIndexDraw({INDEX_ID:12,INDEX_LINE1:0.15,INDEX_LINE2:0.35,INDEX_TYPE:1,INDEX_NAME:'土地出让收入与地方财政收入的比值'},{id:'index_12',size:1});
 
     function coreIndexDraw(result, obj) {
-        coreChart = echarts.init(document.getElementById(obj.id));
+        var coreChart = echarts.init(document.getElementById(obj.id));
         if (result.INDEX_ID == 11){
             timeList = [
                 "2014-Q1", "2014-Q2", "2014-Q3", "2014-Q4", "2015-Q1", "2015-Q2", "2015-Q3", "2015-Q4",
@@ -644,10 +663,10 @@ $(function () {
             graphValue = [
                 "106.6", "108.4", "109.5", "110.9", "104.0", "110.7", "113.3", "117.5",
                 "122.3", "117.0", "115.5", "109.8", "108.7", "106.8", "107.0", "108.6", "106.3"
-            ]
+            ];
         }else if (result.INDEX_ID == 12){
             timeList = ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"];
-            graphValue = ["0.12", "0.12", "0.12", "0.12", "0.06", "0.21", "0.20", "0.12", "0.25", "0.18"]
+            graphValue = ["0.12", "0.12", "0.12", "0.12", "0.06", "0.21", "0.20", "0.12", "0.25", "0.18"];
         } else{
             timeList = getTimeList(result);
             graphValue = getDataList(result,timeList);
@@ -657,18 +676,23 @@ $(function () {
         var minValue = Math.min.apply(null,graphValue);
         var maxyValue = result.INDEX_LINE2 > maxValue ? result.INDEX_LINE2  : maxValue;
         var minyValue = result.INDEX_LINE1 < minValue ? result.INDEX_LINE1  : minValue;
-        var point = getMarkPoin(timeList, graphValue, result.INDEX_LINE2);
+        var precision = result.INDEX_TYPE == 1 && maxyValue < 1 ? 2: 1;
+        var point = getMarkPoin(timeList, graphValue, result.INDEX_LINE2 , precision);
         var visualMapFont = obj.size == 1 ? 'bold 10px "Microsoft YaHei"' : 'bold 16px "Microsoft YaHei"';
 
-        if (result.INDEX_ID == 12){
-            timeList = [] ;
-            graphValue = [];
+        var hotArea = result.INDEX_TYPE==1 ?'  >'+result.INDEX_LINE2:' >'+result.INDEX_LINE2 + '%';
+        var reasonable = result.INDEX_TYPE==1 ? result.INDEX_LINE1+'-'+result.INDEX_LINE2:result.INDEX_LINE1+'%-'+result.INDEX_LINE2+"%";
+        if (reasonable.length < 9){
+            reasonable = "   "+ reasonable;
         }
+        var coolArea = result.INDEX_TYPE==1 ?'  <'+result.INDEX_LINE1:'  <'+result.INDEX_LINE1+"%";
+
+
         option = {
             animationDuration:3000,
             title: obj.size > 1 ? getTitle(result): {},
             grid: [
-                {x: obj.size == 1 ? '7%' : '4%', y: '7%',top:8*obj.size*1.5+'%', tottom:'4%',width: obj.size == 1 ? '70%' : '82%'},
+                {x: obj.size == 1 ? '7%' : '4%', y: '7%',top:8*obj.size*1.5+'%', tottom:'4%',width: obj.size == 1 ? '70%' : '78%'},
             ],
             legend: {
                 right: 20,
@@ -711,7 +735,7 @@ $(function () {
                 }, {
                     gt: result.INDEX_LINE1,
                     lte: result.INDEX_LINE2,
-                    color: '#1ab394'
+                    color: '#67fc42'
                 }, {
                     gt: result.INDEX_LINE2,
                     //lte: 9999,
@@ -745,12 +769,12 @@ $(function () {
             yAxis: {
                 type: 'value',
                 splitLine: {
-                    show:false,
+                    show: false,
                 },
                 max: maxyValue+0.5,//parseInt(maxyValue > 0 ? maxyValue*1.02 : maxyValue * 0.98),
                 min: minyValue-1.5,//parseInt(minyValue > 0 ? minyValue*0.98 : minyValue * 1.02),
                 axisTick: {
-                    show: false
+                    show: obj.size ==1 ? false : true,
                 },
                 axisLine: {
                     lineStyle: {
@@ -758,7 +782,8 @@ $(function () {
                     }
                 },
                 axisLabel: {
-                    show:false,
+                    show: obj.size ==1 ? false : true,
+                    fontSize: 16,
                 }
             },
             graphic: [
@@ -787,34 +812,34 @@ $(function () {
                         },
                         {
                             type: 'text',
-                            left: obj.size == 1 ? 27 : 70,
+                            left: obj.size == 1 ? 27 : 72,
                             top: obj.size == 1 ? 22 : 58,
                             z: 120,
                             style: {
                                 fill: '#29abe2',
-                                text: ['过热区间',' >'+result.INDEX_LINE2].join('\n'),
+                                text: ['过热区间', hotArea].join('\n'),
                                 font: visualMapFont
                             }
                         },
                         {
                             type: 'text',
-                            left: obj.size == 1 ? 27 : 70,
-                            top: obj.size == 1 ? 59 : 156,
+                            left: obj.size == 1 ? 22 : 60,
+                            top: obj.size == 1 ? 59 : 145,
                             z: 120,
                             style: {
                                 fill: '#29abe2',
-                                text: ['合理区间',result.INDEX_LINE1+'-'+result.INDEX_LINE2].join('\n'),
+                                text: ['  合理区间', reasonable].join('\n'),
                                 font: visualMapFont
                             }
                         },
                         {
                             type: 'text',
-                            left: obj.size == 1 ? 27 : 70,
+                            left: obj.size == 1 ? 27 : 72,
                             top: obj.size == 1 ? 97 : 234,
                             z: 120,
                             style: {
                                 fill: '#29abe2',
-                                text: ['过冷区间','   <'+result.INDEX_LINE1].join('\n'),
+                                text: ['过冷区间', coolArea].join('\n'),
                                 font: visualMapFont
                             }
                         },
@@ -837,7 +862,11 @@ $(function () {
                             }
                         },
                         label: {
-                            show:false,
+                            normal: {
+                                show: obj.size == 1? false : true,
+                                formatter: result.INDEX_TYPE == '1' ? '{b}:{c}' : '{b}:{c}%',
+                                fontSize:16
+                            }
                         },
                         data: [
                             {
@@ -909,6 +938,42 @@ $(function () {
                     type: 'effectScatter',
                     symbolSize: obj.size == 1 ? 7 : 20,
                     data: point.effectPoint,
+                    z:99,
+                    rippleEffect:{
+                        period: 4, //动画时间，值越小速度越快
+                        brushType: 'stroke', //波纹绘制方式 stroke, fill
+                        scale: 4 //波纹圆环最大限制，值越大波纹越大
+                    }
+                },
+                {
+                    type: 'line',
+                    markPoint: {
+                        symbolSize:[42*obj.size,21*obj.size],
+                        animation:3000,
+                        symbolOffset: [0, '-75%'],
+                        symbol:'path://M95.36,32.44H54.61L50,38.684l-4.61-6.244H4.64c-1.909,0-3.457-1.548-3.457-3.457V5.002c0-1.909,1.548-3.457,3.457-3.457h90.72c1.909,0,3.457,1.548,3.457,3.457v23.981C98.817,30.892,97.269,32.44,95.36,32.44z',
+                        itemStyle:{
+                            normal:{
+                                color:'#000',
+                            }
+                        },
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: result.INDEX_TYPE == '1'? '{c}':'{c}%',
+                                position: 'inside', //值显示
+                                padding:[25,20,30,20],
+                                color:'#fff',
+                                fontSize:12*obj.size
+                            }
+                        },
+                        data: point.lastPoint,
+                    },
+                },
+                {
+                    type: 'effectScatter',
+                    symbolSize: obj.size == 1 ? 9 : 26,
+                    data: point.lastEffectPoint,
                     z:999,
                     rippleEffect:{
                         period: 4, //动画时间，值越小速度越快
@@ -919,10 +984,19 @@ $(function () {
             ]
         };
         coreChart.setOption(option);
+
+        coreChart.on('datarangeselected',function (params) {
+            var dom = coreChart.getDom();
+            var id = $(dom).attr("id");
+            $("#"+id).parent().parent().attr("value","hide");
+            window.setInterval(function () {
+                $("#"+id).parent().parent().attr("value","show");
+            },100)
+        })
     }
 
     function secondIndexDraw(result, obj) {
-        secondChart = echarts.init(document.getElementById(obj.id));
+        var secondChart = echarts.init(document.getElementById(obj.id));
         if (result.INDEX_ID == 12){
             timeList = ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"];
             graphValue = ["0.12", "0.12", "0.12", "0.12", "0.06", "0.21", "0.20", "0.12", "0.25", "0.18"]
@@ -934,11 +1008,13 @@ $(function () {
         var minValue = Math.min.apply(null,graphValue);
         var maxyValue = result.INDEX_LINE2 > maxValue ? result.INDEX_LINE2  : maxValue;
         var minyValue = result.INDEX_LINE1 < minValue ? result.INDEX_LINE1  : minValue;
-        var point = getMarkPoin(timeList, graphValue, result.INDEX_LINE2);
+        //var point = getMarkPoin(timeList, graphValue, result.INDEX_LINE2);
+        var precision = result.INDEX_TYPE == 1 && maxyValue < 1 ? 2: 1;
+        var point = getMarkPoin(timeList, graphValue, result.INDEX_LINE2 , precision);
         option = {
             animationDuration:3000,
             grid: [
-                {x: '10%', y: '10%',top:40,bottom:90, width: '80%'},
+                {x: '10%', y: '10%',/*left:40,*/ top:40,bottom:90, width: '80%'},
             ],
             legend: {
                 right: 20,
@@ -981,7 +1057,7 @@ $(function () {
                 }, {
                     gt: result.INDEX_LINE1,
                     lte: result.INDEX_LINE2,
-                    color: '#1ab394'
+                    color: '#67fc42'
                 }, {
                     gt: result.INDEX_LINE2,
                     //lte: 9999,
@@ -996,6 +1072,7 @@ $(function () {
                 data: timeList,
                 boundaryGap: false,
                 scale: true,
+                //offset:5,
                 axisTick: {
                     show: false
                 },
@@ -1061,18 +1138,18 @@ $(function () {
                             z: 120,
                             style: {
                                 fill: '#29abe2',
-                                text: ['过热区间','  >'+result.INDEX_LINE2].join('\n'),
+                                text: ['过热区间', result.INDEX_TYPE==1 ?'  >'+result.INDEX_LINE2:' >'+result.INDEX_LINE2 + '%'].join('\n'),
                                 font: 'bold 10px "Microsoft YaHei"'
                             }
                         },
                         {
                             type: 'text',
-                            left: 95,
+                            left: 90,
                             top: 5,
                             z: 120,
                             style: {
                                 fill: '#29abe2',
-                                text: ['合理区间',result.INDEX_LINE1+'-'+result.INDEX_LINE2].join('\n'),
+                                text: [' 合理区间', result.INDEX_TYPE==1 ? result.INDEX_LINE1+'-'+result.INDEX_LINE2:result.INDEX_LINE1+'%-'+result.INDEX_LINE2+"%"].join('\n'),
                                 font: 'bold 10px "Microsoft YaHei"'
                             }
                         },
@@ -1083,7 +1160,7 @@ $(function () {
                             z: 120,
                             style: {
                                 fill: '#29abe2',
-                                text: ['过冷区间','  <'+result.INDEX_LINE1].join('\n'),
+                                text: ['过冷区间', result.INDEX_TYPE==1 ?'  <'+result.INDEX_LINE1:'  <'+result.INDEX_LINE1+"%"].join('\n'),
                                 font: 'bold 10px "Microsoft YaHei"'
                             }
                         },
@@ -1184,11 +1261,61 @@ $(function () {
                         brushType: 'stroke', //波纹绘制方式 stroke, fill
                         scale: 4 //波纹圆环最大限制，值越大波纹越大
                     }
+                },
+                {
+                    type: 'line',
+                    markPoint: {
+                        symbolSize:[42,21],
+                        animation:3000,
+                        symbolOffset: [0, '-75%'],
+                        symbol:'path://M95.36,32.44H54.61L50,38.684l-4.61-6.244H4.64c-1.909,0-3.457-1.548-3.457-3.457V5.002c0-1.909,1.548-3.457,3.457-3.457h90.72c1.909,0,3.457,1.548,3.457,3.457v23.981C98.817,30.892,97.269,32.44,95.36,32.44z',
+                        itemStyle:{
+                            normal:{
+                                color:'#000',
+                                /*opacity:0.9,
+                                borderType:"solid",
+                                borderColor:'#fff',
+                                borderWidth:'1',*/
+                            }
+                        },
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: result.INDEX_TYPE == '1'? '{c}':'{c}%',
+                                position: 'inside', //值显示
+                                padding:[25,20,30,20],
+                                color:'#fff',
+                                fontSize:'12'
+                            }
+                        },
+                        data: point.lastPoint,
+                    },
+                },
+                {
+                    type: 'effectScatter',
+                    symbolSize: obj.size == 1 ? 9 : 26,
+                    data: point.lastEffectPoint,
+                    z:999,
+                    rippleEffect:{
+                        period: 4, //动画时间，值越小速度越快
+                        brushType: 'stroke', //波纹绘制方式 stroke, fill
+                        scale: 4 //波纹圆环最大限制，值越大波纹越大
+                    }
                 }
             ]
         };
         secondChart.setOption(option);
+        secondChart.on('datarangeselected',function (params) {
+            var dom = secondChart.getDom();
+            var id = $(dom).attr("id");
+            $("#"+id).parent().parent().attr("value","hide");
+            window.setInterval(function () {
+                $("#"+id).parent().parent().attr("value","show");
+            },100)
+        })
     }
+    
+
 
     //-----------------------------------------核心指标-----------------------------------------------end
 
@@ -1485,12 +1612,6 @@ $(function () {
     //-------------------放大镜---------------
     $(".magnifying").click(function(){
         $(".bg-pup").show();
-        /*var thisH = $(this).siblings(".echar-content").outerHeight(true)*2;
-        var thisR = thisH/$(this).siblings(".echar-content").outerHeight(true);
-        var thisW = $(this).siblings(".echar-content").outerWidth(true)*thisR;
-        console.log(thisH,thisW);*/
-        //var cloneDIV = $(this).siblings(".echar-content").clone().prependTo($(".pup-content"))
-        // $(".pup-content").append()
         $(".pup-content").css({
             height: 1080 ,
             width: 1920 ,
@@ -1502,6 +1623,28 @@ $(function () {
         var indexId = $(this).siblings(".echar-content").attr("indexId");
         var indexInfo = {params :{indexId:indexId/*, beginDate:"201705", endDate:"201806"*/}, id:'magnifyEcharts',type:1,size:2};
         coreRequest(indexInfo)
+    });
+    
+    $(".block-click").click(function () {
+
+        var value = $(this).attr("value");
+        
+        if (value == 'hide'){
+            return;
+        }
+
+        $(".bg-pup").show();
+        $(".pup-content").css({
+            height: 1080 ,
+            width: 1920 ,
+            display: 'block',
+            marginTop: -540 ,
+            marginLeft: -960
+        })
+
+        var indexId = $(this).find(".echar-content").attr("indexId");
+        var indexInfo = {params :{indexId:indexId/*, beginDate:"201705", endDate:"201806"*/}, id:'magnifyEcharts',type:1,size:2};
+        coreRequest(indexInfo)
     })
 
     $(".close-btn").click(function(event) {
@@ -1510,50 +1653,6 @@ $(function () {
         $(this).closest(".pup-content").hide()
         $(this).closest("div").find("div").removeAttr("_echarts_instance_");
     });
-
-    //--------------------大屏看板------------------------
-
-    $("#bigScreen").click(function () {
-        requestFullScreen();
-        $(this).hide();
-        resizeCenter(-5);
-    })
-
-    window.onresize = function(){
-        if(!checkFull()){
-            exitFullscreen();
-            $("#bigScreen").show();
-        }
-    }
-
-    function checkFull(){
-        var isFull =  document.fullscreenEnabled || window.fullScreen || document.webkitIsFullScreen || document.msFullscreenEnabled;
-        if(isFull === undefined) isFull = false;
-        return isFull;
-    }
-
-    //进入全屏
-    function requestFullScreen(element) {
-        var de = document.querySelector(element) || document.documentElement;
-        if (de.requestFullscreen) {
-            de.requestFullscreen();
-        } else if (de.mozRequestFullScreen) {
-            de.mozRequestFullScreen();
-        } else if (de.webkitRequestFullScreen) {
-            de.webkitRequestFullScreen();
-        }
-    }
-    //退出全屏
-    function exitFullscreen(element) {
-        var de = document.querySelector(element) || document.documentElement;
-        if (de.exitFullscreen) {
-            de.exitFullscreen();
-        } else if (de.mozCancelFullScreen) {
-            de.mozCancelFullScreen();
-        } else if (de.webkitCancelFullScreen) {
-            de.webkitCancelFullScreen();
-        }
-    }
 
     //-----------------------打印报告-------------------------------------
 
@@ -1580,18 +1679,41 @@ $(function () {
         $(".pup-index").css({display:'block'});
     })
 
+
+    //----------------------------------月度下载------------------------------------------------------
     $("#monthBtn").click(function () {
         $("#reportOptionsId").val("0")
         //另外框隐藏
         $(".pup-index").hide();
         $(".bg-pup").show();
         //第二个框显示
-        $(".month-report-content").show();
-        $(".report-ct").show();
+        $(".month-report-content-first").show();
+        //$(".report-ct").show();
+        $(".report-first").show();
+    })
+
+    //当月下载
+    $("#proCurrentReportId").click(function () {
+
+        //$(this).find("a").attr("href","/file/download?fileName="+ title +".docx&fileId="+fileId);
+        document.getElementById("currentReport_download").click()
+    })
+
+    $("#otherMonthReport").click(function () {
+        //隐藏内容
+        $("#monthReportClassId").find(".report-first").hide();
+        //修改内框class
+        $("#monthReportClassId").find("#monthReportBoxId").removeClass().addClass("month-report-box");
+        //修改外框class
+        $("#monthReportClassId").removeClass().addClass("month-report-content");
+        //显示新内容
+        $("#monthReportBoxId").find(".report-ct").show();
     })
 
     $("#proReportId").click(function () {
         var selectValue = $("#reportOptionsId").val();
+        var fileId = $("#reportOptionsId option:selected").attr("fileId");
+        
         if (selectValue == 0){
             return;
         }
@@ -1603,19 +1725,26 @@ $(function () {
 
         var titel = selectValue.substring(0,8);
         $(".report-two-left-title").empty().append(titel);
-        $("#monthDownId").attr("val",selectValue);
+        $("#monthDownId").attr("val", selectValue);
+        $("#monthDownId").attr("fileId", fileId);
     })
 
-    $(".month-report-content .close-btn").click(function () {
+    $(".month-report-content,.month-report-content-first .close-btn").click(function () {
+        $(".month-report-content-first").hide();
         $(".month-report-content").hide();
         $(".report-two-left").hide();
         $(".report-two").hide();
         $(".report-two-txt").hide();
+        $("#monthReportClassId").find("#monthReportBoxId").removeClass().addClass("month-report-box-first");
+        //修改外框class
+        $("#monthReportClassId").removeClass().addClass("month-report-content-first");
     })
 
+    //其他月份下载
     $("#monthDownId").click(function () {
         var title = $(this).attr("val");
-        $(this).find("a").attr("href","/file/download?fileName="+ title +".docx");
+        var fileId = $(this).attr("fileId");
+        $(this).find("a").attr("href","/file/download?fileName="+ title +".docx&fileId="+fileId);
         document.getElementById("monthDownEvent").click()
     })
 
@@ -1661,20 +1790,137 @@ $(function () {
             }else{
                 newValue = parseInt(value) + parseInt(Math.random()*10);
             }
-
-
             $(this).html(newValue);
 
         });
     }
 
-    /*setInterval("scrollText(0)", parseInt(Math.random()*10)*1000);
-    setInterval("scrollText(1)", parseInt(Math.random()*10)*1000);
-    setInterval("scrollText(2)", parseInt(Math.random()*10)*1000);
-    setInterval("scrollText(3)", parseInt(Math.random()*10)*1000);*/
+    //--------------------大屏看板------------------------
 
-    /*$(".map-num").map(function () {
-        $(this).animate({top:-scrollHeight},200)
-    })*/
+    $("#bigScreen").click(function () {
+        requestFullScreen();
+        $(this).hide();
+        resizeCenter(0);
+    })
+
+    window.onresize = function(){
+        if(!checkFull()){
+            exitFullscreen();
+            $("#bigScreen").show();
+        }
+    }
+
+    function checkFull(){
+        var isFull =  document.fullscreenEnabled || window.fullScreen || document.webkitIsFullScreen || document.msFullscreenEnabled;
+        if(isFull === undefined) isFull = false;
+        return isFull;
+    }
+
+    //进入全屏
+    function requestFullScreen(element) {
+        var de = document.querySelector(element) || document.documentElement;
+        if (de.requestFullscreen) {
+            de.requestFullscreen();
+        } else if (de.mozRequestFullScreen) {
+            de.mozRequestFullScreen();
+        } else if (de.webkitRequestFullScreen) {
+            de.webkitRequestFullScreen();
+        }
+    }
+    //退出全屏
+    function exitFullscreen(element) {
+        var de = document.querySelector(element) || document.documentElement;
+        if (de.exitFullscreen) {
+            de.exitFullscreen();
+        } else if (de.mozCancelFullScreen) {
+            de.mozCancelFullScreen();
+        } else if (de.webkitCancelFullScreen) {
+            de.webkitCancelFullScreen();
+        }
+    }
+
+    //-------------------------------自适应----------------------------------------------------
+    $(window, document).resize(function(){
+        resize();
+    }).load(function(){
+        resize();
+    });
+
+    function resize() {
+        var windowRate = $(window).width()/$(window).height();
+        var screenRate = window.screen.width/window.screen.height;
+
+        //当高度超出时用高度自适应
+        if (windowRate > screenRate){
+            var params = window.location.search
+            if (params.length > 0){
+                resizeCenter(40);
+            }else {
+                resizeCenter(0);
+            }
+        }else {
+            //当宽度超出时用宽度自适应
+            resizeWidth();
+        }
+    }
+
+    function resizeWidth() {
+        console.log("width")
+        var ratio = $(window).width()/1920;
+        // var ratio = $(window).width()/(window.screen.width||$('body').width());
+        $('.container').css({
+            transform: "scale("+ratio+")",
+            transformOrigin: "left top",
+            backgroundSize: "100%",
+            marginLeft:0 /*($(window).width()-$('.container').width()*ratio)/2*/
+        });
+    }
+    function resizeCenter(size) {
+
+        if(!window.screen.height||!window.screen.width) return resizeCenterBak();
+        var ratio = ($(window).height()-size)/1080;
+        var ratio_width= $('.container').width()/1920;
+        $(".container").css({
+            transform: "scale("+ratio+")",
+            transformOrigin: "left top",
+            backgroundSize: 100*(window.screen.width/$(window).width() * ratio)+"% " + 100*(window.screen.height/($(window).height()-size) * ratio)+"%",
+            backgroundPosition: ($(window).width()-$('.container').width()*ratio)/2+"px top",
+            marginLeft: ($(window).width()-$('.container').width()*ratio/ratio_width)/2
+        });
+    }
+
+    function resizeFull() {
+        if(!window.screen.height||!window.screen.width) return resizeFullBak();
+        var ratioX = $(window).width()/window.screen.width;
+        var ratioY = $(window).height()/window.screen.height;
+        // console.log(ratioX, 'ratio')
+        $('body').css({
+            transform: "scale("+ratioX+", "+ratioY+")",
+            transformOrigin: "left top",
+            backgroundSize: "100% 100%",
+        });
+    }
+
+    function resizeCenterBak() {
+        var ratioX = $(window).width()/$('body').width();
+        var ratioY = $(window).height()/$('body').height();
+        var ratio = Math.min(ratioX, ratioY);
+        $('body').css({
+            transform: "scale("+ratio+")",
+            transformOrigin: "left top",
+            //backgroundSize: (1/ratioX)*100*ratio+"%",
+            backgroundPosition: ($(window).width()-$('body').width()*ratio)/2+"px top",
+            marginLeft: ($(window).width()-$('body').width()*ratio)/2
+        });
+    }
+    function resizeFullBak() {
+        var ratioX = $(window).width()/$('body').width();
+        var ratioY = $(window).height()/$('body').height();
+        $('body').css({
+            transform: "scale("+ratioX+", "+ratioY+")",
+            transformOrigin: "left top",
+            backgroundSize: "100% "+ratioY*100+"%",
+        });
+    }
 
 })

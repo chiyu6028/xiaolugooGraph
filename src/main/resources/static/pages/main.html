@@ -8,6 +8,9 @@
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.min862f.css">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<script>
+        var shenzhen = "../json/shenzhen.json";
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -17,6 +20,15 @@
 				<div class="header-img"></div>
 			</div>
 			<div class="header-line">
+			</div>
+			<div class="hearder-btn clearfix">
+
+				<div id="warningBtn">
+					预警指标
+				</div>
+				<div id="monthBtn">
+					月度报告
+				</div>
 			</div>
 			<div class="header-data">
 				<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" style="vertical-align: middle;width: 18px; height: 18px; margin-right: 5px;">
@@ -28,14 +40,6 @@
 				</svg>
 				<span class="data-txt"></span>
 			</div>
-			<div class="hearder-btn clearfix">
-				<div id="warningBtn">
-					预警指标
-				</div>
-				<div id="monthBtn">
-					月度报告
-				</div>
-			</div>
 		</div>
 		<div class="wrap-content">
 			<div class="row-one clearfix">
@@ -43,28 +47,28 @@
 					<div>核心指标</div>
 				</div>
 				<div class="content-box">
-					<div class="content-row-box">
+					<div class="content-row-box block-click" value="show">
 						<div class="content-item">
 							<h3 class="">新建商品住宅价格环比指数</h3>
 							<div class="echar-content" id="index_01" indexId="1"></div>
 							<a href="javascript:" class="magnifying"></a>
 						</div>
 					</div>
-					<div class="content-row-box">
+					<div class="content-row-box block-click" value="show">
 						<div class="content-item">
 							<h3 class="">二手住宅价格环比指数</h3>
 							<div class="echar-content" id="index_02" indexId="2"></div>
 							<a href="javascript:" class="magnifying"></a>
 						</div>
 					</div>
-					<div class="content-row-box">
+					<div class="content-row-box block-click" value="show">
 						<div class="content-item">
 							<h3 class="">居住用地价格同比指数</h3>
 							<div class="echar-content" id="index_11" indexId="11"></div>
 							<a href="javascript:" class="magnifying"></a>
 						</div>
 					</div>
-					<div class="content-row-box">
+					<div class="content-row-box block-click" value="show">
 						<div class="content-item">
 							<h3 class="">住房租赁价格同比指数</h3>
 							<div class="echar-content" id="index_03" indexId="3"></div>
@@ -79,36 +83,36 @@
 						<div>先行指标</div>
 					</div>
 					<div class="two-content clearfix">
-						<div class="two-box-content">
+						<div class="two-box-content block-click">
 							<div class="item-content">
 								<h3 class="">新增个人住房贷款</h3>
 								<h3 class="">同比增长率</h3>
-							<div class="echar-content" id="index_04" indexId="4"></div>
-							<a href="javascript:" class="magnifying"></a>
+								<div class="echar-content" id="index_04" indexId="4"></div>
+								<a href="javascript:" class="magnifying"></a>
 							</div>
 						</div>
-						<div class="two-box-content">
+						<div class="two-box-content block-click">
 							<div class="item-content">
 								<h3 class="">商品住宅</h3>
 								<h3 class="">新开工面积同比增长率</h3>
-							<div class="echar-content" id="index_05" indexId="5"></div>
-							<a href="javascript:" class="magnifying"></a>
+								<div class="echar-content" id="index_05" indexId="5"></div>
+								<a href="javascript:" class="magnifying"></a>
 							</div>
 						</div>
-						<div class="two-box-content">
+						<div class="two-box-content block-click">
 							<div class="item-content">
 								<h3 class="">新建商品住宅</h3>
 								<h3 class="">销售面积同比增长率</h3>
-							<div class="echar-content" id="index_06" indexId="6"></div>
-							<a href="javascript:" class="magnifying"></a>
+								<div class="echar-content" id="index_06" indexId="6"></div>
+								<a href="javascript:" class="magnifying"></a>
 							</div>
 						</div>
-						<div class="two-box-content">
+						<div class="two-box-content block-click">
 							<div class="item-content">
 								<h3 class="">二手住宅</h3>
 								<h3 class="">成交面积同比增长率</h3>
-							<div class="echar-content" id="index_07" indexId="7"></div>
-							<a href="javascript:" class="magnifying"></a>
+								<div class="echar-content" id="index_07" indexId="7"></div>
+								<a href="javascript:" class="magnifying"></a>
 							</div>
 						</div>
 					</div>
@@ -118,6 +122,10 @@
 						<div class="center-content">
 							<!--<h3 class="">居住用地显示图</h3>-->
 							<div class="the-map" id="map"></div>
+							<!--<div class="the-map">
+								<div>实时市场监测</div>
+								<img src="../img/map.png" alt="">
+							</div>-->
 							<div class="the-map-content clearfix">
 								<div class="map-btn" id="newHomeId" style="position: absolute;right: 32px;">
 									新建商品住宅
@@ -130,7 +138,7 @@
 									</div>
 									<div  class="map-right">
 										<div class="map-num" style="position: absolute;right: 20px;top: 30px;"><div class="map-num-scroll">2704</div></div>
-										<div class="map-txt" style="position: absolute;right: -4px;top: 60px;width: 100px;">全市成交套数</div>
+										<div class="map-txt" style="position: absolute;right: -8px;top: 60px;width: 100px;">全市成交套数</div>
 									</div>
 									<div></div>
 								</div>
@@ -145,7 +153,7 @@
 									</div>
 									<div  class="map-right">
 										<div class="map-num" style="position: absolute;right: 20px;top: 120px;"><div class="map-num-scroll">6271</div></div>
-										<div class="map-txt" style="position: absolute;right: -4px;top: 145px;width: 100px;">全市成交套数</div>
+										<div class="map-txt" style="position: absolute;right: -8px;top: 145px;width: 100px;">全市成交套数</div>
 									</div>
 									<div></div>
 								</div>
@@ -257,36 +265,36 @@
 						<div>参考指标</div>
 					</div>
 					<div class="two-content clearfix">
-						<div class="two-box-content">
+						<div class="two-box-content block-click">
 							<div class="item-content">
 								<h3 class="">住房空置率</h3>
 								<h3 class="">&nbsp;</h3>
-							<div class="echar-content" id="index_08" indexId="8"></div>
-							<a href="javascript:" class="magnifying"></a>
+								<div class="echar-content" id="index_08" indexId="8"></div>
+								<a href="javascript:" class="magnifying"></a>
 							</div>
 						</div>
-						<div class="two-box-content">
+						<div class="two-box-content block-click">
 							<div class="item-content">
 								<h3 class="">房地产贷款余额与人民币</h3>
 								<h3 class="">各项贷款余额的比值</h3>
-							<div class="echar-content" id="index_09" indexId="9"></div>
-							<a href="javascript:" class="magnifying"></a>
+								<div class="echar-content" id="index_09" indexId="9"></div>
+								<a href="javascript:" class="magnifying"></a>
 							</div>
 						</div>
-						<div class="two-box-content">
+						<div class="two-box-content block-click">
 							<div class="item-content">
 								<h3 class="">新增个人住房贷款与</h3>
 								<h3 class="">住房成交金额的比值</h3>
-							<div class="echar-content" id="index_10" indexId="10"></div>
-							<a href="javascript:" class="magnifying"></a>
+								<div class="echar-content" id="index_10" indexId="10"></div>
+								<a href="javascript:" class="magnifying"></a>
 							</div>
 						</div>
-						<div class="two-box-content">
+						<div class="two-box-content block-click">
 							<div class="item-content">
 								<h3 class="">土地出让收入与地方</h3>
 								<h3 class="">财政收入的比值</h3>
-							<div class="echar-content" id="index_12" indexId="12"></div>
-							<a href="javascript:" class="magnifying"></a>
+								<div class="echar-content" id="index_12" indexId="12"></div>
+								<a href="javascript:" class="magnifying"></a>
 							</div>
 						</div>
 					</div>
@@ -305,21 +313,35 @@
 		<div style="height: 100%; width: 100%" id="magnifyEcharts"></div>
 		<a href="javascript:" class="close-btn"></a>
 	</div>
-	<div class="month-report-content">
+	<div class="month-report-content-first" id="monthReportClassId">
 		<div class="month-report">
 			<div class="index-title">月度报告生成下载</div>
-			<div class="month-report-box ">
+			<div class="month-report-box-first " id="monthReportBoxId">
+				<!--第一步-->
+				<div class="report-first clearfix">
+					<div class="report-first-img">
+						<!--<div>--><img src="../img/download_a.jpg" style="width: 420px;height: 580px; " alt=""><!--</div>-->
+						<!--<div>--><img src="../img/download_b.jpg" style="width: 420px;height: 580px; margin-left: 40px" alt=""><!--</div>-->
+					</div>
+					<div class="pro-first-report" id="proCurrentReportId">
+						<span>下载</span>
+						<a href="/file/download?fileName=2018年6月份深圳市房地产市场运行情况-月初版.docx&fileId=999996" id="currentReport_download" style="display: none" ></a>
+					</div>
+					<div class="pro-first-report-other" id="otherMonthId">
+						<a href="javascript:void(0)" id="otherMonthReport" >其他月份下载</a>
+					</div>
+				</div>
 				<!--第一步-->
 				<div class="report-ct clearfix">
 					<div class="report-select">
 						<select id="reportOptionsId">
 							<option value="0" style="font-size: 16px">请选择要生成的月份报告</option>
-							<option value="2018年1月份深圳市房地产市场运行情况-月中版" style="font-size: 16px">2018年1月份深圳市房地产市场运行情况-月中版</option>
-							<option value="2018年2月份深圳市房地产市场运行情况-月中版" style="font-size: 16px">2018年2月份深圳市房地产市场运行情况-月中版</option>
-							<option value="2018年3月份深圳市房地产市场运行情况-月中版" style="font-size: 16px">2018年3月份深圳市房地产市场运行情况-月中版</option>
-							<option value="2018年4月份深圳市房地产市场运行情况-月中版" style="font-size: 16px">2018年4月份深圳市房地产市场运行情况-月中版</option>
-							<option value="2018年5月份深圳市房地产市场运行情况-月初版" style="font-size: 16px">2018年5月份深圳市房地产市场运行情况-月初版</option>
-							<option value="2018年6月份深圳市房地产市场运行情况-月初版" style="font-size: 16px">2018年6月份深圳市房地产市场运行情况-月初版</option>
+							<option value="2018年1月份深圳市房地产市场运行情况-月中版" fileId="999991" style="font-size: 16px">2018年1月份深圳市房地产市场运行情况-月中版</option>
+							<option value="2018年2月份深圳市房地产市场运行情况-月中版" fileId="999992" style="font-size: 16px">2018年2月份深圳市房地产市场运行情况-月中版</option>
+							<option value="2018年3月份深圳市房地产市场运行情况-月中版" fileId="999993" style="font-size: 16px">2018年3月份深圳市房地产市场运行情况-月中版</option>
+							<option value="2018年4月份深圳市房地产市场运行情况-月中版" fileId="999994" style="font-size: 16px">2018年4月份深圳市房地产市场运行情况-月中版</option>
+							<option value="2018年5月份深圳市房地产市场运行情况-月初版" fileId="999995" style="font-size: 16px">2018年5月份深圳市房地产市场运行情况-月初版</option>
+							<!--<option value="2018年6月份深圳市房地产市场运行情况-月初版" fileId="999996" style="font-size: 16px">2018年6月份深圳市房地产市场运行情况-月初版</option>-->
 						</select>
 					</div>
 					<div class="pro-report" id="proReportId">
@@ -520,7 +542,7 @@
 			</div>
 			<!--endprint-->
 			<div class="index-btn clearfix">
-				<div class="index-download"><a href="/file/download?fileName=5月预警指标.docx" style="text-decoration: none;color: #fff;">下载</a></div>
+				<div class="index-download"><a href="/file/download?fileName=5月预警指标.docx&fileId=999997" style="text-decoration: none;color: #fff;">下载</a></div>
 				<div class="index-print" id="indexPrint">打印</div>
 			</div>
 		</div>
@@ -548,82 +570,7 @@
         $(".header-data .data-txt").empty().html(year+'-'+yue+'-'+day+"  "+hour+":"+minutes+":"+secondes);
     },1000);
 
-    $(window, document).resize(function(){
-        resize();
-    }).load(function(){
-        resize();
-    });
 
-    function resize() {
-        var windowRate = $(window).width()/$(window).height();
-        var screenRate = window.screen.width/window.screen.height;
-
-        //当高度超出时用高度自适应
-        if (windowRate > screenRate){
-            resizeCenter(40);
-        }else {
-            //当宽度超出时用宽度自适应
-            resizeWidth();
-        }
-    }
-
-    function resizeWidth() {
-        var ratio = $(window).width()/1920;
-        // var ratio = $(window).width()/(window.screen.width||$('body').width());
-        $('body').css({
-            transform: "scale("+ratio+")",
-            transformOrigin: "left top",
-            backgroundSize: "100%",
-            marginLeft: ($(window).width()-$('body').width()*ratio)/2
-        });
-    }
-    function resizeCenter(size) {
-        if(!window.screen.height||!window.screen.width) return resizeCenterBak();
-        var ratio = ($(window).height()-size)/1080;
-        // var ratio = $(window).height()/window.screen.height;
-        // console.log(ratio, 'ratio')
-        $('body').css({
-            transform: "scale("+ratio+")",
-            transformOrigin: "left top",
-            backgroundSize: 100*(window.screen.width/$(window).width() * ratio)+"% " + 100*(window.screen.height-40/$(window).height() * ratio)+"%",
-            backgroundPosition: ($(window).width()-$('body').width()*ratio)/2+"px top",
-            marginLeft: ($(window).width()-$('body').width()*ratio)/2
-        });
-    }
-
-    function resizeFull() {
-        if(!window.screen.height||!window.screen.width) return resizeFullBak();
-        var ratioX = $(window).width()/window.screen.width;
-        var ratioY = $(window).height()/window.screen.height;
-        // console.log(ratioX, 'ratio')
-        $('body').css({
-            transform: "scale("+ratioX+", "+ratioY+")",
-            transformOrigin: "left top",
-            backgroundSize: "100% 100%",
-        });
-    }
-
-    function resizeCenterBak() {
-        var ratioX = $(window).width()/$('body').width();
-        var ratioY = $(window).height()/$('body').height();
-        var ratio = Math.min(ratioX, ratioY);
-        $('body').css({
-            transform: "scale("+ratio+")",
-            transformOrigin: "left top",
-            backgroundSize: (1/ratioX)*100*ratio+"%",
-            backgroundPosition: ($(window).width()-$('body').width()*ratio)/2+"px top",
-            marginLeft: ($(window).width()-$('body').width()*ratio)/2
-        });
-    }
-    function resizeFullBak() {
-        var ratioX = $(window).width()/$('body').width();
-        var ratioY = $(window).height()/$('body').height();
-        $('body').css({
-            transform: "scale("+ratioX+", "+ratioY+")",
-            transformOrigin: "left top",
-            backgroundSize: "100% "+ratioY*100+"%",
-        });
-    }
  })();
 
 

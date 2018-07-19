@@ -5,19 +5,20 @@ ul{
 	margin-bottom: 0;}
 .clearfix:after{clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0}
 html{
-	    overflow-x: hidden;
+	overflow-x: hidden;
     overflow-y: visible;
 }
 body{
 	background: url('../img/bg-img.png') ;
 	color: #fff;
-	width: 1920px;
-	height: 1080px;
+
 }
 .container{
 	position: relative;
-	width: 100%;
-	height: 100%;
+	width: 1920px;
+	height: 1080px;
+	/*width: 100%;
+	height: 100%;*/
 	    padding-right: 30px;
     padding-left: 30px;
 	/*margin-bottom: 20px;*/
@@ -43,7 +44,8 @@ body{
 .header-img{
 	    width: 100%;
     height: 100%;
-    background-image: url('../img/center-img.gif');
+    /*background-image: url('../img/center-img.gif');*/
+	background-image: url('../img/header.gif');
     background-size: 67%;
     background-repeat: no-repeat;
     background-position: center center;
@@ -409,7 +411,7 @@ body{
 .header-data{
 	top: 35px;
 	position: absolute;
-	right: 40px;
+	left: 0;
 	font-size: 16px;
 	color: #23a7f1;
 }
@@ -458,6 +460,17 @@ body{
 	top: 15px;
 	right: 0px;
 }
+.the-map>img{
+	width: 90%;
+	text-align: center;
+	margin: auto;
+	display: inherit;
+}
+.the-map>div{
+	font-size: 20px;
+	padding: 20px;
+	font-weight: bold;
+}
 .map-text>div{
 	float: left;
 	/*padding: 0 20px;*/
@@ -494,6 +507,7 @@ body{
 }
 .map-txt{
 	font-size: 8px;
+	-webkit-transform: scale(0.833);
 }
 .map-text{
 	margin-bottom: 18px;
@@ -501,7 +515,7 @@ body{
 .hearder-btn{
 	position: absolute;
 	top: 25px;
-	left: 0px;
+	right: 0px;
 }
 .hearder-btn>div{
 	border: 1px solid #3182cc;
@@ -622,10 +636,25 @@ body{
 	display: none;
 	background-image: linear-gradient(to bottom, #0a225e,#0d163e);
 	/*display: none;*/
-	width: 760px;
+	width: 920px;
 	height: 440px;
-	margin-left: -380px;
+	margin-left: -460px;
 	margin-top: -220px;
+}
+.month-report-content-first{
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	box-shadow: 0 0px 23px #0a2878;
+	/*box-shadow: 0px 5px 20px #122454;*/
+	z-index: 1000;
+	display: none;
+	background-image: linear-gradient(to bottom, #0a225e,#0d163e);
+	/*display: none;*/
+	width: 1180px;
+	height: 760px;
+	margin-left: -590px;
+	margin-top: -370px;
 }
 .month-report-box{
 	width: 600px;
@@ -633,9 +662,45 @@ body{
 	margin: auto;
 	border:1px solid #1a3168;
 }
+.month-report-box-first{
+	width: 1105px;
+	height: 610px;
+	margin: auto;
+	border:1px solid #1a3168;
+}
 .report-select{
 	float: left;
 	margin-right: 25px;
+}
+.report-first{
+	margin: 8px 35px;
+	display: block;
+}
+.report-first-img{
+	float: left;
+	margin-right: 25px;
+}
+.pro-first-report{
+	float: left;
+	background: #3182cc;
+	color: #fff;
+	width: 120px;
+	height: 35px;
+	font-size: 20px;
+	line-height: 35px;
+	text-align: center;
+	margin-top: 265px;
+}
+.pro-first-report-other{
+	float: left;
+	/*background: #3182cc;*/
+	color: #fff;
+	width: 120px;
+	height: 35px;
+	font-size: 20px;
+	line-height: 35px;
+	text-align: center;
+	margin-top: 20px;
 }
 .report-select select{
 	width: 240px;
